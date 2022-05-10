@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32228.430
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestesMariana", "TestesMariana\TestesMariana.csproj", "{10101F89-70DE-4972-AFC8-5E94F044DB75}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Apresentação", "1 - Apresentação", "{6D06324E-56ED-4E5B-9416-84C878DD0E7F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Dominio", "2 - Dominio", "{8AB683FD-A1D9-4822-A94F-D2D72A9708E1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Infra", "3 - Infra", "{DF746775-F413-4681-90A1-68726ADC478D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestesMariana.Dominio", "TestesMariana.Dominio\TestesMariana.Dominio.csproj", "{5C8FFF27-3AF3-448F-8962-439BD97BF031}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Arquivos", "Arquivos", "{8A2019BC-CC65-418D-A180-B234F7061CF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestesMariana.Infra.Arquivos", "TestesMariana.Infra.Arquivos\TestesMariana.Infra.Arquivos.csproj", "{7655F882-CD76-4C54-B606-2CA231CACC53}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{10101F89-70DE-4972-AFC8-5E94F044DB75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10101F89-70DE-4972-AFC8-5E94F044DB75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10101F89-70DE-4972-AFC8-5E94F044DB75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10101F89-70DE-4972-AFC8-5E94F044DB75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C8FFF27-3AF3-448F-8962-439BD97BF031}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C8FFF27-3AF3-448F-8962-439BD97BF031}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C8FFF27-3AF3-448F-8962-439BD97BF031}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C8FFF27-3AF3-448F-8962-439BD97BF031}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7655F882-CD76-4C54-B606-2CA231CACC53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7655F882-CD76-4C54-B606-2CA231CACC53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7655F882-CD76-4C54-B606-2CA231CACC53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7655F882-CD76-4C54-B606-2CA231CACC53}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{10101F89-70DE-4972-AFC8-5E94F044DB75} = {6D06324E-56ED-4E5B-9416-84C878DD0E7F}
+		{5C8FFF27-3AF3-448F-8962-439BD97BF031} = {8AB683FD-A1D9-4822-A94F-D2D72A9708E1}
+		{8A2019BC-CC65-418D-A180-B234F7061CF9} = {DF746775-F413-4681-90A1-68726ADC478D}
+		{7655F882-CD76-4C54-B606-2CA231CACC53} = {8A2019BC-CC65-418D-A180-B234F7061CF9}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EB1D9C42-66C1-4B43-B446-8C614B87F45D}
+	EndGlobalSection
+EndGlobal
