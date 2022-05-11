@@ -27,6 +27,30 @@ namespace TestesMariana.Infra.Arquivos.ModuloDisciplina
             return resultadoValidacao;
         }
 
+        public virtual ValidationResult Editar(Disciplina registro)
+        {
+
+            var resultadoValidacao = Validar(registro);
+
+            if (resultadoValidacao.IsValid)
+            {
+                var registros = ObterRegistros();
+
+                foreach (var item in registros)
+                {
+                    if (item.Numero == registro.Numero)
+                    {
+                        item.Atualizar(registro);
+                        break;
+                    }
+                }
+            }
+
+            return resultadoValidacao;
+        }
+
+
+
         public RepositorioDisciplinaEmArquivo(DataContext context) : base(context)
         {
             if (dataContext.Disciplinas.Count > 0)
@@ -56,7 +80,14 @@ namespace TestesMariana.Infra.Arquivos.ModuloDisciplina
                .Select(x => x.Nome.ToUpper())
                .Contains(registro.Nome.ToUpper());
 
-            if (nomeEncontrado && registro.Numero == 0)
+            var numeroEncontrado = -1;
+
+            if (nomeEncontrado)
+            {
+                numeroEncontrado = ObterRegistros()
+                    .Find(x => x.Nome.ToUpper() == registro.Nome.ToUpper()).Numero;
+            }
+            if ((nomeEncontrado && registro.Numero == 0) || (nomeEncontrado && numeroEncontrado != -1 && numeroEncontrado != registro.Numero))
                 resultadoValidacao.Errors.Add(new ValidationFailure("", "Já existe uma disciplina com este nome cadastrada no sistema!"));
 
             return resultadoValidacao;
