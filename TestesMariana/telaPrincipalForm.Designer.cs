@@ -28,17 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TelaPrincipalForm));
             this.menu = new System.Windows.Forms.MenuStrip();
             this.cadastrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disciplinasMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.materiasMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.questoesMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testesEscolaresMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolBox = new System.Windows.Forms.ToolStrip();
+            this.toolbox = new System.Windows.Forms.ToolStrip();
+            this.btnInserir = new System.Windows.Forms.ToolStripButton();
+            this.btnEditar = new System.Windows.Forms.ToolStripButton();
+            this.btnExcluir = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.labelRodape = new System.Windows.Forms.ToolStripStatusLabel();
             this.panelRegistros = new System.Windows.Forms.Panel();
+            this.labelTipoCadastro = new System.Windows.Forms.ToolStripLabel();
             this.menu.SuspendLayout();
+            this.toolbox.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,6 +76,7 @@
             this.disciplinasMenuItem.Size = new System.Drawing.Size(175, 22);
             this.disciplinasMenuItem.Text = "Disciplinas";
             this.disciplinasMenuItem.ToolTipText = "Disciplinas";
+            this.disciplinasMenuItem.Click += new System.EventHandler(this.disciplinasMenuItem_Click);
             // 
             // materiasMenuItem
             // 
@@ -78,6 +85,7 @@
             this.materiasMenuItem.Size = new System.Drawing.Size(175, 22);
             this.materiasMenuItem.Text = "Matérias";
             this.materiasMenuItem.ToolTipText = "Matérias";
+            this.materiasMenuItem.Click += new System.EventHandler(this.materiasMenuItem_Click);
             // 
             // questoesMenuItem
             // 
@@ -86,6 +94,7 @@
             this.questoesMenuItem.Size = new System.Drawing.Size(175, 22);
             this.questoesMenuItem.Text = "Questões";
             this.questoesMenuItem.ToolTipText = "Questões";
+            this.questoesMenuItem.Click += new System.EventHandler(this.questoesMenuItem_Click);
             // 
             // testesEscolaresMenuItem
             // 
@@ -94,14 +103,50 @@
             this.testesEscolaresMenuItem.Size = new System.Drawing.Size(175, 22);
             this.testesEscolaresMenuItem.Text = "Testes escolares";
             this.testesEscolaresMenuItem.ToolTipText = "Testes escolares";
+            this.testesEscolaresMenuItem.Click += new System.EventHandler(this.testesEscolaresMenuItem_Click);
             // 
-            // toolBox
+            // toolbox
             // 
-            this.toolBox.Location = new System.Drawing.Point(0, 24);
-            this.toolBox.Name = "toolBox";
-            this.toolBox.Size = new System.Drawing.Size(800, 25);
-            this.toolBox.TabIndex = 1;
-            this.toolBox.Text = "toolStrip1";
+            this.toolbox.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnInserir,
+            this.btnEditar,
+            this.btnExcluir,
+            this.labelTipoCadastro});
+            this.toolbox.Location = new System.Drawing.Point(0, 24);
+            this.toolbox.Name = "toolbox";
+            this.toolbox.Size = new System.Drawing.Size(800, 32);
+            this.toolbox.TabIndex = 1;
+            this.toolbox.Text = "toolStrip1";
+            // 
+            // btnInserir
+            // 
+            this.btnInserir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnInserir.Image = ((System.Drawing.Image)(resources.GetObject("btnInserir.Image")));
+            this.btnInserir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnInserir.Name = "btnInserir";
+            this.btnInserir.Padding = new System.Windows.Forms.Padding(5);
+            this.btnInserir.Size = new System.Drawing.Size(53, 29);
+            this.btnInserir.Text = "Inserir";
+            // 
+            // btnEditar
+            // 
+            this.btnEditar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnEditar.Image = ((System.Drawing.Image)(resources.GetObject("btnEditar.Image")));
+            this.btnEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Padding = new System.Windows.Forms.Padding(5);
+            this.btnEditar.Size = new System.Drawing.Size(51, 29);
+            this.btnEditar.Text = "Editar";
+            // 
+            // btnExcluir
+            // 
+            this.btnExcluir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnExcluir.Image = ((System.Drawing.Image)(resources.GetObject("btnExcluir.Image")));
+            this.btnExcluir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnExcluir.Name = "btnExcluir";
+            this.btnExcluir.Padding = new System.Windows.Forms.Padding(5);
+            this.btnExcluir.Size = new System.Drawing.Size(56, 29);
+            this.btnExcluir.Text = "Excluir";
             // 
             // statusStrip1
             // 
@@ -122,10 +167,16 @@
             // panelRegistros
             // 
             this.panelRegistros.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelRegistros.Location = new System.Drawing.Point(0, 49);
+            this.panelRegistros.Location = new System.Drawing.Point(0, 56);
             this.panelRegistros.Name = "panelRegistros";
-            this.panelRegistros.Size = new System.Drawing.Size(800, 379);
+            this.panelRegistros.Size = new System.Drawing.Size(800, 372);
             this.panelRegistros.TabIndex = 3;
+            // 
+            // labelTipoCadastro
+            // 
+            this.labelTipoCadastro.Name = "labelTipoCadastro";
+            this.labelTipoCadastro.Size = new System.Drawing.Size(86, 29);
+            this.labelTipoCadastro.Text = "toolStripLabel1";
             // 
             // TelaPrincipalForm
             // 
@@ -134,7 +185,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panelRegistros);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.toolBox);
+            this.Controls.Add(this.toolbox);
             this.Controls.Add(this.menu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MainMenuStrip = this.menu;
@@ -144,6 +195,8 @@
             this.Text = "Gerador de Testes Escolares";
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
+            this.toolbox.ResumeLayout(false);
+            this.toolbox.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -159,9 +212,13 @@
         private System.Windows.Forms.ToolStripMenuItem materiasMenuItem;
         private System.Windows.Forms.ToolStripMenuItem questoesMenuItem;
         private System.Windows.Forms.ToolStripMenuItem testesEscolaresMenuItem;
-        private System.Windows.Forms.ToolStrip toolBox;
+        private System.Windows.Forms.ToolStrip toolbox;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.Panel panelRegistros;
         private System.Windows.Forms.ToolStripStatusLabel labelRodape;
+        private System.Windows.Forms.ToolStripButton btnInserir;
+        private System.Windows.Forms.ToolStripButton btnEditar;
+        private System.Windows.Forms.ToolStripButton btnExcluir;
+        private System.Windows.Forms.ToolStripLabel labelTipoCadastro;
     }
 }

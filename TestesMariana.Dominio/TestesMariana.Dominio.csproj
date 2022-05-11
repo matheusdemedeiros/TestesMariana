@@ -5,10 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ModuloTeste\" />
-    <Folder Include="ModuloMateria\" />
-    <Folder Include="ModuloQuestao\" />
-    <Folder Include="ModuloDisciplina\" />
+    <PackageReference Include="FluentValidation" Version="11.0.1" />
   </ItemGroup>
 
 </Project>
