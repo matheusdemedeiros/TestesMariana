@@ -1,6 +1,6 @@
 ﻿namespace TestesMariana.WinApp.ModuloMateria
 {
-    partial class TelaCatastroMateriasForm
+    partial class TelaCadastroMateriasForm
     {
         /// <summary>
         /// Required designer variable.
@@ -120,6 +120,19 @@
             "3ª Série - EM"});
             this.comboBoxSerie.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSerie.FormattingEnabled = true;
+            this.comboBoxSerie.Items.AddRange(new object[] {
+            "1ª Série - EF",
+            "2ª Série - EF",
+            "3ª Série - EF ",
+            "4ª Série - EF",
+            "5ª Série - EF",
+            "6ª Série - EF",
+            "7ª Série - EF",
+            "8ª Série - EF",
+            "9ª Série - EF",
+            "1ª Série - EM",
+            "2ª Série - EM",
+            "3ª Série - EM"});
             this.comboBoxSerie.Location = new System.Drawing.Point(155, 116);
             this.comboBoxSerie.Name = "comboBoxSerie";
             this.comboBoxSerie.Size = new System.Drawing.Size(233, 23);
@@ -156,7 +169,7 @@
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             // 
-            // TelaCatastroMateriasForm
+            // TelaCadastroMateriasForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -175,9 +188,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "TelaCatastroMateriasForm";
+            this.Name = "TelaCadastroMateriasForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de Matérias";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TelaCatastroMateriasForm_FormClosing);
             this.Load += new System.EventHandler(this.TelaCatastroMateriasForm_Load);

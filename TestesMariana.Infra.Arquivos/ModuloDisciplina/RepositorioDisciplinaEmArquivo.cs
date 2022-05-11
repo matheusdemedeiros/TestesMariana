@@ -10,6 +10,11 @@ namespace TestesMariana.Infra.Arquivos.ModuloDisciplina
     public class RepositorioDisciplinaEmArquivo : RepositorioEmArquivoBase<Disciplina>, IRepositorioDisciplina
     {
 
+        public RepositorioDisciplinaEmArquivo(DataContext context) : base(context)
+        {
+            if (dataContext.Disciplinas.Count > 0)
+                contador = dataContext.Disciplinas.Max(x => x.Numero);
+        }
 
         public override ValidationResult Inserir(Disciplina novoRegistro)
         {
@@ -47,14 +52,6 @@ namespace TestesMariana.Infra.Arquivos.ModuloDisciplina
             }
 
             return resultadoValidacao;
-        }
-
-
-
-        public RepositorioDisciplinaEmArquivo(DataContext context) : base(context)
-        {
-            if (dataContext.Disciplinas.Count > 0)
-                contador = dataContext.Disciplinas.Max(x => x.Numero);
         }
 
         public override List<Disciplina> ObterRegistros()

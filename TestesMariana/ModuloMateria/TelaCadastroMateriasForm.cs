@@ -7,14 +7,14 @@ using TestesMariana.Dominio.ModuloMateria;
 
 namespace TestesMariana.WinApp.ModuloMateria
 {
-    public partial class TelaCatastroMateriasForm : Form
+    public partial class TelaCadastroMateriasForm : Form
     {
 
         private Materia materia;
 
         private List<Disciplina> disciplinas;
 
-        public TelaCatastroMateriasForm(List<Disciplina> disciplinas)
+        public TelaCadastroMateriasForm(List<Disciplina> disciplinas)
         {
             InitializeComponent();
 

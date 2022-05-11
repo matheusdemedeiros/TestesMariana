@@ -10,6 +10,9 @@ namespace TestesMariana.WinApp.ModuloMateria
         public ListagemMateriasControl()
         {
             InitializeComponent();
+            grid.ConfigurarGridZebrado();
+            grid.ConfigurarGridSomenteLeitura();
+            grid.Columns.AddRange(ObterColunas());
         }
 
         public DataGridViewColumn[] ObterColunas()
@@ -29,7 +32,7 @@ namespace TestesMariana.WinApp.ModuloMateria
         }
 
 
-        public int ObtemNumeroDisciplinaSelecionado()
+        public int ObtemNumeroMateriaSelecionado()
         {
             return grid.SelecionarNumero<int>();
         }

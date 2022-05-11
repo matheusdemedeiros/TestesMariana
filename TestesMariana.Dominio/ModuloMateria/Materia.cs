@@ -14,6 +14,8 @@ namespace TestesMariana.Dominio.ModuloMateria
         
         public string Serie { get; set; }
 
+        public string NomeDisciplina => Disciplina.Nome;
+
         public Materia()
         {
 

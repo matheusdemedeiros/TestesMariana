@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using TestesMariana.Infra.Arquivos.Compartilhado;
 using TestesMariana.Infra.Arquivos.ModuloDisciplina;
+using TestesMariana.Infra.Arquivos.ModuloMateria;
 using TestesMariana.WinApp.Compartilhado;
 using TestesMariana.WinApp.ModuloDisciplina;
+using TestesMariana.WinApp.ModuloMateria;
 
 namespace TestesMariana
 {
@@ -124,13 +126,14 @@ namespace TestesMariana
         private void InicializarControladores()
         {
             var repositorioDisciplina = new RepositorioDisciplinaEmArquivo(contextoDados);
-            //var repositoriocontato = new repositoriocontatoemarquivo(contextodados);
+            var repositorioMateria = new RepositorioMateriaEmArquivo(contextoDados);
             //var repositoriocompromisso = new repositoriocompromissoemarquivo(contextodados);
             //var repositoriodespesa = new repositoriodespesaemarquivo(contextodados);
 
             controladores = new Dictionary<string, ControladorBase>();
 
             controladores.Add("Disciplinas", new ControladorDisciplina(repositorioDisciplina));
+            controladores.Add("Matérias", new ControladorMateria(repositorioMateria, repositorioDisciplina));
             //controladores.add("contatos", new controladorcontato(repositoriocontato));
             //controladores.add("compromissos", new controladorcompromisso(repositoriocompromisso, repositoriocontato));
             //controladores.add("despesas", new controladordespesa(repositoriodespesa));

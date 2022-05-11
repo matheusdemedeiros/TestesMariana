@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 using TestesMariana.Dominio.ModuloDisciplina;
 using TestesMariana.WinApp.Compartilhado;
@@ -8,7 +7,6 @@ namespace TestesMariana.WinApp.ModuloDisciplina
 {
     public class ControladorDisciplina : ControladorBase
     {
-
         private readonly IRepositorioDisciplina repositorioDisciplina;
 
         private ListagemDisciplinasControl listagemDisciplinas;
@@ -29,9 +27,7 @@ namespace TestesMariana.WinApp.ModuloDisciplina
             DialogResult resultado = tela.ShowDialog();
 
             if (resultado == DialogResult.OK)
-            {
                 CarregarDisciplinas();
-            }
 
         }
 
@@ -81,7 +77,6 @@ namespace TestesMariana.WinApp.ModuloDisciplina
             }
         }
 
-
         public override ConfiguracaoToolboxBase ObtemConfiguracaoToolbox()
         {
             return new ConfiguracaoToolboxDisciplina();
@@ -101,7 +96,6 @@ namespace TestesMariana.WinApp.ModuloDisciplina
         private void CarregarDisciplinas()
         {
             List<Disciplina> disciplinas = repositorioDisciplina.SelecionarTodos();
-
 
             listagemDisciplinas.AtualizarRegistros(disciplinas);
 

@@ -7,11 +7,15 @@ using TestesMariana.Infra.Arquivos.Compartilhado;
 
 namespace TestesMariana.Infra.Arquivos.ModuloMateria
 {
-    public class RepositorioMateriaEmArquivo : RepositorioEmArquivoBase<Materia>
+    public class RepositorioMateriaEmArquivo : RepositorioEmArquivoBase<Materia>, IRepositorioMateria
     {
         public RepositorioMateriaEmArquivo(DataContext dataContext) : base(dataContext)
         {
+            if (dataContext.Materias.Count > 0)
+                contador = dataContext.Materias.Max(x => x.Numero);
+
         }
+
         public override ValidationResult Inserir(Materia novoRegistro)
         {
             var resultadoValidacao = Validar(novoRegistro);
@@ -28,8 +32,6 @@ namespace TestesMariana.Infra.Arquivos.ModuloMateria
             return resultadoValidacao;
         }
 
-
-
         public override List<Materia> ObterRegistros()
         {
             return dataContext.Materias;
@@ -39,7 +41,6 @@ namespace TestesMariana.Infra.Arquivos.ModuloMateria
         {
             return new ValidadorMateria();
         }
-
 
         private ValidationResult Validar(Materia registro)
         {

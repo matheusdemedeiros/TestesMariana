@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using TestesMariana.Dominio.ModuloDisciplina;
 using TestesMariana.Dominio.ModuloMateria;
@@ -8,7 +9,6 @@ namespace TestesMariana.WinApp.ModuloMateria
 {
     public class ControladorMateria : ControladorBase
     {
-
         private readonly IRepositorioMateria repositorioMateria;
 
         private readonly IRepositorioDisciplina repositorioDisciplina;
@@ -20,6 +20,7 @@ namespace TestesMariana.WinApp.ModuloMateria
             this.repositorioMateria = repositorioMateria;
             this.repositorioDisciplina = repositorioDisciplina;
         }
+   
         public List<Disciplina> Disiciplinas
         {
             get
@@ -27,33 +28,94 @@ namespace TestesMariana.WinApp.ModuloMateria
                 return repositorioDisciplina.SelecionarTodos();
             }
         }
+        
+        public override void Inserir()
+        {
+            TelaCadastroMateriasForm tela = new TelaCadastroMateriasForm(Disiciplinas);
+
+            tela.Materia = new Materia();
+
+            tela.GravarRegistro = repositorioMateria.Inserir;
+
+            DialogResult resultado = tela.ShowDialog();
+
+            if (resultado == DialogResult.OK)
+                CarregarMaterias();
+        }
 
         public override void Editar()
         {
-            throw new System.NotImplementedException();
+            Materia materiaSelecionada = ObtemMateriaSelecionada();
+
+            if (materiaSelecionada == null)
+            {
+                MessageBox.Show("Selecione uma materia primeiro",
+                "Edição de Matérias", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            TelaCadastroMateriasForm tela = new TelaCadastroMateriasForm(Disiciplinas);
+
+            tela.Materia = materiaSelecionada;
+
+            tela.GravarRegistro = repositorioMateria.Editar;
+
+            DialogResult resultado = tela.ShowDialog();
+
+            if (resultado == DialogResult.OK)
+                CarregarMaterias();
         }
 
         public override void Excluir()
         {
-            throw new System.NotImplementedException();
-        }
+            Materia materiaSelecionada = ObtemMateriaSelecionada();
 
-        public override void Inserir()
-        {
-            TelaCatastroMateriasForm tela = new TelaCatastroMateriasForm(Disiciplinas);
+            if (materiaSelecionada == null)
+            {
+                MessageBox.Show("Selecione uma matéria primeiro",
+                "Exclusão de Matérias", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            DialogResult resultado = MessageBox.Show("Deseja realmente excluir a matéria?",
+                "Exclusão de Matérias", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.OK)
+            {
+                repositorioMateria.Excluir(materiaSelecionada);
+                CarregarMaterias();
+            }
         }
 
         public override ConfiguracaoToolboxBase ObtemConfiguracaoToolbox()
         {
-            throw new System.NotImplementedException();
+            return new ConfiguracaoTollboxMateria();
         }
 
         public override UserControl ObtemListagem()
         {
-            throw new System.NotImplementedException();
+            if (listagemMaterias == null)
+                listagemMaterias = new ListagemMateriasControl();
+
+            CarregarMaterias();
+
+            return listagemMaterias;
         }
 
+        private void CarregarMaterias()
+        {
+            List<Materia> materias = repositorioMateria.SelecionarTodos();
 
+            listagemMaterias.AtualizarRegistros(materias);
 
+            TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {materias.Count} materia(s)");
+        }
+
+        private Materia ObtemMateriaSelecionada()
+        {
+            var numero = listagemMaterias.ObtemNumeroMateriaSelecionado();
+
+            return repositorioMateria.SelecionarPorNumero(numero);
+        }
     }
 }
