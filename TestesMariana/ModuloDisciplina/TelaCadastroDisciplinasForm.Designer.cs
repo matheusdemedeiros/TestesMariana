@@ -123,6 +123,8 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de Disciplinas";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TelaCadastroDisciplinasForm_FormClosing);
+            this.Load += new System.EventHandler(this.TelaCadastroDisciplinasForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

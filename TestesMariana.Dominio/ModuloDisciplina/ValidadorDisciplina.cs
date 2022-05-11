@@ -9,7 +9,8 @@ namespace TestesMariana.Dominio.ModuloDisciplina
         public ValidadorDisciplina()
         {
             RuleFor(x => x.Nome)
-                .NotNull().NotEmpty();
+                .NotNull().NotEmpty()
+                .WithMessage("O campo 'Nome da disciplina' é obrigatório");
 
         }
     }

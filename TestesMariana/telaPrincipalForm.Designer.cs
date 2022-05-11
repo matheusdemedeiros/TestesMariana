@@ -154,8 +154,11 @@
             // 
             // labelTipoCadastro
             // 
+            this.labelTipoCadastro.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
+                | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
+            this.labelTipoCadastro.ForeColor = System.Drawing.Color.DarkBlue;
             this.labelTipoCadastro.Name = "labelTipoCadastro";
-            this.labelTipoCadastro.Size = new System.Drawing.Size(86, 29);
+            this.labelTipoCadastro.Size = new System.Drawing.Size(94, 29);
             this.labelTipoCadastro.Text = "toolStripLabel1";
             // 
             // statusStrip1

@@ -10,12 +10,10 @@ namespace TestesMariana.WinApp.ModuloDisciplina
 
         private Disciplina disciplina;
 
-
         public TelaCadastroDisciplinasForm()
         {
             InitializeComponent();
         }
-
 
         public Disciplina Disciplina
         {
@@ -31,12 +29,13 @@ namespace TestesMariana.WinApp.ModuloDisciplina
             }
         }
 
-
         public Func<Disciplina, ValidationResult> GravarRegistro { get; set; }
 
         private void btnLimpar_Click(object sender, EventArgs e)
         {
             LimparCampos();
+
+            TelaPrincipalForm.Instancia.AtualizarRodape("");
         }
 
         private void btnGravar_Click(object sender, EventArgs e)
@@ -55,11 +54,19 @@ namespace TestesMariana.WinApp.ModuloDisciplina
             }
         }
 
+        private void TelaCadastroDisciplinasForm_Load(object sender, EventArgs e)
+        {
+            TelaPrincipalForm.Instancia.AtualizarRodape("");
+        }
+
+        private void TelaCadastroDisciplinasForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            TelaPrincipalForm.Instancia.AtualizarRodape("");
+        }
 
         private void LimparCampos()
         {
             this.txtNomeDisciplina.Clear();
-            this.txtNumero.Clear();
         }
     }
 }
