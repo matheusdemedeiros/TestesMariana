@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using TestesMariana.Infra.Arquivos.Compartilhado;
+using TestesMariana.Infra.Arquivos.ModuloDisciplina;
 using TestesMariana.WinApp.Compartilhado;
 using TestesMariana.WinApp.ModuloDisciplina;
 
@@ -15,18 +16,20 @@ namespace TestesMariana
         private DataContext contextoDados;
 
 
-        public TelaPrincipalForm()
+        public TelaPrincipalForm(DataContext contextoDados)
         {
+            InitializeComponent();
 
-           Instancia = this;
+            Instancia = this;
 
             labelRodape.Text = string.Empty;
 
-            //labelTipoCadastro.Text = string.Empty;
+            labelTipoCadastro.Text = string.Empty;
 
             this.contextoDados = contextoDados;
 
-            InitializeComponent();
+
+            InicializarControladores();
         }
 
 
@@ -40,35 +43,29 @@ namespace TestesMariana
 
         private void disciplinasMenuItem_Click(object sender, EventArgs e)
         {
-            ListagemDisciplinasControl listagem = new ListagemDisciplinasControl();
-            
-            listagem.Dock = DockStyle.Fill;
-            
-            panelRegistros.Controls.Clear();
-
-            panelRegistros.Controls.Add(listagem);
+            ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
         }
 
         private void materiasMenuItem_Click(object sender, EventArgs e)
         {
-
+            ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
         }
 
         private void questoesMenuItem_Click(object sender, EventArgs e)
         {
-
+            ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
         }
 
         private void testesEscolaresMenuItem_Click(object sender, EventArgs e)
         {
-
+            ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
         }
 
         public void AtualizarRodape(string mensagem)
         {
             labelRodape.Text = mensagem;
         }
-
+           
 
         private void ConfigurarBotoes(ConfiguracaoToolboxBase configuracao)
         {
@@ -124,23 +121,34 @@ namespace TestesMariana
             panelRegistros.Controls.Add(listagemControl);
         }
 
-        //private void InicializarControladores()
-        //{
-        //    var repositorioTarefa = new RepositorioTarefaEmArquivo(contextoDados);
-        //    var repositorioContato = new RepositorioContatoEmArquivo(contextoDados);
-        //    var repositorioCompromisso = new RepositorioCompromissoEmArquivo(contextoDados);
-        //    var repositorioDespesa = new RepositorioDespesaEmArquivo(contextoDados);
+        private void InicializarControladores()
+        {
+            var repositorioDisciplina = new RepositorioDisciplinaEmArquivo(contextoDados);
+            //var repositoriocontato = new repositoriocontatoemarquivo(contextodados);
+            //var repositoriocompromisso = new repositoriocompromissoemarquivo(contextodados);
+            //var repositoriodespesa = new repositoriodespesaemarquivo(contextodados);
 
-        //    controladores = new Dictionary<string, ControladorBase>();
+            controladores = new Dictionary<string, ControladorBase>();
 
-        //    controladores.Add("Tarefas", new ControladorTarefa(repositorioTarefa));
-        //    controladores.Add("Contatos", new ControladorContato(repositorioContato));
-        //    controladores.Add("Compromissos", new ControladorCompromisso(repositorioCompromisso, repositorioContato));
-        //    controladores.Add("Despesas", new ControladorDespesa(repositorioDespesa));
-        //}
+            controladores.Add("Disciplinas", new ControladorDisciplina(repositorioDisciplina));
+            //controladores.add("contatos", new controladorcontato(repositoriocontato));
+            //controladores.add("compromissos", new controladorcompromisso(repositoriocompromisso, repositoriocontato));
+            //controladores.add("despesas", new controladordespesa(repositoriodespesa));
+        }
 
+        private void btnInserir_Click(object sender, EventArgs e)
+        {
+            controlador.Inserir();
+        }
 
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            controlador.Editar();
+        }
 
-
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            controlador.Excluir();
+        }
     }
 }

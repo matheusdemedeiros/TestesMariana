@@ -1,11 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ModuloDisciplina\" />
     <Folder Include="ModuloMateria\" />
     <Folder Include="ModuloQuestao\" />
     <Folder Include="ModuloTeste\" />
