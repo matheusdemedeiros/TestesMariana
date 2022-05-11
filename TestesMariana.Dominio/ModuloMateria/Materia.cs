@@ -40,5 +40,10 @@ namespace TestesMariana.Dominio.ModuloMateria
             return $"Número: {Numero} - Título: {Titulo} - Disciplina: {Disciplina.Nome} - Série: {Serie}";
         }
 
+        public Materia Clone()
+        {
+            return MemberwiseClone() as Materia;
+        }
+
     }
 }

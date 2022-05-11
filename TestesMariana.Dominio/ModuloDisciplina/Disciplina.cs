@@ -32,5 +32,9 @@ namespace TestesMariana.Dominio.ModuloDisciplina
             return $"Número: {Numero} - Nome: {Nome}";
         }
 
+        public Disciplina Clone()
+        {
+            return MemberwiseClone() as Disciplina;
+        }
     }
 }

@@ -52,7 +52,7 @@ namespace TestesMariana.WinApp.ModuloMateria
         {
             materia.Titulo = txtTituloMateria.Text;
             materia.Disciplina =  (Disciplina)comboBoxDisciplina.SelectedItem;
-            materia.Serie =  comboBoxSerie.SelectedItem.ToString();
+            materia.Serie =  (string)comboBoxSerie.SelectedItem;
 
             var resultadoValidacao = GravarRegistro(materia);
 

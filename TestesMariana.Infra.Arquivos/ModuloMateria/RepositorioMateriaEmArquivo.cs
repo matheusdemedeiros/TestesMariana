@@ -32,6 +32,27 @@ namespace TestesMariana.Infra.Arquivos.ModuloMateria
             return resultadoValidacao;
         }
 
+        public virtual ValidationResult Editar(Materia registro)
+        {
+            var resultadoValidacao = Validar(registro);
+
+            if (resultadoValidacao.IsValid)
+            {
+                var registros = ObterRegistros();
+
+                foreach (var item in registros)
+                {
+                    if (item.Numero == registro.Numero)
+                    {
+                        item.Atualizar(registro);
+                        break;
+                    }
+                }
+            }
+
+            return resultadoValidacao;
+        }
+
         public override List<Materia> ObterRegistros()
         {
             return dataContext.Materias;
@@ -51,15 +72,39 @@ namespace TestesMariana.Infra.Arquivos.ModuloMateria
             if (resultadoValidacao.IsValid == false)
                 return resultadoValidacao;
 
-            var tituloEncontrado = ObterRegistros()
-               .Select(x => x.Titulo.ToUpper())
-               .Contains(registro.Titulo.ToUpper());
-
-            if (tituloEncontrado && registro.Numero == 0)
-                resultadoValidacao.Errors.Add(new ValidationFailure("", "Já existe uma matéria com este nome cadastrada no sistema!"));
+            resultadoValidacao = ValidarTitulo(registro);
 
             return resultadoValidacao;
         }
 
+        private ValidationResult ValidarTitulo(Materia registro)
+        {
+            bool tituloRegistrado = VerificarSeOhTituloJaEstaRegistrado(registro);
+
+            ValidationResult validacaoDeTitulo = new ValidationResult();
+
+            if (tituloRegistrado)
+            {
+                if (registro.Numero == 0)
+                    validacaoDeTitulo.Errors.Add(new ValidationFailure("", "Não foi possível inserir, pois já existe uma matéria com este título cadastrada no sistema!"));
+
+                else if (ObterMateriaPeloTitulo(registro.Titulo).Numero != registro.Numero)
+                    validacaoDeTitulo.Errors.Add(new ValidationFailure("", "Não foi possível editar, pois já existe uma matéria com este título cadastrada no sistema!"));
+            }
+            return validacaoDeTitulo;
+        }
+
+        private bool VerificarSeOhTituloJaEstaRegistrado(Materia registro)
+        {
+            return ObterRegistros()
+                           .Select(x => x.Titulo.ToUpper())
+                           .Contains(registro.Titulo.ToUpper());
+        }
+
+        private Materia ObterMateriaPeloTitulo(string titulo)
+        {
+            return ObterRegistros()
+               .Find(x => x.Titulo.ToUpper() == titulo.ToUpper());
+        }
     }
 }

@@ -56,7 +56,7 @@ namespace TestesMariana.WinApp.ModuloMateria
 
             TelaCadastroMateriasForm tela = new TelaCadastroMateriasForm(Disiciplinas);
 
-            tela.Materia = materiaSelecionada;
+            tela.Materia = materiaSelecionada.Clone();
 
             tela.GravarRegistro = repositorioMateria.Editar;
 

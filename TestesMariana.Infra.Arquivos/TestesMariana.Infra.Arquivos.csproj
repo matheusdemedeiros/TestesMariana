@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ModuloQuestao\" />
     <Folder Include="ModuloTeste\" />
   </ItemGroup>
 

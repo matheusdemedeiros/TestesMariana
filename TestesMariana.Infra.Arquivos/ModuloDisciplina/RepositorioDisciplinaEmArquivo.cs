@@ -34,7 +34,6 @@ namespace TestesMariana.Infra.Arquivos.ModuloDisciplina
 
         public virtual ValidationResult Editar(Disciplina registro)
         {
-
             var resultadoValidacao = Validar(registro);
 
             if (resultadoValidacao.IsValid)
@@ -72,23 +71,40 @@ namespace TestesMariana.Infra.Arquivos.ModuloDisciplina
 
             if (resultadoValidacao.IsValid == false)
                 return resultadoValidacao;
-
-            var nomeEncontrado = ObterRegistros()
-               .Select(x => x.Nome.ToUpper())
-               .Contains(registro.Nome.ToUpper());
-
-            var numeroEncontrado = -1;
-
-            if (nomeEncontrado)
-            {
-                numeroEncontrado = ObterRegistros()
-                    .Find(x => x.Nome.ToUpper() == registro.Nome.ToUpper()).Numero;
-            }
-            if ((nomeEncontrado && registro.Numero == 0) || (nomeEncontrado && numeroEncontrado != -1 && numeroEncontrado != registro.Numero))
-                resultadoValidacao.Errors.Add(new ValidationFailure("", "Já existe uma disciplina com este nome cadastrada no sistema!"));
+            
+            resultadoValidacao =  ValidarNome(registro);
 
             return resultadoValidacao;
         }
 
+        private ValidationResult ValidarNome(Disciplina registro)
+        {
+            bool nomeRegistrado = VerificarSeOhNomeJaEstaRegistrado(registro);
+
+            ValidationResult validacaoDeNome = new ValidationResult();
+
+            if (nomeRegistrado)
+            {
+                if (registro.Numero == 0)
+                    validacaoDeNome.Errors.Add(new ValidationFailure("", "Não foi possível inserir, pois já existe uma disciplina com este nome cadastrada no sistema!"));
+                
+                else if (ObterDisciplinaPeloNome(registro.Nome).Numero != registro.Numero)
+                    validacaoDeNome.Errors.Add(new ValidationFailure("", "Não foi possível editar, pois já existe uma disciplina com este nome cadastrada no sistema!"));
+            }
+            return validacaoDeNome;
+        }
+
+        private bool VerificarSeOhNomeJaEstaRegistrado(Disciplina registro)
+        {
+            return ObterRegistros()
+                           .Select(x => x.Nome.ToUpper())
+                           .Contains(registro.Nome.ToUpper());
+        }
+
+        private Disciplina ObterDisciplinaPeloNome(string nome)
+        {
+            return ObterRegistros()
+               .Find(x => x.Nome.ToUpper() == nome.ToUpper());
+        }
     }
 }
