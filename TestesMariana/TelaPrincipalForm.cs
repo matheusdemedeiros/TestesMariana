@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using TestesMariana.Infra.Arquivos.Compartilhado;
 using TestesMariana.Infra.Arquivos.ModuloDisciplina;
@@ -12,11 +13,9 @@ namespace TestesMariana
 {
     public partial class TelaPrincipalForm : Form
     {
-
         private ControladorBase controlador;
         private Dictionary<string, ControladorBase> controladores;
         private DataContext contextoDados;
-
 
         public TelaPrincipalForm(DataContext contextoDados)
         {
@@ -30,18 +29,14 @@ namespace TestesMariana
 
             this.contextoDados = contextoDados;
 
-
             InicializarControladores();
         }
-
 
         public static TelaPrincipalForm Instancia
         {
             get;
             private set;
         }
-
-
 
         private void disciplinasMenuItem_Click(object sender, EventArgs e)
         {
@@ -63,12 +58,15 @@ namespace TestesMariana
             ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
         }
 
-        public void AtualizarRodape(string mensagem)
+        public void AtualizarRodape(string mensagem, Color cor)
         {
             labelRodape.Text = mensagem;
+            statusStripRodape.BackColor = cor;
+            
+            if (cor.IsEmpty == false)
+                labelRodape.ForeColor = Color.White;
         }
            
-
         private void ConfigurarBotoes(ConfiguracaoToolboxBase configuracao)
         {
             btnInserir.Enabled = configuracao.InserirHabilitado;
@@ -112,7 +110,7 @@ namespace TestesMariana
 
         private void ConfigurarListagem()
         {
-            AtualizarRodape("");
+            AtualizarRodape("", Color.DarkBlue);
 
             var listagemControl = controlador.ObtemListagem();
 
@@ -153,5 +151,21 @@ namespace TestesMariana
         {
             controlador.Excluir();
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (toolbox.Enabled == true)
+            {
+                switch (keyData)
+                {
+                    case Keys.Control | Keys.I: controlador.Inserir(); break;
+                    case Keys.Control | Keys.D: controlador.Excluir(); break;
+                    case Keys.Control | Keys.E: controlador.Editar(); break;
+                        //case Keys.Control | Keys.NumPad4: controlador.Inserir break;
+                }
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
     }
 }

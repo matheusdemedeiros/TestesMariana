@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using TestesMariana.Dominio.ModuloDisciplina;
 using TestesMariana.WinApp.Compartilhado;
@@ -19,7 +20,7 @@ namespace TestesMariana.WinApp.ModuloDisciplina
         public override void Inserir()
         {
             TelaCadastroDisciplinasForm tela = new TelaCadastroDisciplinasForm();
-            
+
             tela.Disciplina = new Disciplina();
 
             tela.GravarRegistro = repositorioDisciplina.Inserir;
@@ -72,8 +73,19 @@ namespace TestesMariana.WinApp.ModuloDisciplina
 
             if (resultado == DialogResult.OK)
             {
-                repositorioDisciplina.Excluir(disciplinaSelecionada);
+                var resultadoExclusao = repositorioDisciplina.Excluir(disciplinaSelecionada);
+
+                if (resultadoExclusao.IsValid == false)
+                {
+                    string erro = resultadoExclusao.Errors[0].ErrorMessage;
+
+                    MessageBox.Show(erro, "Exclusão de Disciplinas - Informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else
+                    MessageBox.Show("Disciplina excluída com sucesso!", "Exclusão de Disciplinas - Informativo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 CarregarDisciplinas();
+
             }
         }
 
@@ -99,7 +111,7 @@ namespace TestesMariana.WinApp.ModuloDisciplina
 
             listagemDisciplinas.AtualizarRegistros(disciplinas);
 
-            TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {disciplinas.Count} disciplina(s)");
+            TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {disciplinas.Count} disciplina(s)", Color.DarkBlue);
         }
 
         private Disciplina ObtemDisciplinaSelecionada()

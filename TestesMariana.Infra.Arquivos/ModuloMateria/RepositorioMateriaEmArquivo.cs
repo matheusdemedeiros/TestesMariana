@@ -24,6 +24,8 @@ namespace TestesMariana.Infra.Arquivos.ModuloMateria
             {
                 novoRegistro.Numero = ++contador;
 
+                novoRegistro.Disciplina.QtdMateriasRelacionadas++; ;
+
                 var registros = ObterRegistros();
 
                 registros.Add(novoRegistro);
@@ -49,6 +51,20 @@ namespace TestesMariana.Infra.Arquivos.ModuloMateria
                     }
                 }
             }
+
+            return resultadoValidacao;
+        }
+
+        public override ValidationResult Excluir(Materia registro)
+        {
+            var resultadoValidacao = new ValidationResult();
+
+            var registros = ObterRegistros();
+            
+            registro.Disciplina.QtdMateriasRelacionadas--;
+
+            if (registros.Remove(registro) == false)
+                resultadoValidacao.Errors.Add(new ValidationFailure("", "Não foi possível remover o registro"));
 
             return resultadoValidacao;
         }

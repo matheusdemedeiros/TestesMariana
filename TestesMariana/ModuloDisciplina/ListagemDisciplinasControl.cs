@@ -43,5 +43,10 @@ namespace TestesMariana.WinApp.ModuloDisciplina
                 grid.Rows.Add(disciplina.Numero, disciplina.Nome);
             }
         }
+
+        private void ListagemDisciplinasControl_Load(object sender, System.EventArgs e)
+        {
+            grid.Focus();
+        }
     }
 }

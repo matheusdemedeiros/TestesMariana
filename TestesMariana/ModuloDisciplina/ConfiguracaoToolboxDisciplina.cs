@@ -11,5 +11,6 @@ namespace TestesMariana.WinApp.ModuloDisciplina
         public override string TooltipEditar => "Editar uma Disciplina existente";
 
         public override string TooltipExcluir => "Excluir uma Disciplina existente";
+
     }
 }

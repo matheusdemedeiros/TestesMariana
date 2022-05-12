@@ -40,12 +40,12 @@
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
             this.btnExcluir = new System.Windows.Forms.ToolStripButton();
             this.labelTipoCadastro = new System.Windows.Forms.ToolStripLabel();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusStripRodape = new System.Windows.Forms.StatusStrip();
             this.labelRodape = new System.Windows.Forms.ToolStripStatusLabel();
             this.panelRegistros = new System.Windows.Forms.Panel();
             this.menu.SuspendLayout();
             this.toolbox.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
+            this.statusStripRodape.SuspendLayout();
             this.SuspendLayout();
             // 
             // menu
@@ -163,13 +163,13 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusStripRodape.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.labelRodape});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 428);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(800, 22);
-            this.statusStrip1.TabIndex = 2;
-            this.statusStrip1.Text = "statusStrip1";
+            this.statusStripRodape.Location = new System.Drawing.Point(0, 428);
+            this.statusStripRodape.Name = "statusStrip1";
+            this.statusStripRodape.Size = new System.Drawing.Size(800, 22);
+            this.statusStripRodape.TabIndex = 2;
+            this.statusStripRodape.Text = "statusStrip1";
             // 
             // labelRodape
             // 
@@ -191,7 +191,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panelRegistros);
-            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.statusStripRodape);
             this.Controls.Add(this.toolbox);
             this.Controls.Add(this.menu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -204,8 +204,8 @@
             this.menu.PerformLayout();
             this.toolbox.ResumeLayout(false);
             this.toolbox.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
+            this.statusStripRodape.ResumeLayout(false);
+            this.statusStripRodape.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -220,7 +220,7 @@
         private System.Windows.Forms.ToolStripMenuItem questoesMenuItem;
         private System.Windows.Forms.ToolStripMenuItem testesEscolaresMenuItem;
         private System.Windows.Forms.ToolStrip toolbox;
-        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.StatusStrip statusStripRodape;
         private System.Windows.Forms.Panel panelRegistros;
         private System.Windows.Forms.ToolStripStatusLabel labelRodape;
         private System.Windows.Forms.ToolStripButton btnInserir;

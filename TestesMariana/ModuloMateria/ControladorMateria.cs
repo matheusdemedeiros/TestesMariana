@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using TestesMariana.Dominio.ModuloDisciplina;
 using TestesMariana.Dominio.ModuloMateria;
@@ -108,7 +108,7 @@ namespace TestesMariana.WinApp.ModuloMateria
 
             listagemMaterias.AtualizarRegistros(materias);
 
-            TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {materias.Count} materia(s)");
+            TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {materias.Count} materia(s)", Color.DarkBlue);
         }
 
         private Materia ObtemMateriaSelecionada()

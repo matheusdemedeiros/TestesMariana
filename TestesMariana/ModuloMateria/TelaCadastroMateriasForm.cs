@@ -1,6 +1,7 @@
 ﻿using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using TestesMariana.Dominio.ModuloDisciplina;
 using TestesMariana.Dominio.ModuloMateria;
@@ -45,7 +46,7 @@ namespace TestesMariana.WinApp.ModuloMateria
         {
             LimparCampos();
 
-            TelaPrincipalForm.Instancia.AtualizarRodape("");
+            TelaPrincipalForm.Instancia.AtualizarRodape("", Color.DarkBlue);
         }
 
         private void btnGravar_Click(object sender, EventArgs e)
@@ -60,7 +61,7 @@ namespace TestesMariana.WinApp.ModuloMateria
             {
                 string erro = resultadoValidacao.Errors[0].ErrorMessage;
 
-                TelaPrincipalForm.Instancia.AtualizarRodape(erro);
+                TelaPrincipalForm.Instancia.AtualizarRodape(erro, Color.Red);
 
                 DialogResult = DialogResult.None;
             }
@@ -68,12 +69,12 @@ namespace TestesMariana.WinApp.ModuloMateria
 
         private void TelaCatastroMateriasForm_Load(object sender, EventArgs e)
         {
-            TelaPrincipalForm.Instancia.AtualizarRodape("");
+            TelaPrincipalForm.Instancia.AtualizarRodape("", Color.DarkBlue);
         }
 
         private void TelaCatastroMateriasForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            TelaPrincipalForm.Instancia.AtualizarRodape("");
+            TelaPrincipalForm.Instancia.AtualizarRodape("", Color.DarkBlue);
         }
 
         private void LimparCampos()

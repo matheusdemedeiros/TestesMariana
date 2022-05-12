@@ -7,7 +7,6 @@ namespace TestesMariana.Dominio.ModuloDisciplina
     [Serializable]
     public class Disciplina : EntidadeBase<Disciplina>
     {
-
         public Disciplina()
         {
 
@@ -20,12 +19,14 @@ namespace TestesMariana.Dominio.ModuloDisciplina
 
         public string Nome { get; set; }
 
+        public bool PodeExcluir => QtdMateriasRelacionadas == 0 ? true : false;
+
+        public int QtdMateriasRelacionadas = 0;
 
         public override void Atualizar(Disciplina registro)
         {
             this.Nome = registro.Nome;
         }
-
 
         public override string ToString()
         {

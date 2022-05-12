@@ -53,6 +53,24 @@ namespace TestesMariana.Infra.Arquivos.ModuloDisciplina
             return resultadoValidacao;
         }
 
+        public override ValidationResult Excluir(Disciplina registro)
+        {
+            var resultadovalidacao = new ValidationResult();
+
+            var registros = ObterRegistros();
+
+            if (registro.PodeExcluir)
+            {
+                if (registros.Remove(registro) == false)
+                    resultadovalidacao.Errors.Add(new ValidationFailure("", "Não foi possível remover a disciplina!"));
+            }
+            else
+                resultadovalidacao.Errors.Add(new ValidationFailure("", "Não foi possível excluir a disciplina," +
+                    " pois ela está associada a alguma(s) matéria(s)!"));
+
+            return resultadovalidacao;
+        }
+
         public override List<Disciplina> ObterRegistros()
         {
             return dataContext.Disciplinas;
@@ -71,8 +89,8 @@ namespace TestesMariana.Infra.Arquivos.ModuloDisciplina
 
             if (resultadoValidacao.IsValid == false)
                 return resultadoValidacao;
-            
-            resultadoValidacao =  ValidarNome(registro);
+
+            resultadoValidacao = ValidarNome(registro);
 
             return resultadoValidacao;
         }
@@ -87,7 +105,7 @@ namespace TestesMariana.Infra.Arquivos.ModuloDisciplina
             {
                 if (registro.Numero == 0)
                     validacaoDeNome.Errors.Add(new ValidationFailure("", "Não foi possível inserir, pois já existe uma disciplina com este nome cadastrada no sistema!"));
-                
+
                 else if (ObterDisciplinaPeloNome(registro.Nome).Numero != registro.Numero)
                     validacaoDeNome.Errors.Add(new ValidationFailure("", "Não foi possível editar, pois já existe uma disciplina com este nome cadastrada no sistema!"));
             }
