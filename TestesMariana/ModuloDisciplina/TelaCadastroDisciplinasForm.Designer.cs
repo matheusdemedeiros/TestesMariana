@@ -71,7 +71,7 @@
             this.txtNomeDisciplina.Size = new System.Drawing.Size(304, 23);
             this.txtNomeDisciplina.TabIndex = 0;
             this.txtNomeDisciplina.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
+             // 
             // btnGravar
             // 
             this.btnGravar.DialogResult = System.Windows.Forms.DialogResult.OK;

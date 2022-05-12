@@ -8,7 +8,6 @@ namespace TestesMariana.WinApp.ModuloDisciplina
 {
     public partial class TelaCadastroDisciplinasForm : Form
     {
-
         private Disciplina disciplina;
 
         public TelaCadastroDisciplinasForm()
@@ -69,5 +68,6 @@ namespace TestesMariana.WinApp.ModuloDisciplina
         {
             this.txtNomeDisciplina.Clear();
         }
+
     }
 }

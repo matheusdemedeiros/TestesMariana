@@ -9,7 +9,6 @@ namespace TestesMariana.Infra.Arquivos.ModuloDisciplina
 {
     public class RepositorioDisciplinaEmArquivo : RepositorioEmArquivoBase<Disciplina>, IRepositorioDisciplina
     {
-
         public RepositorioDisciplinaEmArquivo(DataContext context) : base(context)
         {
             if (dataContext.Disciplinas.Count > 0)

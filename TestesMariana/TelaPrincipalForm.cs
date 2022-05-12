@@ -17,7 +17,7 @@ namespace TestesMariana
         private Dictionary<string, ControladorBase> controladores;
         private DataContext contextoDados;
 
-        public TelaPrincipalForm(DataContext contextoDados)
+        public TelaPrincipalForm(DataContext contextoDados) 
         {
             InitializeComponent();
 
@@ -61,6 +61,7 @@ namespace TestesMariana
         public void AtualizarRodape(string mensagem, Color cor)
         {
             labelRodape.Text = mensagem;
+            
             statusStripRodape.BackColor = cor;
             
             if (cor.IsEmpty == false)
