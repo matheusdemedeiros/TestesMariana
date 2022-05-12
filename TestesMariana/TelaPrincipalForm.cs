@@ -5,9 +5,11 @@ using System.Windows.Forms;
 using TestesMariana.Infra.Arquivos.Compartilhado;
 using TestesMariana.Infra.Arquivos.ModuloDisciplina;
 using TestesMariana.Infra.Arquivos.ModuloMateria;
+using TestesMariana.Infra.Arquivos.ModuloQuestao;
 using TestesMariana.WinApp.Compartilhado;
 using TestesMariana.WinApp.ModuloDisciplina;
 using TestesMariana.WinApp.ModuloMateria;
+using TestesMariana.WinApp.ModuloQuestao;
 
 namespace TestesMariana
 {
@@ -23,7 +25,7 @@ namespace TestesMariana
 
             Instancia = this;
 
-            labelRodape.Text = string.Empty;
+            AtualizarRodape(string.Empty, Color.DarkBlue);
 
             labelTipoCadastro.Text = string.Empty;
 
@@ -126,16 +128,13 @@ namespace TestesMariana
         {
             var repositorioDisciplina = new RepositorioDisciplinaEmArquivo(contextoDados);
             var repositorioMateria = new RepositorioMateriaEmArquivo(contextoDados);
-            //var repositoriocompromisso = new repositoriocompromissoemarquivo(contextodados);
-            //var repositoriodespesa = new repositoriodespesaemarquivo(contextodados);
+            var repositorioQuestao = new RepositorioQuestaoEmArquivo(contextoDados);
 
             controladores = new Dictionary<string, ControladorBase>();
 
             controladores.Add("Disciplinas", new ControladorDisciplina(repositorioDisciplina));
             controladores.Add("Matérias", new ControladorMateria(repositorioMateria, repositorioDisciplina));
-            //controladores.add("contatos", new controladorcontato(repositoriocontato));
-            //controladores.add("compromissos", new controladorcompromisso(repositoriocompromisso, repositoriocontato));
-            //controladores.add("despesas", new controladordespesa(repositoriodespesa));
+            controladores.Add("Questões", new ControladorQuestao(repositorioQuestao, repositorioDisciplina, repositorioMateria));
         }
 
         private void btnInserir_Click(object sender, EventArgs e)
