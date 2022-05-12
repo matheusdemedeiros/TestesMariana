@@ -79,7 +79,7 @@ namespace TestesMariana.WinApp.ModuloQuestao
             TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {questoes.Count} questão(ões)", Color.DarkBlue);
         }
 
-        private Questao ObtemDisciplinaSelecionada()
+        private Questao ObtemQuestaoSelecionada()
         {
             var numero = listagemQuestoes.ObtemNumeroQuestaoSelecionado();
 

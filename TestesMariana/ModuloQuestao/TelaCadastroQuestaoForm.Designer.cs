@@ -32,16 +32,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.txtNumero = new System.Windows.Forms.TextBox();
             this.comboBoxDisiciplina = new System.Windows.Forms.ComboBox();
             this.comboBoxMateria = new System.Windows.Forms.ComboBox();
             this.richTextBoxEnunciado = new System.Windows.Forms.RichTextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBoxAlternativaDescricao = new System.Windows.Forms.TextBox();
+            this.txtAlternativaDescricao = new System.Windows.Forms.TextBox();
             this.listAlternativasCadastradas = new System.Windows.Forms.ListBox();
-            this.comboBoxLetra = new System.Windows.Forms.ComboBox();
             this.checkBoxAlternativaCorreta = new System.Windows.Forms.CheckBox();
             this.btnAdicionarAlternativa = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -82,15 +80,6 @@
             this.label4.Size = new System.Drawing.Size(171, 15);
             this.label4.TabIndex = 3;
             this.label4.Text = "Digite o enunciado da questão:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(134, 269);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(36, 15);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Letra:";
             // 
             // label7
             // 
@@ -143,13 +132,13 @@
             this.label8.TabIndex = 12;
             this.label8.Text = "Informe a alternativa:";
             // 
-            // textBoxAlternativaDescricao
+            // txtAlternativaDescricao
             // 
-            this.textBoxAlternativaDescricao.Location = new System.Drawing.Point(20, 231);
-            this.textBoxAlternativaDescricao.Name = "textBoxAlternativaDescricao";
-            this.textBoxAlternativaDescricao.Size = new System.Drawing.Size(413, 23);
-            this.textBoxAlternativaDescricao.TabIndex = 13;
-            this.textBoxAlternativaDescricao.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtAlternativaDescricao.Location = new System.Drawing.Point(20, 231);
+            this.txtAlternativaDescricao.Name = "txtAlternativaDescricao";
+            this.txtAlternativaDescricao.Size = new System.Drawing.Size(413, 23);
+            this.txtAlternativaDescricao.TabIndex = 13;
+            this.txtAlternativaDescricao.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // listAlternativasCadastradas
             // 
@@ -160,19 +149,10 @@
             this.listAlternativasCadastradas.Size = new System.Drawing.Size(349, 169);
             this.listAlternativasCadastradas.TabIndex = 14;
             // 
-            // comboBoxLetra
-            // 
-            this.comboBoxLetra.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxLetra.FormattingEnabled = true;
-            this.comboBoxLetra.Location = new System.Drawing.Point(176, 269);
-            this.comboBoxLetra.Name = "comboBoxLetra";
-            this.comboBoxLetra.Size = new System.Drawing.Size(121, 23);
-            this.comboBoxLetra.TabIndex = 16;
-            // 
             // checkBoxAlternativaCorreta
             // 
             this.checkBoxAlternativaCorreta.AutoSize = true;
-            this.checkBoxAlternativaCorreta.Location = new System.Drawing.Point(310, 269);
+            this.checkBoxAlternativaCorreta.Location = new System.Drawing.Point(123, 269);
             this.checkBoxAlternativaCorreta.Name = "checkBoxAlternativaCorreta";
             this.checkBoxAlternativaCorreta.Size = new System.Drawing.Size(123, 19);
             this.checkBoxAlternativaCorreta.TabIndex = 17;
@@ -187,6 +167,7 @@
             this.btnAdicionarAlternativa.TabIndex = 18;
             this.btnAdicionarAlternativa.Text = "Adicionar";
             this.btnAdicionarAlternativa.UseVisualStyleBackColor = true;
+            this.btnAdicionarAlternativa.Click += new System.EventHandler(this.btnAdicionarAlternativa_Click);
             // 
             // label6
             // 
@@ -205,16 +186,14 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnAdicionarAlternativa);
             this.Controls.Add(this.checkBoxAlternativaCorreta);
-            this.Controls.Add(this.comboBoxLetra);
             this.Controls.Add(this.listAlternativasCadastradas);
-            this.Controls.Add(this.textBoxAlternativaDescricao);
+            this.Controls.Add(this.txtAlternativaDescricao);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.richTextBoxEnunciado);
             this.Controls.Add(this.comboBoxMateria);
             this.Controls.Add(this.comboBoxDisiciplina);
             this.Controls.Add(this.txtNumero);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -237,16 +216,14 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtNumero;
         private System.Windows.Forms.ComboBox comboBoxDisiciplina;
         private System.Windows.Forms.ComboBox comboBoxMateria;
         private System.Windows.Forms.RichTextBox richTextBoxEnunciado;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBoxAlternativaDescricao;
+        private System.Windows.Forms.TextBox txtAlternativaDescricao;
         private System.Windows.Forms.ListBox listAlternativasCadastradas;
-        private System.Windows.Forms.ComboBox comboBoxLetra;
         private System.Windows.Forms.CheckBox checkBoxAlternativaCorreta;
         private System.Windows.Forms.Button btnAdicionarAlternativa;
         private System.Windows.Forms.Label label6;
