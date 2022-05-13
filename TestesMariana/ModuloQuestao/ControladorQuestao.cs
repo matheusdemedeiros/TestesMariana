@@ -14,7 +14,7 @@ namespace TestesMariana.WinApp.ModuloQuestao
     {
         private RepositorioQuestaoEmArquivo repositorioQuestao;
         private IRepositorioDisciplina repositorioDisciplina;
-        private IRepositorioMateria reposirioMateria;
+        private IRepositorioMateria repositorioMateria;
         private ListagemQuestoesControl listagemQuestoes;
 
         public ControladorQuestao(RepositorioQuestaoEmArquivo repositorioQuestao,
@@ -22,12 +22,29 @@ namespace TestesMariana.WinApp.ModuloQuestao
         {
             this.repositorioQuestao = repositorioQuestao;
             this.repositorioDisciplina = repositorioDisciplina;
-            this.reposirioMateria = reposirioMateria;
+            this.repositorioMateria = reposirioMateria;
         }
+
+
+        public List<Disciplina> Disiciplinas
+        {
+            get
+            {
+                return repositorioDisciplina.SelecionarTodos();
+            }
+        }
+
+        public List<Materia> Materias
+        {
+            get
+            {
+                return repositorioMateria.SelecionarTodos();
+            }
+        }
+
         public override void Inserir()
         {
-
-            TelaCadastroQuestaoForm tela = new TelaCadastroQuestaoForm();
+            TelaCadastroQuestaoForm tela = new TelaCadastroQuestaoForm(Disiciplinas, Materias);
 
             tela.Questao = new Questao();
 
@@ -39,8 +56,7 @@ namespace TestesMariana.WinApp.ModuloQuestao
                 CarregarQuestoes();
 
         }
-
-       
+        
 
         public override void Editar()
         {

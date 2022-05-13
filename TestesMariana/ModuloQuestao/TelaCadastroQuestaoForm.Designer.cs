@@ -43,6 +43,9 @@
             this.checkBoxAlternativaCorreta = new System.Windows.Forms.CheckBox();
             this.btnAdicionarAlternativa = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
+            this.btnGravar = new System.Windows.Forms.Button();
+            this.btnLimpar = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -105,6 +108,7 @@
             this.comboBoxDisiciplina.Name = "comboBoxDisiciplina";
             this.comboBoxDisiciplina.Size = new System.Drawing.Size(213, 23);
             this.comboBoxDisiciplina.TabIndex = 9;
+            this.comboBoxDisiciplina.SelectedIndexChanged += new System.EventHandler(this.comboBoxDisiciplina_SelectedIndexChanged);
             // 
             // comboBoxMateria
             // 
@@ -152,7 +156,7 @@
             // checkBoxAlternativaCorreta
             // 
             this.checkBoxAlternativaCorreta.AutoSize = true;
-            this.checkBoxAlternativaCorreta.Location = new System.Drawing.Point(123, 269);
+            this.checkBoxAlternativaCorreta.Location = new System.Drawing.Point(123, 263);
             this.checkBoxAlternativaCorreta.Name = "checkBoxAlternativaCorreta";
             this.checkBoxAlternativaCorreta.Size = new System.Drawing.Size(123, 19);
             this.checkBoxAlternativaCorreta.TabIndex = 17;
@@ -161,7 +165,7 @@
             // 
             // btnAdicionarAlternativa
             // 
-            this.btnAdicionarAlternativa.Location = new System.Drawing.Point(20, 269);
+            this.btnAdicionarAlternativa.Location = new System.Drawing.Point(20, 263);
             this.btnAdicionarAlternativa.Name = "btnAdicionarAlternativa";
             this.btnAdicionarAlternativa.Size = new System.Drawing.Size(75, 23);
             this.btnAdicionarAlternativa.TabIndex = 18;
@@ -178,11 +182,44 @@
             this.label6.TabIndex = 19;
             this.label6.Text = "Alternativas adicionadas";
             // 
+            // btnGravar
+            // 
+            this.btnGravar.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnGravar.Location = new System.Drawing.Point(256, 263);
+            this.btnGravar.Name = "btnGravar";
+            this.btnGravar.Size = new System.Drawing.Size(75, 23);
+            this.btnGravar.TabIndex = 20;
+            this.btnGravar.Text = "Gravar";
+            this.btnGravar.UseVisualStyleBackColor = true;
+            // 
+            // btnLimpar
+            // 
+            this.btnLimpar.Location = new System.Drawing.Point(337, 263);
+            this.btnLimpar.Name = "btnLimpar";
+            this.btnLimpar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpar.TabIndex = 21;
+            this.btnLimpar.Text = "Limpar";
+            this.btnLimpar.UseVisualStyleBackColor = true;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelar.Location = new System.Drawing.Point(418, 263);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 22;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            // 
             // TelaCadastroQuestaoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(815, 304);
+            this.Controls.Add(this.btnCancelar);
+            this.Controls.Add(this.btnLimpar);
+            this.Controls.Add(this.btnGravar);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnAdicionarAlternativa);
             this.Controls.Add(this.checkBoxAlternativaCorreta);
@@ -227,5 +264,8 @@
         private System.Windows.Forms.CheckBox checkBoxAlternativaCorreta;
         private System.Windows.Forms.Button btnAdicionarAlternativa;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnGravar;
+        private System.Windows.Forms.Button btnLimpar;
+        private System.Windows.Forms.Button btnCancelar;
     }
 }

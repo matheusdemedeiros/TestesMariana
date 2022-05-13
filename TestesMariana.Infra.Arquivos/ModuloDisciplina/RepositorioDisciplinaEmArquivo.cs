@@ -104,7 +104,7 @@ namespace TestesMariana.Infra.Arquivos.ModuloDisciplina
             {
                 if (registro.Numero == 0)
                     validacaoDeNome.Errors.Add(new ValidationFailure("", "Não foi possível inserir, pois já existe uma disciplina com este nome cadastrada no sistema!"));
-
+                   
                 else if (ObterDisciplinaPeloNome(registro.Nome).Numero != registro.Numero)
                     validacaoDeNome.Errors.Add(new ValidationFailure("", "Não foi possível editar, pois já existe uma disciplina com este nome cadastrada no sistema!"));
             }
