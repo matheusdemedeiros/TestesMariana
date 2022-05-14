@@ -88,7 +88,6 @@ namespace TestesMariana.WinApp.ModuloMateria
         {
             if (this.disciplinas.Count > 0)
                 PopularComboboxDisciplinas();
-            
         }
 
         private void PopularComboboxDisciplinas()
