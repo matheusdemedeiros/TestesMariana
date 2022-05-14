@@ -25,7 +25,7 @@ namespace TestesMariana.Infra.Arquivos.ModuloMateria
             {
                 novoRegistro.Numero = ++contador;
 
-                novoRegistro.Disciplina.QtdMateriasRelacionadas++; ;
+                novoRegistro.Disciplina.IncrementarQtdMateriasRelacionadas();
 
                 var registros = ObterRegistros();
 
@@ -43,11 +43,14 @@ namespace TestesMariana.Infra.Arquivos.ModuloMateria
             {
                 var registros = ObterRegistros();
 
-                foreach (var item in registros)
+                foreach (var materia in registros)
                 {
-                    if (item.Numero == registro.Numero)
+                    if (materia.Numero == registro.Numero)
                     {
-                        item.Atualizar(registro);
+                        AtualizarDisciplinasRelacionadas(registro, materia);
+                        
+                        materia.Atualizar(registro);
+
                         break;
                     }
                 }
@@ -56,13 +59,15 @@ namespace TestesMariana.Infra.Arquivos.ModuloMateria
             return resultadoValidacao;
         }
 
+        
+
         public override ValidationResult Excluir(Materia registro)
         {
             var resultadoValidacao = new ValidationResult();
 
             var registros = ObterRegistros();
-            
-            registro.Disciplina.QtdMateriasRelacionadas--;
+
+            registro.Disciplina.DecrementarQtdMateriasRelacionadas();
 
             if (registros.Remove(registro) == false)
                 resultadoValidacao.Errors.Add(new ValidationFailure("", "Não foi possível remover o registro"));
@@ -123,5 +128,23 @@ namespace TestesMariana.Infra.Arquivos.ModuloMateria
             return ObterRegistros()
                .Find(x => x.Titulo.SaoIguais(titulo));
         }
+
+        private bool VerificaSeAsDisciplinasSaoIguais(Materia materia1, Materia materia2)
+        {
+            if (materia1.Disciplina == materia2.Disciplina)
+                return true;
+
+            return false;
+        }
+
+        private void AtualizarDisciplinasRelacionadas(Materia materiaNova, Materia materiaAntiga)
+        {
+            if (VerificaSeAsDisciplinasSaoIguais(materiaAntiga, materiaNova) == false)
+            {
+                materiaNova.Disciplina.IncrementarQtdMateriasRelacionadas();
+                materiaAntiga.Disciplina.DecrementarQtdMateriasRelacionadas();
+            }
+        }
+
     }
 }

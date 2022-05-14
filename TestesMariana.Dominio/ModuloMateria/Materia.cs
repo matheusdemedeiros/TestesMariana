@@ -45,5 +45,8 @@ namespace TestesMariana.Dominio.ModuloMateria
             return MemberwiseClone() as Materia;
         }
 
+
+
+
     }
 }

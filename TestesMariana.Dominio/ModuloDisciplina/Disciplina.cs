@@ -22,6 +22,16 @@ namespace TestesMariana.Dominio.ModuloDisciplina
         public bool PodeExcluir => QtdMateriasRelacionadas == 0 ? true : false;
 
         public int QtdMateriasRelacionadas = 0;
+        
+        public void IncrementarQtdMateriasRelacionadas()
+        {
+            QtdMateriasRelacionadas++;
+        }
+
+        public void DecrementarQtdMateriasRelacionadas()
+        {
+            QtdMateriasRelacionadas--;
+        }
 
         public override void Atualizar(Disciplina registro)
         {
