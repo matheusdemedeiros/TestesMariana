@@ -30,7 +30,6 @@ namespace TestesMariana.Dominio.ModuloQuestao
             Materia = materia;
         }
 
-
         public ValidationResult AdicionarAlternativa(Alternativa alternativa)
         {
             var resultadoValidacao = ValidarAlternativa(alternativa);
@@ -48,14 +47,7 @@ namespace TestesMariana.Dominio.ModuloQuestao
             if (Alternativas.Remove(alternativa) == false)
                 resultadoValidacao.Errors.Add(new ValidationFailure("", "Não foi possível excluir a alternativa!"));
 
-            return resultadoValidacao;  
-        }
-
-
-
-        private AbstractValidator<Alternativa> ObterValidadorAlternativa()
-        {
-            return new ValidadorAlternativa();
+            return resultadoValidacao;
         }
 
         private ValidationResult ValidarAlternativa(Alternativa alternativa)
@@ -64,10 +56,60 @@ namespace TestesMariana.Dominio.ModuloQuestao
 
             var resultadoValidacao = validador.Validate(alternativa);
 
+            if (resultadoValidacao.IsValid == false)
+                return resultadoValidacao;
+
+            resultadoValidacao = ValidarDescricaoAlternativa(alternativa);
+
+            if (resultadoValidacao.IsValid == false)
+                return resultadoValidacao;
+            
+            resultadoValidacao = ValidarAlternativaCorreta(alternativa);
+
+            if (resultadoValidacao.IsValid == false)
+                return resultadoValidacao;
+
             return resultadoValidacao;
         }
 
+        private ValidationResult ValidarDescricaoAlternativa(Alternativa alternativa)
+        {
+            bool descricaoAlternativaRegistrada = VerificarSeAhDescricaoAlternativaJaEstaRegistrada(alternativa);
 
+            ValidationResult validacaoDeDescricao = new ValidationResult();
+
+            if (descricaoAlternativaRegistrada)
+                validacaoDeDescricao.Errors.Add(new ValidationFailure("", "Não foi possível inserir, pois já existe uma alternativa com esta descrição cadastrada no sistema!"));
+
+            return validacaoDeDescricao;
+        }
+        
+        private ValidationResult ValidarAlternativaCorreta(Alternativa alternativa)
+        {
+            bool alternativaCorretaJaRegistrada = VerificarSeJaExisteAlternativaCorretaRegistrada(alternativa);
+
+            ValidationResult validacaoDeDescricao = new ValidationResult();
+
+            if (alternativaCorretaJaRegistrada)
+                validacaoDeDescricao.Errors.Add(new ValidationFailure("", "Não foi possível inserir, pois já existe uma alternativa correta cadastrada na questão atual!"));
+
+            return validacaoDeDescricao;
+        }
+
+        private bool VerificarSeAhDescricaoAlternativaJaEstaRegistrada(Alternativa alternativa)
+        {
+            return Alternativas.Exists(x => x.Descricao.SaoIguais(alternativa.Descricao));
+        } 
+        
+        private bool VerificarSeJaExisteAlternativaCorretaRegistrada(Alternativa alternativa)
+        {
+            return Alternativas.Exists(x => x.Correta == true);
+        }
+
+        private AbstractValidator<Alternativa> ObterValidadorAlternativa()
+        {
+            return new ValidadorAlternativa();
+        }
 
         public override void Atualizar(Questao registro)
         {

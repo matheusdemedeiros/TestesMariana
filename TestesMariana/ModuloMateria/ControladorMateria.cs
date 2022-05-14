@@ -16,7 +16,7 @@ namespace TestesMariana.WinApp.ModuloMateria
         private ListagemMateriasControl listagemMaterias;
 
         public ControladorMateria(IRepositorioMateria repositorioMateria, IRepositorioDisciplina repositorioDisciplina)
-        {
+        {              
             this.repositorioMateria = repositorioMateria;
             this.repositorioDisciplina = repositorioDisciplina;
         }

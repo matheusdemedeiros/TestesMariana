@@ -59,8 +59,6 @@ namespace TestesMariana.Infra.Arquivos.ModuloMateria
             return resultadoValidacao;
         }
 
-        
-
         public override ValidationResult Excluir(Materia registro)
         {
             var resultadoValidacao = new ValidationResult();
