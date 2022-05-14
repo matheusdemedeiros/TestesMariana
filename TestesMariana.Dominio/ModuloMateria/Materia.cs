@@ -16,6 +16,20 @@ namespace TestesMariana.Dominio.ModuloMateria
 
         public string NomeDisciplina => Disciplina.Nome;
 
+        public bool PodeExcluir => QtdQuestoesRelacionadas == 0 ? true : false;
+
+        public int QtdQuestoesRelacionadas = 0;
+
+        public void IncrementarQtdQuestoesRelacionadas()
+        {
+            QtdQuestoesRelacionadas++;
+        }
+
+        public void DecrementarQtdQuestoesRelacionadas()
+        {
+            QtdQuestoesRelacionadas--;
+        }
+
         public Materia()
         {
 

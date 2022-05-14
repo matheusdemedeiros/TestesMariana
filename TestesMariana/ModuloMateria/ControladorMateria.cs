@@ -15,12 +15,13 @@ namespace TestesMariana.WinApp.ModuloMateria
 
         private ListagemMateriasControl listagemMaterias;
 
-        public ControladorMateria(IRepositorioMateria repositorioMateria, IRepositorioDisciplina repositorioDisciplina)
-        {              
+        public ControladorMateria(IRepositorioMateria repositorioMateria,
+            IRepositorioDisciplina repositorioDisciplina)
+        {
             this.repositorioMateria = repositorioMateria;
             this.repositorioDisciplina = repositorioDisciplina;
         }
-   
+
         public List<Disciplina> Disiciplinas
         {
             get
@@ -28,7 +29,7 @@ namespace TestesMariana.WinApp.ModuloMateria
                 return repositorioDisciplina.SelecionarTodos();
             }
         }
-        
+
         public override void Inserir()
         {
             TelaCadastroMateriasForm tela = new TelaCadastroMateriasForm(Disiciplinas);
@@ -82,7 +83,17 @@ namespace TestesMariana.WinApp.ModuloMateria
 
             if (resultado == DialogResult.OK)
             {
-                repositorioMateria.Excluir(materiaSelecionada);
+                var resultadoExclusao = repositorioMateria.Excluir(materiaSelecionada);
+
+                if (resultadoExclusao.IsValid == false)
+                {
+                    string erro = resultadoExclusao.Errors[0].ErrorMessage;
+
+                    MessageBox.Show(erro, "Exclusão de Matérias - Informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else
+                    MessageBox.Show("Matéria excluída com sucesso!", "Exclusão de Matérias - Informativo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 CarregarMaterias();
             }
         }

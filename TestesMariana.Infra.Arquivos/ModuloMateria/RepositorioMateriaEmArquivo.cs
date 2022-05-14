@@ -65,10 +65,16 @@ namespace TestesMariana.Infra.Arquivos.ModuloMateria
 
             var registros = ObterRegistros();
 
-            registro.Disciplina.DecrementarQtdMateriasRelacionadas();
+            if (registro.PodeExcluir)
+            {
+                registro.Disciplina.DecrementarQtdMateriasRelacionadas();
 
-            if (registros.Remove(registro) == false)
-                resultadoValidacao.Errors.Add(new ValidationFailure("", "Não foi possível remover o registro"));
+                if (registros.Remove(registro) == false)
+                    resultadoValidacao.Errors.Add(new ValidationFailure("", "Não foi possível remover a matéria!"));
+            }
+            else
+                resultadoValidacao.Errors.Add(new ValidationFailure("", "Não foi possível excluir a matéria," +
+                    " pois ela está associada a alguma(s) questão(ões)!"));
 
             return resultadoValidacao;
         }

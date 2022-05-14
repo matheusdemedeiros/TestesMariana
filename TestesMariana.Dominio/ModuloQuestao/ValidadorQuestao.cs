@@ -18,8 +18,9 @@ namespace TestesMariana.Dominio.ModuloQuestao
             RuleFor(x => x.Alternativas.Count).GreaterThan(1)
                 .WithMessage("A questão deve ter no mínimo duas alternativa cadastradas!");
 
+            RuleFor(x => x.Materia).NotNull()
+                .WithMessage("A questão deve ter uma matéria cadastrada!");
+
         }
-
-
     }
 }
