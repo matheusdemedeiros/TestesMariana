@@ -12,12 +12,12 @@ namespace TestesMariana.WinApp.ModuloQuestao
 {
     public class ControladorQuestao : ControladorBase
     {
-        private RepositorioQuestaoEmArquivo repositorioQuestao;
+        private IRepositorioQuestao repositorioQuestao;
         private IRepositorioDisciplina repositorioDisciplina;
         private IRepositorioMateria repositorioMateria;
         private ListagemQuestoesControl listagemQuestoes;
 
-        public ControladorQuestao(RepositorioQuestaoEmArquivo repositorioQuestao,
+        public ControladorQuestao(IRepositorioQuestao repositorioQuestao,
             IRepositorioDisciplina repositorioDisciplina, IRepositorioMateria reposirioMateria)
         {
             this.repositorioQuestao = repositorioQuestao;

@@ -37,7 +37,7 @@ namespace TestesMariana.WinApp.ModuloQuestao
                 questao = value;
                 questao.Enunciado = richTextBoxEnunciado.Text;
                 questao.Materia = (Materia)comboBoxMateria.SelectedItem;
-
+                AtualizarListboxAlternativas();
             }
         }
 
@@ -65,6 +65,24 @@ namespace TestesMariana.WinApp.ModuloQuestao
             RemoverAlternativa();
 
             AtualizarListboxAlternativas();
+        }
+
+        private void btnGravar_Click(object sender, EventArgs e)
+        {
+            questao.Enunciado = richTextBoxEnunciado.Text;
+            questao.Materia = (Materia)comboBoxMateria.SelectedItem;
+
+
+            var resultadoValidacao = GravarRegistro(questao);
+
+            if (resultadoValidacao.IsValid == false)
+            {
+                string erro = resultadoValidacao.Errors[0].ErrorMessage;
+
+                TelaPrincipalForm.Instancia.AtualizarRodape(erro, Color.Red);
+
+                DialogResult = DialogResult.None;
+            }
         }
 
         private void comboBoxMateria_SelectedIndexChanged(object sender, EventArgs e)
@@ -234,7 +252,6 @@ namespace TestesMariana.WinApp.ModuloQuestao
             btnRemoverAlternativa.Enabled = true;
 
         }
-
 
     }
 }
