@@ -95,6 +95,7 @@
             // 
             // txtNumero
             // 
+            this.txtNumero.Enabled = false;
             this.txtNumero.Location = new System.Drawing.Point(80, 18);
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(75, 23);
@@ -108,7 +109,7 @@
             this.comboBoxDisiciplina.Location = new System.Drawing.Point(264, 18);
             this.comboBoxDisiciplina.Name = "comboBoxDisiciplina";
             this.comboBoxDisiciplina.Size = new System.Drawing.Size(213, 23);
-            this.comboBoxDisiciplina.TabIndex = 9;
+            this.comboBoxDisiciplina.TabIndex = 0;
             this.comboBoxDisiciplina.SelectedIndexChanged += new System.EventHandler(this.comboBoxDisiciplina_SelectedIndexChanged);
             // 
             // comboBoxMateria
@@ -118,14 +119,15 @@
             this.comboBoxMateria.Location = new System.Drawing.Point(575, 18);
             this.comboBoxMateria.Name = "comboBoxMateria";
             this.comboBoxMateria.Size = new System.Drawing.Size(213, 23);
-            this.comboBoxMateria.TabIndex = 10;
+            this.comboBoxMateria.TabIndex = 1;
+            this.comboBoxMateria.SelectedIndexChanged += new System.EventHandler(this.comboBoxMateria_SelectedIndexChanged);
             // 
             // richTextBoxEnunciado
             // 
             this.richTextBoxEnunciado.Location = new System.Drawing.Point(20, 85);
             this.richTextBoxEnunciado.Name = "richTextBoxEnunciado";
             this.richTextBoxEnunciado.Size = new System.Drawing.Size(413, 116);
-            this.richTextBoxEnunciado.TabIndex = 11;
+            this.richTextBoxEnunciado.TabIndex = 2;
             this.richTextBoxEnunciado.Text = "";
             // 
             // label8
@@ -142,7 +144,7 @@
             this.txtAlternativaDescricao.Location = new System.Drawing.Point(20, 231);
             this.txtAlternativaDescricao.Name = "txtAlternativaDescricao";
             this.txtAlternativaDescricao.Size = new System.Drawing.Size(413, 23);
-            this.txtAlternativaDescricao.TabIndex = 13;
+            this.txtAlternativaDescricao.TabIndex = 3;
             this.txtAlternativaDescricao.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // listAlternativasCadastradas
@@ -152,7 +154,7 @@
             this.listAlternativasCadastradas.Location = new System.Drawing.Point(439, 85);
             this.listAlternativasCadastradas.Name = "listAlternativasCadastradas";
             this.listAlternativasCadastradas.Size = new System.Drawing.Size(349, 169);
-            this.listAlternativasCadastradas.TabIndex = 14;
+            this.listAlternativasCadastradas.TabIndex = 10;
             // 
             // checkBoxAlternativaCorreta
             // 
@@ -160,7 +162,7 @@
             this.checkBoxAlternativaCorreta.Location = new System.Drawing.Point(123, 263);
             this.checkBoxAlternativaCorreta.Name = "checkBoxAlternativaCorreta";
             this.checkBoxAlternativaCorreta.Size = new System.Drawing.Size(123, 19);
-            this.checkBoxAlternativaCorreta.TabIndex = 17;
+            this.checkBoxAlternativaCorreta.TabIndex = 5;
             this.checkBoxAlternativaCorreta.Text = "Alternativa correta";
             this.checkBoxAlternativaCorreta.UseVisualStyleBackColor = true;
             // 
@@ -169,7 +171,7 @@
             this.btnAdicionarAlternativa.Location = new System.Drawing.Point(20, 263);
             this.btnAdicionarAlternativa.Name = "btnAdicionarAlternativa";
             this.btnAdicionarAlternativa.Size = new System.Drawing.Size(75, 23);
-            this.btnAdicionarAlternativa.TabIndex = 18;
+            this.btnAdicionarAlternativa.TabIndex = 4;
             this.btnAdicionarAlternativa.Text = "Adicionar";
             this.btnAdicionarAlternativa.UseVisualStyleBackColor = true;
             this.btnAdicionarAlternativa.Click += new System.EventHandler(this.btnAdicionarAlternativa_Click);
@@ -189,7 +191,7 @@
             this.btnGravar.Location = new System.Drawing.Point(256, 263);
             this.btnGravar.Name = "btnGravar";
             this.btnGravar.Size = new System.Drawing.Size(75, 23);
-            this.btnGravar.TabIndex = 20;
+            this.btnGravar.TabIndex = 6;
             this.btnGravar.Text = "Gravar";
             this.btnGravar.UseVisualStyleBackColor = true;
             // 
@@ -198,7 +200,7 @@
             this.btnLimpar.Location = new System.Drawing.Point(338, 263);
             this.btnLimpar.Name = "btnLimpar";
             this.btnLimpar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpar.TabIndex = 21;
+            this.btnLimpar.TabIndex = 7;
             this.btnLimpar.Text = "Limpar";
             this.btnLimpar.UseVisualStyleBackColor = true;
             this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
@@ -209,7 +211,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(420, 263);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 22;
+            this.btnCancelar.TabIndex = 8;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             // 
@@ -218,7 +220,7 @@
             this.btnRemoverAlternativa.Location = new System.Drawing.Point(502, 263);
             this.btnRemoverAlternativa.Name = "btnRemoverAlternativa";
             this.btnRemoverAlternativa.Size = new System.Drawing.Size(142, 23);
-            this.btnRemoverAlternativa.TabIndex = 23;
+            this.btnRemoverAlternativa.TabIndex = 9;
             this.btnRemoverAlternativa.Text = "Remover alternativa";
             this.btnRemoverAlternativa.UseVisualStyleBackColor = true;
             this.btnRemoverAlternativa.Click += new System.EventHandler(this.btnRemoverAlternativa_Click);

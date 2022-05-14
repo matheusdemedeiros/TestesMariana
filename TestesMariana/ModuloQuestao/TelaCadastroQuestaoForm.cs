@@ -22,6 +22,8 @@ namespace TestesMariana.WinApp.ModuloQuestao
             this.materias = materias;
 
             ManipularComboboxDisciplinas();
+
+            DesabilitarComponentes();
         }
 
         public Questao Questao
@@ -44,6 +46,8 @@ namespace TestesMariana.WinApp.ModuloQuestao
         private void btnAdicionarAlternativa_Click(object sender, EventArgs e)
         {
             AdicionarAlternativa();
+
+            AtualizarListboxAlternativas();
         }
 
         private void btnLimpar_Click(object sender, EventArgs e)
@@ -59,6 +63,13 @@ namespace TestesMariana.WinApp.ModuloQuestao
         private void btnRemoverAlternativa_Click(object sender, EventArgs e)
         {
             RemoverAlternativa();
+
+            AtualizarListboxAlternativas();
+        }
+
+        private void comboBoxMateria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            HabilitarComponentes();
         }
 
         private void LimparCampos()
@@ -134,8 +145,7 @@ namespace TestesMariana.WinApp.ModuloQuestao
             if (resultado.IsValid == false)
                 TelaPrincipalForm.Instancia.AtualizarRodape(resultado.Errors[0].ErrorMessage, Color.Red);
 
-            AtualizarListboxAlternativas();
-
+            txtAlternativaDescricao.Text = "";
         }
 
         private void RemoverAlternativa()
@@ -158,11 +168,13 @@ namespace TestesMariana.WinApp.ModuloQuestao
             }
             else
                 TelaPrincipalForm.Instancia.AtualizarRodape(resultado.Errors[0].ErrorMessage, Color.Red);
+
+
         }
 
         public void MarcarCorreta(Alternativa alternativa)
         {
-            if (checkBoxAlternativaCorreta.Checked)
+            if (checkBoxAlternativaCorreta.Checked && checkBoxAlternativaCorreta.Enabled == true)
                 alternativa.Correta = true;
         }
 
@@ -170,7 +182,7 @@ namespace TestesMariana.WinApp.ModuloQuestao
         {
             listAlternativasCadastradas.Items.Clear();
 
-            if (questao.Alternativas.Count > 0)
+            if (questao.Alternativas != null && questao.Alternativas.Count > 0)
                 foreach (var alternativa in questao.Alternativas)
                     listAlternativasCadastradas.Items.Add(alternativa);
 
@@ -187,7 +199,40 @@ namespace TestesMariana.WinApp.ModuloQuestao
             if (questao.TemAlternativaCorretaCadastrada)
                 checkBoxAlternativaCorreta.Enabled = false;
             else
+            {
                 checkBoxAlternativaCorreta.Enabled = true;
+                checkBoxAlternativaCorreta.Checked = false;
+            }
+        }
+
+        private void DesabilitarComponentes()
+        {
+            richTextBoxEnunciado.Enabled = false;
+            txtAlternativaDescricao.Enabled = false;
+            txtAlternativaDescricao.Enabled = false;
+            listAlternativasCadastradas.Enabled = false;
+            checkBoxAlternativaCorreta.Enabled = false;
+
+            btnAdicionarAlternativa.Enabled = false;
+            btnGravar.Enabled = false;
+            btnLimpar.Enabled = false;
+            btnRemoverAlternativa.Enabled = false;
+
+        }
+
+        private void HabilitarComponentes()
+        {
+            richTextBoxEnunciado.Enabled = true;
+            txtAlternativaDescricao.Enabled = true;
+            txtAlternativaDescricao.Enabled = true;
+            listAlternativasCadastradas.Enabled = true;
+            checkBoxAlternativaCorreta.Enabled = true;
+
+            btnAdicionarAlternativa.Enabled = true;
+            btnGravar.Enabled = true;
+            btnLimpar.Enabled = true;
+            btnRemoverAlternativa.Enabled = true;
+
         }
 
 

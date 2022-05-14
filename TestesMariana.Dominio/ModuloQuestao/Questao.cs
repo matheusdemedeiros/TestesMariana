@@ -20,6 +20,8 @@ namespace TestesMariana.Dominio.ModuloQuestao
 
         public Disciplina Disciplina => Materia.Disciplina;
 
+        public string Serie => Materia.Serie;
+
         public bool TemAlternativaCorretaCadastrada
         {
             get
@@ -30,7 +32,7 @@ namespace TestesMariana.Dominio.ModuloQuestao
 
         public Questao()
         {
-
+            Alternativas = new List<Alternativa>();
         }
 
         public Questao(string enunciado, List<Alternativa> alternativas, Materia materia)
@@ -46,9 +48,9 @@ namespace TestesMariana.Dominio.ModuloQuestao
 
             if (resultadoValidacao.IsValid)
             {
-                GerarLetraParaAlternativa(alternativa);
-
                 Alternativas.Add(alternativa);
+
+                AtualizarLetraAlternativas();
             }
 
             return resultadoValidacao;
@@ -60,6 +62,8 @@ namespace TestesMariana.Dominio.ModuloQuestao
 
             if (Alternativas.Remove(alternativa) == false)
                 resultadoValidacao.Errors.Add(new ValidationFailure("", "Não foi possível excluir a alternativa!"));
+            else
+                AtualizarLetraAlternativas();
 
             return resultadoValidacao;
         }
@@ -137,13 +141,16 @@ namespace TestesMariana.Dominio.ModuloQuestao
             return MemberwiseClone() as Questao;
         }
 
-        private void GerarLetraParaAlternativa(Alternativa alternativa)
+        private void AtualizarLetraAlternativas()
         {
-            int soma = Alternativas.Count;
+            char resultado = (char)contadorASCII;
 
-            char resultado = (char)(contadorASCII + soma);
+            foreach (var alternativa in Alternativas)
+            {
+                alternativa.Letra = resultado;
+                resultado++;
+            }
 
-            alternativa.Letra = resultado;
         }
     }
 }
