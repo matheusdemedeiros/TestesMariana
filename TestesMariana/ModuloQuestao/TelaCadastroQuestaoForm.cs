@@ -1,6 +1,7 @@
 ﻿using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using TestesMariana.Dominio.ModuloDisciplina;
 using TestesMariana.Dominio.ModuloMateria;
@@ -53,6 +54,11 @@ namespace TestesMariana.WinApp.ModuloQuestao
         private void comboBoxDisiciplina_SelectedIndexChanged(object sender, EventArgs e)
         {
             ManipularComboboxMaterias();
+        }
+
+        private void btnRemoverAlternativa_Click(object sender, EventArgs e)
+        {
+            RemoverAlternativa();
         }
 
         private void LimparCampos()
@@ -121,13 +127,69 @@ namespace TestesMariana.WinApp.ModuloQuestao
 
             alternativa.Descricao = txtAlternativaDescricao.Text;
 
+            MarcarCorreta(alternativa);
+
+            var resultado = questao.AdicionarAlternativa(alternativa);
+
+            if (resultado.IsValid == false)
+                TelaPrincipalForm.Instancia.AtualizarRodape(resultado.Errors[0].ErrorMessage, Color.Red);
+
+            AtualizarListboxAlternativas();
+
         }
-        
+
+        private void RemoverAlternativa()
+        {
+            var alternativaSelecionada = ObterAlternativaSelecionada();
+
+            if (alternativaSelecionada == null)
+            {
+                MessageBox.Show("Selecione uma alternativa primeiro!", "Exclusão de alternativas",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            var resultado = questao.ExcluirAlternativa(alternativaSelecionada);
+
+            if (resultado.IsValid)
+            {
+                MessageBox.Show("Alternativa removida com sucesso!!", "Exclusão de alternativas",
+                   MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+                TelaPrincipalForm.Instancia.AtualizarRodape(resultado.Errors[0].ErrorMessage, Color.Red);
+        }
+
         public void MarcarCorreta(Alternativa alternativa)
         {
             if (checkBoxAlternativaCorreta.Checked)
                 alternativa.Correta = true;
         }
+
+        private void AtualizarListboxAlternativas()
+        {
+            listAlternativasCadastradas.Items.Clear();
+
+            if (questao.Alternativas.Count > 0)
+                foreach (var alternativa in questao.Alternativas)
+                    listAlternativasCadastradas.Items.Add(alternativa);
+
+            AtualizarCheckboxAlternativaCorreta();
+        }
+
+        private Alternativa ObterAlternativaSelecionada()
+        {
+            return (Alternativa)listAlternativasCadastradas.SelectedItem;
+        }
+
+        private void AtualizarCheckboxAlternativaCorreta()
+        {
+            if (questao.TemAlternativaCorretaCadastrada)
+                checkBoxAlternativaCorreta.Enabled = false;
+            else
+                checkBoxAlternativaCorreta.Enabled = true;
+        }
+
 
     }
 }

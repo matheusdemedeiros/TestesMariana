@@ -46,6 +46,7 @@
             this.btnGravar = new System.Windows.Forms.Button();
             this.btnLimpar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnRemoverAlternativa = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -194,7 +195,7 @@
             // 
             // btnLimpar
             // 
-            this.btnLimpar.Location = new System.Drawing.Point(337, 263);
+            this.btnLimpar.Location = new System.Drawing.Point(338, 263);
             this.btnLimpar.Name = "btnLimpar";
             this.btnLimpar.Size = new System.Drawing.Size(75, 23);
             this.btnLimpar.TabIndex = 21;
@@ -205,18 +206,29 @@
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(418, 263);
+            this.btnCancelar.Location = new System.Drawing.Point(420, 263);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 22;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             // 
+            // btnRemoverAlternativa
+            // 
+            this.btnRemoverAlternativa.Location = new System.Drawing.Point(502, 263);
+            this.btnRemoverAlternativa.Name = "btnRemoverAlternativa";
+            this.btnRemoverAlternativa.Size = new System.Drawing.Size(142, 23);
+            this.btnRemoverAlternativa.TabIndex = 23;
+            this.btnRemoverAlternativa.Text = "Remover alternativa";
+            this.btnRemoverAlternativa.UseVisualStyleBackColor = true;
+            this.btnRemoverAlternativa.Click += new System.EventHandler(this.btnRemoverAlternativa_Click);
+            // 
             // TelaCadastroQuestaoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(815, 304);
+            this.Controls.Add(this.btnRemoverAlternativa);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnLimpar);
             this.Controls.Add(this.btnGravar);
@@ -267,5 +279,6 @@
         private System.Windows.Forms.Button btnGravar;
         private System.Windows.Forms.Button btnLimpar;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Button btnRemoverAlternativa;
     }
 }

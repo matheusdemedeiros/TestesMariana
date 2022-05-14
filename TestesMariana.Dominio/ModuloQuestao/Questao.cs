@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
-using System;
 using System.Collections.Generic;
 using TestesMariana.Dominio.Compartilhado;
 using TestesMariana.Dominio.ModuloDisciplina;
@@ -10,6 +9,9 @@ namespace TestesMariana.Dominio.ModuloQuestao
 {
     public class Questao : EntidadeBase<Questao>
     {
+
+        private int contadorASCII = (int)'a';
+
         public string Enunciado { get; set; }
 
         public List<Alternativa> Alternativas { get; set; }
@@ -17,6 +19,14 @@ namespace TestesMariana.Dominio.ModuloQuestao
         public Materia Materia { get; set; }
 
         public Disciplina Disciplina => Materia.Disciplina;
+
+        public bool TemAlternativaCorretaCadastrada
+        {
+            get
+            {
+                return Alternativas.Exists(x => x.Correta == true);
+            }
+        }
 
         public Questao()
         {
@@ -35,7 +45,11 @@ namespace TestesMariana.Dominio.ModuloQuestao
             var resultadoValidacao = ValidarAlternativa(alternativa);
 
             if (resultadoValidacao.IsValid)
+            {
+                GerarLetraParaAlternativa(alternativa);
+
                 Alternativas.Add(alternativa);
+            }
 
             return resultadoValidacao;
         }
@@ -63,7 +77,7 @@ namespace TestesMariana.Dominio.ModuloQuestao
 
             if (resultadoValidacao.IsValid == false)
                 return resultadoValidacao;
-            
+
             resultadoValidacao = ValidarAlternativaCorreta(alternativa);
 
             if (resultadoValidacao.IsValid == false)
@@ -83,14 +97,14 @@ namespace TestesMariana.Dominio.ModuloQuestao
 
             return validacaoDeDescricao;
         }
-        
+
         private ValidationResult ValidarAlternativaCorreta(Alternativa alternativa)
         {
-            bool alternativaCorretaJaRegistrada = VerificarSeJaExisteAlternativaCorretaRegistrada(alternativa);
+            bool alternativaCorretaJaRegistrada = TemAlternativaCorretaCadastrada;
 
             ValidationResult validacaoDeDescricao = new ValidationResult();
 
-            if (alternativaCorretaJaRegistrada)
+            if (alternativaCorretaJaRegistrada && alternativa.Correta)
                 validacaoDeDescricao.Errors.Add(new ValidationFailure("", "Não foi possível inserir, pois já existe uma alternativa correta cadastrada na questão atual!"));
 
             return validacaoDeDescricao;
@@ -99,11 +113,6 @@ namespace TestesMariana.Dominio.ModuloQuestao
         private bool VerificarSeAhDescricaoAlternativaJaEstaRegistrada(Alternativa alternativa)
         {
             return Alternativas.Exists(x => x.Descricao.SaoIguais(alternativa.Descricao));
-        } 
-        
-        private bool VerificarSeJaExisteAlternativaCorretaRegistrada(Alternativa alternativa)
-        {
-            return Alternativas.Exists(x => x.Correta == true);
         }
 
         private AbstractValidator<Alternativa> ObterValidadorAlternativa()
@@ -128,5 +137,13 @@ namespace TestesMariana.Dominio.ModuloQuestao
             return MemberwiseClone() as Questao;
         }
 
+        private void GerarLetraParaAlternativa(Alternativa alternativa)
+        {
+            int soma = Alternativas.Count;
+
+            char resultado = (char)(contadorASCII + soma);
+
+            alternativa.Letra = resultado;
+        }
     }
 }

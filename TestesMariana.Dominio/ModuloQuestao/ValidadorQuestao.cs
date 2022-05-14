@@ -7,17 +7,16 @@ namespace TestesMariana.Dominio.ModuloQuestao
     {
         public ValidadorQuestao()
         {
-            //RuleFor(x => x.Titulo)
-            //    .NotNull().NotEmpty()
-            //    .WithMessage("O campo 'Título da matéria' é obrigatório.");
+            RuleFor(x => x.Enunciado)
+                .NotNull().NotEmpty()
+                .WithMessage("O campo 'Enunciado da questão' é obrigatório!");
 
-            //RuleFor(x => x.Serie)
-            //    .NotNull().NotEmpty()
-            //    .WithMessage("O campo 'Série' é obrigatório.");
+            RuleFor(x => x.TemAlternativaCorretaCadastrada)
+                .Equal(true)
+                .WithMessage("A questão deve ter no mínimo uma alternativa correta cadastrada!");
 
-            //RuleFor(x => x.Disciplina)
-            //    .NotNull()
-            //    .WithMessage("O campo 'Disciplina' é obrigatório.");
+            RuleFor(x => x.Alternativas.Count).GreaterThan(1)
+                .WithMessage("A questão deve ter no mínimo duas alternativa cadastradas!");
 
         }
 

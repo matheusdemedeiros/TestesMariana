@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TestesMariana.Dominio.ModuloQuestao
+﻿namespace TestesMariana.Dominio.ModuloQuestao
 {
     public class Alternativa
     {
         public string Descricao { get; set; }
 
         public bool Correta { get; set; }
+        
+        public char Letra { get; set; }
 
         public Alternativa()
         {
@@ -25,7 +21,10 @@ namespace TestesMariana.Dominio.ModuloQuestao
 
         public override string ToString()
         {
-            return $"Descrição: {Descricao}";
+            if (Correta)
+                return $"{Letra}) {Descricao} - (CORRETA);";
+
+            return $"{Letra}) {Descricao};";
         }
     }
 }
