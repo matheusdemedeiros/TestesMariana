@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TestesMariana.Dominio.ModuloDisciplina;
 using TestesMariana.Infra.Arquivos.Compartilhado;
+using TestesMariana.Dominio.Compartilhado;
 
 namespace TestesMariana.Infra.Arquivos.ModuloDisciplina
 {
@@ -113,15 +114,17 @@ namespace TestesMariana.Infra.Arquivos.ModuloDisciplina
 
         private bool VerificarSeOhNomeJaEstaRegistrado(Disciplina registro)
         {
+            //return ObterRegistros()
+            //               .Select(x => x.Nome.ToUpper())
+            //               .Contains(registro.Nome.ToUpper());
             return ObterRegistros()
-                           .Select(x => x.Nome.ToUpper())
-                           .Contains(registro.Nome.ToUpper());
+                           .Exists(x => x.Nome.SaoIguais(registro.Nome));
         }
 
         private Disciplina ObterDisciplinaPeloNome(string nome)
         {
             return ObterRegistros()
-               .Find(x => x.Nome.ToUpper() == nome.ToUpper());
+               .Find(x => x.Nome.SaoIguais(nome));
         }
     }
 }

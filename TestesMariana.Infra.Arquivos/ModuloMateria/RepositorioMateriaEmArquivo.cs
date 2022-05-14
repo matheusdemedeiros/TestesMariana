@@ -2,6 +2,7 @@
 using FluentValidation.Results;
 using System.Collections.Generic;
 using System.Linq;
+using TestesMariana.Dominio.Compartilhado;
 using TestesMariana.Dominio.ModuloMateria;
 using TestesMariana.Infra.Arquivos.Compartilhado;
 
@@ -113,14 +114,14 @@ namespace TestesMariana.Infra.Arquivos.ModuloMateria
         private bool VerificarSeOhTituloJaEstaRegistrado(Materia registro)
         {
             return ObterRegistros()
-                           .Select(x => x.Titulo.ToUpper())
-                           .Contains(registro.Titulo.ToUpper());
+                             .Exists(x => x.Titulo.SaoIguais(registro.Titulo));
+
         }
 
         private Materia ObterMateriaPeloTitulo(string titulo)
         {
             return ObterRegistros()
-               .Find(x => x.Titulo.ToUpper() == titulo.ToUpper());
+               .Find(x => x.Titulo.SaoIguais(titulo));
         }
     }
 }

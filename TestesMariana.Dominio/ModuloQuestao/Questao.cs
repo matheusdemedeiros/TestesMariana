@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using System;
 using System.Collections.Generic;
 using TestesMariana.Dominio.Compartilhado;
 using TestesMariana.Dominio.ModuloDisciplina;
@@ -28,13 +30,52 @@ namespace TestesMariana.Dominio.ModuloQuestao
             Materia = materia;
         }
 
+
+        public ValidationResult AdicionarAlternativa(Alternativa alternativa)
+        {
+            var resultadoValidacao = ValidarAlternativa(alternativa);
+
+            if (resultadoValidacao.IsValid)
+                Alternativas.Add(alternativa);
+
+            return resultadoValidacao;
+        }
+
+        public ValidationResult ExcluirAlternativa(Alternativa alternativa)
+        {
+            var resultadoValidacao = new ValidationResult();
+
+            if (Alternativas.Remove(alternativa) == false)
+                resultadoValidacao.Errors.Add(new ValidationFailure("", "Não foi possível excluir a alternativa!"));
+
+            return resultadoValidacao;  
+        }
+
+
+
+        private AbstractValidator<Alternativa> ObterValidadorAlternativa()
+        {
+            return new ValidadorAlternativa();
+        }
+
+        private ValidationResult ValidarAlternativa(Alternativa alternativa)
+        {
+            var validador = ObterValidadorAlternativa();
+
+            var resultadoValidacao = validador.Validate(alternativa);
+
+            return resultadoValidacao;
+        }
+
+
+
         public override void Atualizar(Questao registro)
         {
             this.Enunciado = registro.Enunciado;
             this.Alternativas = registro.Alternativas;
             this.Materia = registro.Materia;
         }
-        
+
         public override string ToString()
         {
             return $"Número: {Numero} Enunciado: {Enunciado} Matéria: {Materia.Titulo} Disciplina: {Disciplina}";

@@ -4,7 +4,6 @@ namespace TestesMariana.Dominio.ModuloMateria
 {
     public class ValidadorMateria : AbstractValidator<Materia>
     {
-
         public ValidadorMateria()
         {
             RuleFor(x => x.Titulo)
@@ -20,7 +19,5 @@ namespace TestesMariana.Dominio.ModuloMateria
                 .WithMessage("O campo 'Disciplina' é obrigatório.");
 
         }
-
-
     }
 }

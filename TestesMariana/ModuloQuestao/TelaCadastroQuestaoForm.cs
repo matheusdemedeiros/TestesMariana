@@ -121,10 +121,8 @@ namespace TestesMariana.WinApp.ModuloQuestao
 
             alternativa.Descricao = txtAlternativaDescricao.Text;
 
-            MarcarCorreta(alternativa);
-
         }
-        s
+        
         public void MarcarCorreta(Alternativa alternativa)
         {
             if (checkBoxAlternativaCorreta.Checked)
