@@ -17,13 +17,14 @@ namespace TestesMariana.WinApp.ModuloQuestao
             grid.Columns.AddRange(ObterColunas());
         }
 
-
         public DataGridViewColumn[] ObterColunas()
         {
             var colunas = new DataGridViewColumn[]
             {
                 new DataGridViewTextBoxColumn { DataPropertyName = "Numero", HeaderText = "Número"},
 
+                new DataGridViewTextBoxColumn { DataPropertyName = "Enunciado", HeaderText = "Enunciado"},
+                
                 new DataGridViewTextBoxColumn { DataPropertyName = "Materia.Disciplina", HeaderText = "Disciplina"},
 
                 new DataGridViewTextBoxColumn { DataPropertyName = "Materia", HeaderText = "Matéria"},
@@ -47,8 +48,8 @@ namespace TestesMariana.WinApp.ModuloQuestao
 
             foreach (Questao questao in questoes)
             {
-                grid.Rows.Add(questao.Numero, questao.Materia.Disciplina,
-                    questao.Materia, questao.Serie, questao.Alternativas.Count);
+                grid.Rows.Add(questao.Numero, questao.Enunciado,
+                    questao.Materia.Disciplina, questao.Materia, questao.Serie, questao.Alternativas.Count);
             }
         }
     }

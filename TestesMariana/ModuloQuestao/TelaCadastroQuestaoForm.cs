@@ -35,10 +35,18 @@ namespace TestesMariana.WinApp.ModuloQuestao
             }
             set
             {
-                //questao = value;
-                //questao.Enunciado = richTextBoxEnunciado.Text;
-                //questao.Materia = (Materia)comboBoxMateria.SelectedItem;
-                //AtualizarListboxAlternativas();
+                questao = value;
+                
+                if (questao.Numero != 0)
+                {
+                    HabilitarComponentes();
+
+                    txtNumero.Text = questao.Numero.ToString();
+                    comboBoxDisiciplina.SelectedItem = questao.Disciplina;    
+                    comboBoxMateria.SelectedItem = questao.Materia;    
+                    richTextBoxEnunciado.Text = questao.Enunciado;
+                    AtualizarListboxAlternativas();
+                }
             }
         }
 

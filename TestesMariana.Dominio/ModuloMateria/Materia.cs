@@ -51,7 +51,7 @@ namespace TestesMariana.Dominio.ModuloMateria
 
         public override string ToString()
         {
-            return $"Número: {Numero} - Título: {Titulo} - Disciplina: {Disciplina.Nome} - Série: {Serie}";
+            return Titulo;
         }
 
         public Materia Clone()

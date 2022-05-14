@@ -134,9 +134,8 @@ namespace TestesMariana.Dominio.ModuloQuestao
 
         public override string ToString()
         {
-            return $"Número: {Numero} Enunciado: {Enunciado} Matéria: {Materia.Titulo}";
+            return Enunciado;
         }
-
         public Questao Clone()
         {
             return MemberwiseClone() as Questao;

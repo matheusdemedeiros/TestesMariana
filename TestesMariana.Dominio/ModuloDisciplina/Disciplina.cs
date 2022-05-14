@@ -40,7 +40,7 @@ namespace TestesMariana.Dominio.ModuloDisciplina
 
         public override string ToString()
         {
-            return $"Número: {Numero} - Nome: {Nome}";
+            return Nome;
         }
 
         public Disciplina Clone()
