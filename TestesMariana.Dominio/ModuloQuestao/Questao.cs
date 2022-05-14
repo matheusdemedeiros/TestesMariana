@@ -124,6 +124,7 @@ namespace TestesMariana.Dominio.ModuloQuestao
             return new ValidadorAlternativa();
         }
 
+        
         public override void Atualizar(Questao registro)
         {
             this.Enunciado = registro.Enunciado;
@@ -133,7 +134,7 @@ namespace TestesMariana.Dominio.ModuloQuestao
 
         public override string ToString()
         {
-            return $"Número: {Numero} Enunciado: {Enunciado} Matéria: {Materia.Titulo} Disciplina: {Disciplina}";
+            return $"Número: {Numero} Enunciado: {Enunciado} Matéria: {Materia.Titulo}";
         }
 
         public Questao Clone()

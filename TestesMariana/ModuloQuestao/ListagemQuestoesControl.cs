@@ -24,7 +24,7 @@ namespace TestesMariana.WinApp.ModuloQuestao
             {
                 new DataGridViewTextBoxColumn { DataPropertyName = "Numero", HeaderText = "Número"},
 
-                new DataGridViewTextBoxColumn { DataPropertyName = "Disciplina", HeaderText = "Disciplina"},
+                new DataGridViewTextBoxColumn { DataPropertyName = "Materia.Disciplina", HeaderText = "Disciplina"},
 
                 new DataGridViewTextBoxColumn { DataPropertyName = "Materia", HeaderText = "Matéria"},
 
@@ -47,7 +47,7 @@ namespace TestesMariana.WinApp.ModuloQuestao
 
             foreach (Questao questao in questoes)
             {
-                grid.Rows.Add(questao.Numero, questao.Disciplina,
+                grid.Rows.Add(questao.Numero, questao.Materia.Disciplina,
                     questao.Materia, questao.Serie, questao.Alternativas.Count);
             }
         }

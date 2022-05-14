@@ -15,6 +15,7 @@ namespace TestesMariana.WinApp.ModuloQuestao
         private List<Disciplina> disciplinas;
         private List<Materia> materias;
 
+
         public TelaCadastroQuestaoForm(List<Disciplina> disciplinas, List<Materia> materias)
         {
             InitializeComponent();
@@ -34,10 +35,10 @@ namespace TestesMariana.WinApp.ModuloQuestao
             }
             set
             {
-                questao = value;
-                questao.Enunciado = richTextBoxEnunciado.Text;
-                questao.Materia = (Materia)comboBoxMateria.SelectedItem;
-                AtualizarListboxAlternativas();
+                //questao = value;
+                //questao.Enunciado = richTextBoxEnunciado.Text;
+                //questao.Materia = (Materia)comboBoxMateria.SelectedItem;
+                //AtualizarListboxAlternativas();
             }
         }
 

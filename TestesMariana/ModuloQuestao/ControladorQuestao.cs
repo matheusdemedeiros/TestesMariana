@@ -60,12 +60,56 @@ namespace TestesMariana.WinApp.ModuloQuestao
 
         public override void Editar()
         {
-            throw new NotImplementedException();
+            Questao questaoSelecionada = ObtemQuestaoSelecionada();
+
+            if (questaoSelecionada == null)
+            {
+                MessageBox.Show("Selecione uma questão primeiro",
+                "Edição de Questões", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            TelaCadastroQuestaoForm tela = new TelaCadastroQuestaoForm(Disiciplinas, Materias);
+
+            tela.Questao = questaoSelecionada.Clone();
+
+            tela.GravarRegistro = repositorioQuestao.Editar;
+
+            DialogResult resultado = tela.ShowDialog();
+
+            if (resultado == DialogResult.OK)
+                CarregarQuestoes();
         }
 
         public override void Excluir()
         {
-            throw new NotImplementedException();
+            Questao questaoSelecionada = ObtemQuestaoSelecionada();
+
+            if (questaoSelecionada == null)
+            {
+                MessageBox.Show("Selecione uma questão primeiro",
+                "Exclusão de Questões", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            DialogResult resultado = MessageBox.Show("Deseja realmente excluir a questão?",
+                "Exclusão de Questões", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.OK)
+            {
+                var resultadoExclusao = repositorioQuestao.Excluir(questaoSelecionada);
+
+                if (resultadoExclusao.IsValid == false)
+                {
+                    string erro = resultadoExclusao.Errors[0].ErrorMessage;
+
+                    MessageBox.Show(erro, "Exclusão de Questões - Informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else
+                    MessageBox.Show("Questão excluída com sucesso!", "Exclusão de Matérias - Informativo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                CarregarQuestoes();
+            }
         }
 
 
@@ -77,7 +121,6 @@ namespace TestesMariana.WinApp.ModuloQuestao
 
         public override UserControl ObtemListagem()
         {
-
             if (listagemQuestoes == null)
                 listagemQuestoes = new ListagemQuestoesControl();
 
