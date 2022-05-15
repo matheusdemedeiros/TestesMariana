@@ -73,6 +73,19 @@ namespace TestesMariana.Infra.Arquivos.ModuloQuestao
             return resultadoValidacao;
         }
 
+        public List<Questao> Filtrar(Predicate<Questao> condicao)
+        {
+            List<Questao> listaFiltrada = new List<Questao>();
+
+            foreach (var questao in ObterRegistros())
+            {
+                if (condicao(questao))
+                    listaFiltrada.Add(questao);
+            }
+
+            return listaFiltrada;
+        }
+
         public override List<Questao> ObterRegistros()
         {
             return dataContext.Questoes;

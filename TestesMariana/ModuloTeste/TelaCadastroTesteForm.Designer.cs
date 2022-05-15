@@ -38,15 +38,21 @@
             this.comboBoxDisciplinas = new System.Windows.Forms.ComboBox();
             this.comboBoxMaterias = new System.Windows.Forms.ComboBox();
             this.txtQtdQuestoes = new System.Windows.Forms.TextBox();
-            this.btnGravar = new System.Windows.Forms.Button();
+            this.btnGerarTeste = new System.Windows.Forms.Button();
             this.btnLimpar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtNumero = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.labelMaxQuestoesEncontradas = new System.Windows.Forms.Label();
+            this.btnFiltrar = new System.Windows.Forms.Button();
+            this.checkBoxTesteDisciplinaInteira = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(72, 20);
+            this.label1.Location = new System.Drawing.Point(70, 42);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(40, 15);
             this.label1.TabIndex = 0;
@@ -55,7 +61,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(77, 49);
+            this.label2.Location = new System.Drawing.Point(75, 71);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 15);
             this.label2.TabIndex = 1;
@@ -64,7 +70,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(51, 83);
+            this.label3.Location = new System.Drawing.Point(49, 105);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(61, 15);
             this.label3.TabIndex = 2;
@@ -73,7 +79,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(62, 114);
+            this.label4.Location = new System.Drawing.Point(60, 161);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(50, 15);
             this.label4.TabIndex = 3;
@@ -82,7 +88,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(14, 148);
+            this.label5.Location = new System.Drawing.Point(12, 195);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(98, 15);
             this.label5.TabIndex = 4;
@@ -90,9 +96,9 @@
             // 
             // txtTituloTeste
             // 
-            this.txtTituloTeste.Location = new System.Drawing.Point(123, 20);
+            this.txtTituloTeste.Location = new System.Drawing.Point(121, 42);
             this.txtTituloTeste.Name = "txtTituloTeste";
-            this.txtTituloTeste.Size = new System.Drawing.Size(242, 23);
+            this.txtTituloTeste.Size = new System.Drawing.Size(247, 23);
             this.txtTituloTeste.TabIndex = 0;
             this.txtTituloTeste.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -126,51 +132,52 @@
             "1ª Série - EM",
             "2ª Série - EM",
             "3ª Série - EM"});
-            this.comboBoxSerie.Location = new System.Drawing.Point(123, 49);
+            this.comboBoxSerie.Location = new System.Drawing.Point(121, 71);
             this.comboBoxSerie.Name = "comboBoxSerie";
-            this.comboBoxSerie.Size = new System.Drawing.Size(242, 23);
+            this.comboBoxSerie.Size = new System.Drawing.Size(247, 23);
             this.comboBoxSerie.TabIndex = 1;
             // 
             // comboBoxDisciplinas
             // 
             this.comboBoxDisciplinas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxDisciplinas.FormattingEnabled = true;
-            this.comboBoxDisciplinas.Location = new System.Drawing.Point(123, 83);
+            this.comboBoxDisciplinas.Location = new System.Drawing.Point(121, 105);
             this.comboBoxDisciplinas.Name = "comboBoxDisciplinas";
-            this.comboBoxDisciplinas.Size = new System.Drawing.Size(242, 23);
+            this.comboBoxDisciplinas.Size = new System.Drawing.Size(247, 23);
             this.comboBoxDisciplinas.TabIndex = 2;
+            this.comboBoxDisciplinas.SelectedIndexChanged += new System.EventHandler(this.comboBoxDisciplinas_SelectedIndexChanged);
             // 
             // comboBoxMaterias
             // 
             this.comboBoxMaterias.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMaterias.FormattingEnabled = true;
-            this.comboBoxMaterias.Location = new System.Drawing.Point(123, 114);
+            this.comboBoxMaterias.Location = new System.Drawing.Point(121, 161);
             this.comboBoxMaterias.Name = "comboBoxMaterias";
-            this.comboBoxMaterias.Size = new System.Drawing.Size(242, 23);
+            this.comboBoxMaterias.Size = new System.Drawing.Size(247, 23);
             this.comboBoxMaterias.TabIndex = 3;
             // 
             // txtQtdQuestoes
             // 
-            this.txtQtdQuestoes.Location = new System.Drawing.Point(123, 147);
+            this.txtQtdQuestoes.Location = new System.Drawing.Point(121, 194);
             this.txtQtdQuestoes.Name = "txtQtdQuestoes";
             this.txtQtdQuestoes.Size = new System.Drawing.Size(75, 23);
             this.txtQtdQuestoes.TabIndex = 4;
             this.txtQtdQuestoes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // btnGravar
+            // btnGerarTeste
             // 
-            this.btnGravar.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnGravar.Location = new System.Drawing.Point(123, 177);
-            this.btnGravar.Name = "btnGravar";
-            this.btnGravar.Size = new System.Drawing.Size(75, 23);
-            this.btnGravar.TabIndex = 5;
-            this.btnGravar.Text = "Gravar";
-            this.btnGravar.UseVisualStyleBackColor = true;
-            this.btnGravar.Click += new System.EventHandler(this.btnGravar_Click);
+            this.btnGerarTeste.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnGerarTeste.Location = new System.Drawing.Point(121, 256);
+            this.btnGerarTeste.Name = "btnGerarTeste";
+            this.btnGerarTeste.Size = new System.Drawing.Size(75, 23);
+            this.btnGerarTeste.TabIndex = 5;
+            this.btnGerarTeste.Text = "Gerar teste";
+            this.btnGerarTeste.UseVisualStyleBackColor = true;
+            this.btnGerarTeste.Click += new System.EventHandler(this.btnGravar_Click);
             // 
             // btnLimpar
             // 
-            this.btnLimpar.Location = new System.Drawing.Point(203, 147);
+            this.btnLimpar.Location = new System.Drawing.Point(207, 255);
             this.btnLimpar.Name = "btnLimpar";
             this.btnLimpar.Size = new System.Drawing.Size(75, 23);
             this.btnLimpar.TabIndex = 6;
@@ -181,21 +188,85 @@
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(290, 147);
+            this.btnCancelar.Location = new System.Drawing.Point(293, 255);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 7;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(56, 9);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(54, 15);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Número:";
+            // 
+            // txtNumero
+            // 
+            this.txtNumero.Enabled = false;
+            this.txtNumero.Location = new System.Drawing.Point(121, 9);
+            this.txtNumero.Name = "txtNumero";
+            this.txtNumero.Size = new System.Drawing.Size(75, 23);
+            this.txtNumero.TabIndex = 9;
+            this.txtNumero.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(202, 202);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(166, 15);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "QTD de questões encontradas:";
+            // 
+            // labelMaxQuestoesEncontradas
+            // 
+            this.labelMaxQuestoesEncontradas.AutoSize = true;
+            this.labelMaxQuestoesEncontradas.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelMaxQuestoesEncontradas.Location = new System.Drawing.Point(275, 226);
+            this.labelMaxQuestoesEncontradas.Name = "labelMaxQuestoesEncontradas";
+            this.labelMaxQuestoesEncontradas.Size = new System.Drawing.Size(19, 21);
+            this.labelMaxQuestoesEncontradas.TabIndex = 11;
+            this.labelMaxQuestoesEncontradas.Text = "0";
+            // 
+            // btnFiltrar
+            // 
+            this.btnFiltrar.Location = new System.Drawing.Point(121, 227);
+            this.btnFiltrar.Name = "btnFiltrar";
+            this.btnFiltrar.Size = new System.Drawing.Size(75, 23);
+            this.btnFiltrar.TabIndex = 12;
+            this.btnFiltrar.Text = "Filtrar";
+            this.btnFiltrar.UseVisualStyleBackColor = true;
+            this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
+            // 
+            // checkBoxTesteDisciplinaInteira
+            // 
+            this.checkBoxTesteDisciplinaInteira.AutoSize = true;
+            this.checkBoxTesteDisciplinaInteira.Location = new System.Drawing.Point(127, 137);
+            this.checkBoxTesteDisciplinaInteira.Name = "checkBoxTesteDisciplinaInteira";
+            this.checkBoxTesteDisciplinaInteira.Size = new System.Drawing.Size(157, 19);
+            this.checkBoxTesteDisciplinaInteira.TabIndex = 13;
+            this.checkBoxTesteDisciplinaInteira.Text = "Teste da disciplina inteira";
+            this.checkBoxTesteDisciplinaInteira.UseVisualStyleBackColor = true;
+            this.checkBoxTesteDisciplinaInteira.CheckedChanged += new System.EventHandler(this.checkBoxTesteDisciplinaInteira_CheckedChanged);
+            // 
             // TelaCadastroTesteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(417, 222);
+            this.ClientSize = new System.Drawing.Size(417, 291);
+            this.Controls.Add(this.checkBoxTesteDisciplinaInteira);
+            this.Controls.Add(this.btnFiltrar);
+            this.Controls.Add(this.labelMaxQuestoesEncontradas);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.txtNumero);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnLimpar);
-            this.Controls.Add(this.btnGravar);
+            this.Controls.Add(this.btnGerarTeste);
             this.Controls.Add(this.txtQtdQuestoes);
             this.Controls.Add(this.comboBoxMaterias);
             this.Controls.Add(this.comboBoxDisciplinas);
@@ -231,8 +302,14 @@
         private System.Windows.Forms.ComboBox comboBoxDisciplinas;
         private System.Windows.Forms.ComboBox comboBoxMaterias;
         private System.Windows.Forms.TextBox txtQtdQuestoes;
-        private System.Windows.Forms.Button btnGravar;
+        private System.Windows.Forms.Button btnGerarTeste;
         private System.Windows.Forms.Button btnLimpar;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtNumero;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label labelMaxQuestoesEncontradas;
+        private System.Windows.Forms.Button btnFiltrar;
+        private System.Windows.Forms.CheckBox checkBoxTesteDisciplinaInteira;
     }
 }

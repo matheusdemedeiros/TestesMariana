@@ -39,6 +39,8 @@
             this.btnInserir = new System.Windows.Forms.ToolStripButton();
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
             this.btnExcluir = new System.Windows.Forms.ToolStripButton();
+            this.btnGerarPdf = new System.Windows.Forms.ToolStripButton();
+            this.btnDuplicar = new System.Windows.Forms.ToolStripButton();
             this.labelTipoCadastro = new System.Windows.Forms.ToolStripLabel();
             this.statusStripRodape = new System.Windows.Forms.StatusStrip();
             this.labelRodape = new System.Windows.Forms.ToolStripStatusLabel();
@@ -112,6 +114,8 @@
             this.btnInserir,
             this.btnEditar,
             this.btnExcluir,
+            this.btnGerarPdf,
+            this.btnDuplicar,
             this.labelTipoCadastro});
             this.toolbox.Location = new System.Drawing.Point(0, 24);
             this.toolbox.Name = "toolbox";
@@ -152,6 +156,26 @@
             this.btnExcluir.Text = "Excluir";
             this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
+            // btnGerarPdf
+            // 
+            this.btnGerarPdf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnGerarPdf.Image = ((System.Drawing.Image)(resources.GetObject("btnGerarPdf.Image")));
+            this.btnGerarPdf.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnGerarPdf.Name = "btnGerarPdf";
+            this.btnGerarPdf.Size = new System.Drawing.Size(63, 29);
+            this.btnGerarPdf.Text = "Gerar PDF";
+            this.btnGerarPdf.Visible = false;
+            // 
+            // btnDuplicar
+            // 
+            this.btnDuplicar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnDuplicar.Image = ((System.Drawing.Image)(resources.GetObject("btnDuplicar.Image")));
+            this.btnDuplicar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDuplicar.Name = "btnDuplicar";
+            this.btnDuplicar.Size = new System.Drawing.Size(83, 29);
+            this.btnDuplicar.Text = "Duplicar teste";
+            this.btnDuplicar.Visible = false;
+            // 
             // labelTipoCadastro
             // 
             this.labelTipoCadastro.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
@@ -161,12 +185,12 @@
             this.labelTipoCadastro.Size = new System.Drawing.Size(94, 29);
             this.labelTipoCadastro.Text = "toolStripLabel1";
             // 
-            // statusStrip1
+            // statusStripRodape
             // 
             this.statusStripRodape.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.labelRodape});
             this.statusStripRodape.Location = new System.Drawing.Point(0, 428);
-            this.statusStripRodape.Name = "statusStrip1";
+            this.statusStripRodape.Name = "statusStripRodape";
             this.statusStripRodape.Size = new System.Drawing.Size(800, 22);
             this.statusStripRodape.TabIndex = 2;
             this.statusStripRodape.Text = "statusStrip1";
@@ -227,5 +251,7 @@
         private System.Windows.Forms.ToolStripButton btnEditar;
         private System.Windows.Forms.ToolStripButton btnExcluir;
         private System.Windows.Forms.ToolStripLabel labelTipoCadastro;
+        private System.Windows.Forms.ToolStripButton btnGerarPdf;
+        private System.Windows.Forms.ToolStripButton btnDuplicar;
     }
 }

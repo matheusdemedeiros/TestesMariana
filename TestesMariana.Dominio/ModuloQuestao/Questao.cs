@@ -123,7 +123,6 @@ namespace TestesMariana.Dominio.ModuloQuestao
         {
             return new ValidadorAlternativa();
         }
-
         
         public override void Atualizar(Questao registro)
         {
@@ -136,6 +135,7 @@ namespace TestesMariana.Dominio.ModuloQuestao
         {
             return Enunciado;
         }
+
         public Questao Clone()
         {
             return MemberwiseClone() as Questao;

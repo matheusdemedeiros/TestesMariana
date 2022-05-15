@@ -6,10 +6,12 @@ using TestesMariana.Infra.Arquivos.Compartilhado;
 using TestesMariana.Infra.Arquivos.ModuloDisciplina;
 using TestesMariana.Infra.Arquivos.ModuloMateria;
 using TestesMariana.Infra.Arquivos.ModuloQuestao;
+using TestesMariana.Infra.Arquivos.ModuloTeste;
 using TestesMariana.WinApp.Compartilhado;
 using TestesMariana.WinApp.ModuloDisciplina;
 using TestesMariana.WinApp.ModuloMateria;
 using TestesMariana.WinApp.ModuloQuestao;
+using TestesMariana.WinApp.ModuloTeste;
 
 namespace TestesMariana
 {
@@ -73,8 +75,10 @@ namespace TestesMariana
         private void ConfigurarBotoes(ConfiguracaoToolboxBase configuracao)
         {
             btnInserir.Enabled = configuracao.InserirHabilitado;
-            btnEditar.Enabled = configuracao.EditarHabilitado;
+            btnEditar.Visible = configuracao.EditarHabilitado;
             btnExcluir.Enabled = configuracao.ExcluirHabilitado;
+            btnGerarPdf.Visible = configuracao.GerarPDFHabilitado;
+            btnDuplicar.Visible= configuracao.DuplicarHabilitado;
         }
 
         private void ConfigurarTooltips(ConfiguracaoToolboxBase configuracao)
@@ -82,6 +86,8 @@ namespace TestesMariana
             btnInserir.ToolTipText = configuracao.TooltipInserir;
             btnEditar.ToolTipText = configuracao.TooltipEditar;
             btnExcluir.ToolTipText = configuracao.TooltipExcluir;
+            btnGerarPdf.ToolTipText = configuracao.TooltipGerarPDF;
+            btnDuplicar.ToolTipText = configuracao.TooltipDuplicar;
         }
 
         private void ConfigurarTelaPrincipal(ToolStripMenuItem opcaoSelecionada)
@@ -129,12 +135,15 @@ namespace TestesMariana
             var repositorioDisciplina = new RepositorioDisciplinaEmArquivo(contextoDados);
             var repositorioMateria = new RepositorioMateriaEmArquivo(contextoDados);
             var repositorioQuestao = new RepositorioQuestaoEmArquivo(contextoDados);
+            var repositorioTeste = new RepositorioTesteEmArquivo(contextoDados);
 
             controladores = new Dictionary<string, ControladorBase>();
 
             controladores.Add("Disciplinas", new ControladorDisciplina(repositorioDisciplina));
             controladores.Add("Matérias", new ControladorMateria(repositorioMateria, repositorioDisciplina));
             controladores.Add("Questões", new ControladorQuestao(repositorioQuestao, repositorioDisciplina, repositorioMateria));
+            controladores.Add("Testes escolares", new ControladorTeste(repositorioQuestao, repositorioDisciplina,
+               repositorioMateria, repositorioTeste));
         }
 
         private void btnInserir_Click(object sender, EventArgs e)

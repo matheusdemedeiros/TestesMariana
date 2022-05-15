@@ -1,9 +1,6 @@
 ﻿using FluentValidation;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TestesMariana.Dominio.ModuloTeste;
 using TestesMariana.Infra.Arquivos.Compartilhado;
 
@@ -21,6 +18,7 @@ namespace TestesMariana.Infra.Arquivos.ModuloTeste
         {
             return dataContext.Testes;
         }
+
 
         public override AbstractValidator<Teste> ObterValidador()
         {
