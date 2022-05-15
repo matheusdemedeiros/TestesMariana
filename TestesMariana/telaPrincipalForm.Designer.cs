@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TelaPrincipalForm));
             this.menu = new System.Windows.Forms.MenuStrip();
             this.cadastrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disciplinasMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -119,63 +118,76 @@
             this.labelTipoCadastro});
             this.toolbox.Location = new System.Drawing.Point(0, 24);
             this.toolbox.Name = "toolbox";
-            this.toolbox.Size = new System.Drawing.Size(800, 32);
+            this.toolbox.Size = new System.Drawing.Size(800, 41);
             this.toolbox.TabIndex = 1;
             this.toolbox.Text = "toolStrip1";
             // 
             // btnInserir
             // 
-            this.btnInserir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnInserir.Image = ((System.Drawing.Image)(resources.GetObject("btnInserir.Image")));
+            this.btnInserir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnInserir.DoubleClickEnabled = true;
+            this.btnInserir.Image = global::TestesMariana.WinApp.Properties.Resources.Insert;
+            this.btnInserir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnInserir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnInserir.Name = "btnInserir";
             this.btnInserir.Padding = new System.Windows.Forms.Padding(5);
-            this.btnInserir.Size = new System.Drawing.Size(53, 29);
+            this.btnInserir.Size = new System.Drawing.Size(38, 38);
             this.btnInserir.Text = "Inserir";
             this.btnInserir.Click += new System.EventHandler(this.btnInserir_Click);
             // 
             // btnEditar
             // 
-            this.btnEditar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnEditar.Image = ((System.Drawing.Image)(resources.GetObject("btnEditar.Image")));
+            this.btnEditar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnEditar.DoubleClickEnabled = true;
+            this.btnEditar.Image = global::TestesMariana.WinApp.Properties.Resources.Edit;
+            this.btnEditar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Padding = new System.Windows.Forms.Padding(5);
-            this.btnEditar.Size = new System.Drawing.Size(51, 29);
+            this.btnEditar.Size = new System.Drawing.Size(38, 38);
             this.btnEditar.Text = "Editar";
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // btnExcluir
             // 
-            this.btnExcluir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnExcluir.Image = ((System.Drawing.Image)(resources.GetObject("btnExcluir.Image")));
+            this.btnExcluir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnExcluir.DoubleClickEnabled = true;
+            this.btnExcluir.Image = global::TestesMariana.WinApp.Properties.Resources.Delete;
+            this.btnExcluir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnExcluir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Padding = new System.Windows.Forms.Padding(5);
-            this.btnExcluir.Size = new System.Drawing.Size(56, 29);
+            this.btnExcluir.Size = new System.Drawing.Size(38, 38);
             this.btnExcluir.Text = "Excluir";
             this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
             // btnGerarPdf
             // 
-            this.btnGerarPdf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnGerarPdf.Image = ((System.Drawing.Image)(resources.GetObject("btnGerarPdf.Image")));
+            this.btnGerarPdf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnGerarPdf.DoubleClickEnabled = true;
+            this.btnGerarPdf.Image = global::TestesMariana.WinApp.Properties.Resources.PDF;
+            this.btnGerarPdf.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnGerarPdf.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnGerarPdf.Name = "btnGerarPdf";
-            this.btnGerarPdf.Size = new System.Drawing.Size(63, 29);
+            this.btnGerarPdf.Padding = new System.Windows.Forms.Padding(5);
+            this.btnGerarPdf.Size = new System.Drawing.Size(38, 38);
             this.btnGerarPdf.Text = "Gerar PDF";
             this.btnGerarPdf.Visible = false;
             this.btnGerarPdf.Click += new System.EventHandler(this.btnGerarPdf_Click);
             // 
             // btnDuplicar
             // 
-            this.btnDuplicar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnDuplicar.Image = ((System.Drawing.Image)(resources.GetObject("btnDuplicar.Image")));
+            this.btnDuplicar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnDuplicar.DoubleClickEnabled = true;
+            this.btnDuplicar.Image = global::TestesMariana.WinApp.Properties.Resources.Duplicate;
+            this.btnDuplicar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDuplicar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDuplicar.Name = "btnDuplicar";
-            this.btnDuplicar.Size = new System.Drawing.Size(83, 29);
+            this.btnDuplicar.Padding = new System.Windows.Forms.Padding(5);
+            this.btnDuplicar.Size = new System.Drawing.Size(38, 38);
             this.btnDuplicar.Text = "Duplicar teste";
             this.btnDuplicar.Visible = false;
+            this.btnDuplicar.Click += new System.EventHandler(this.btnDuplicar_Click);
             // 
             // labelTipoCadastro
             // 
@@ -183,7 +195,7 @@
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
             this.labelTipoCadastro.ForeColor = System.Drawing.Color.DarkBlue;
             this.labelTipoCadastro.Name = "labelTipoCadastro";
-            this.labelTipoCadastro.Size = new System.Drawing.Size(94, 29);
+            this.labelTipoCadastro.Size = new System.Drawing.Size(94, 38);
             this.labelTipoCadastro.Text = "toolStripLabel1";
             // 
             // statusStripRodape
@@ -205,9 +217,9 @@
             // panelRegistros
             // 
             this.panelRegistros.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelRegistros.Location = new System.Drawing.Point(0, 56);
+            this.panelRegistros.Location = new System.Drawing.Point(0, 65);
             this.panelRegistros.Name = "panelRegistros";
-            this.panelRegistros.Size = new System.Drawing.Size(800, 372);
+            this.panelRegistros.Size = new System.Drawing.Size(800, 363);
             this.panelRegistros.TabIndex = 3;
             // 
             // TelaPrincipalForm

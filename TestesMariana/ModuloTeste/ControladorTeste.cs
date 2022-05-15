@@ -18,6 +18,7 @@ namespace TestesMariana.WinApp.ModuloTeste
         private IRepositorioTeste repositorioTeste;
         private ListagemTesteControl listagemTestes;
         private GeradorPDF geradorPDF;
+        
         public ControladorTeste(IRepositorioQuestao repositorioQuestao,
             IRepositorioDisciplina repositorioDisciplina,
             IRepositorioMateria repositorioMateria, IRepositorioTeste repositorioTeste)
@@ -115,7 +116,7 @@ namespace TestesMariana.WinApp.ModuloTeste
             {
                 SaveFileDialog sfd = new SaveFileDialog() { Filter = "PDF file|*.pdf", ValidateNames = true };
 
-                if(sfd.ShowDialog() == DialogResult.OK)
+                if (sfd.ShowDialog() == DialogResult.OK)
                 {
                     geradorPDF = new GeradorPDF(testeSelecionado, sfd.FileName);
                     geradorPDF.GerarPDF();
@@ -151,11 +152,36 @@ namespace TestesMariana.WinApp.ModuloTeste
             TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {testes.Count} Teste(s)", Color.DarkBlue);
         }
 
-        private Teste ObtemTesteSelecionado()
+        public Teste ObtemTesteSelecionado()
         {
             var numero = listagemTestes.ObtemNumeroTesteSelecionado();
 
             return repositorioTeste.SelecionarPorNumero(numero);
+        }
+
+        public void Duplicar()
+        {
+            Teste testeSelecionado = ObtemTesteSelecionado();
+
+            if (testeSelecionado == null)
+            {
+                MessageBox.Show("Selecione um teste primeiro",
+                "Duplicação de Testes", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            TelaCadastroTesteForm tela = new TelaCadastroTesteForm(Disiciplinas, Materias, Questoes);
+
+            tela.Teste = testeSelecionado;
+
+            tela.GravarRegistro = repositorioTeste.Inserir;
+
+            DialogResult resultado = tela.ShowDialog();
+
+            if (resultado == DialogResult.OK)
+            {
+                CarregarTestes();
+            }
         }
     }
 }

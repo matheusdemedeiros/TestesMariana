@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using TestesMariana.Dominio.ModuloTeste;
 using TestesMariana.Infra.Arquivos.Compartilhado;
 using TestesMariana.Infra.Arquivos.ModuloDisciplina;
 using TestesMariana.Infra.Arquivos.ModuloMateria;
@@ -182,6 +183,10 @@ namespace TestesMariana
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        
+        private void btnDuplicar_Click(object sender, EventArgs e)
+        {
+            var controladorTeste = (ControladorTeste)controlador;
+            controladorTeste.Duplicar();
+        }
     }
 }

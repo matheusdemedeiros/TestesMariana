@@ -41,7 +41,7 @@ namespace TestesMariana.WinApp.ModuloTeste
             set
             {
                 teste = value;
-                if (teste.Numero != 0)
+                if (teste.Numero != 0 && string.IsNullOrEmpty(txtTituloTeste.Text))
                 {
                     txtNumero.Text = teste.Numero.ToString();
                     txtQtdQuestoes.Text = teste.QtdQuestoes.ToString();
@@ -226,6 +226,8 @@ namespace TestesMariana.WinApp.ModuloTeste
                 int qtdInformadaUsuario = int.Parse(txtQtdQuestoes.Text);
 
                 Random randNum = new Random();
+
+                teste.Questoes.Clear();
 
                 while (qtdInformadaUsuario > teste.Questoes.Count)
                 {
