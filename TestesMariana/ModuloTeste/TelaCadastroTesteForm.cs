@@ -217,7 +217,6 @@ namespace TestesMariana.WinApp.ModuloTeste
                 comboBoxMaterias.Enabled = true;
         }
 
-
         private void GerarTeste()
         {
             if (VerificarCampoDeQtd())
