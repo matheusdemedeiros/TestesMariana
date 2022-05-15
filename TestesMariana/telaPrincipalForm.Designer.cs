@@ -165,6 +165,7 @@
             this.btnGerarPdf.Size = new System.Drawing.Size(63, 29);
             this.btnGerarPdf.Text = "Gerar PDF";
             this.btnGerarPdf.Visible = false;
+            this.btnGerarPdf.Click += new System.EventHandler(this.btnGerarPdf_Click);
             // 
             // btnDuplicar
             // 

@@ -17,7 +17,7 @@ namespace TestesMariana.WinApp.ModuloTeste
         private IRepositorioMateria repositorioMateria;
         private IRepositorioTeste repositorioTeste;
         private ListagemTesteControl listagemTestes;
-
+        private GeradorPDF geradorPDF;
         public ControladorTeste(IRepositorioQuestao repositorioQuestao,
             IRepositorioDisciplina repositorioDisciplina,
             IRepositorioMateria repositorioMateria, IRepositorioTeste repositorioTeste)
@@ -97,6 +97,33 @@ namespace TestesMariana.WinApp.ModuloTeste
                     MessageBox.Show("Teste excluído com sucesso!", "Exclusão de Testes - Informativo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 CarregarTestes();
+            }
+        }
+
+        public void GerarPDF()
+        {
+            Teste testeSelecionado = ObtemTesteSelecionado();
+
+            if (testeSelecionado == null)
+            {
+                MessageBox.Show("Selecione um teste primeiro!",
+                "Geração de PDF", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            try
+            {
+                SaveFileDialog sfd = new SaveFileDialog() { Filter = "PDF file|*.pdf", ValidateNames = true };
+
+                if(sfd.ShowDialog() == DialogResult.OK)
+                {
+                    geradorPDF = new GeradorPDF(testeSelecionado, sfd.FileName);
+                    geradorPDF.GerarPDF();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro ao gerar PDF", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

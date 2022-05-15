@@ -161,6 +161,12 @@ namespace TestesMariana
             controlador.Excluir();
         }
 
+        private void btnGerarPdf_Click(object sender, EventArgs e)
+        {
+            var controladorTeste = (ControladorTeste)controlador;
+            controladorTeste.GerarPDF();
+        }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (toolbox.Enabled == true)
@@ -176,5 +182,6 @@ namespace TestesMariana
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
+        
     }
 }
