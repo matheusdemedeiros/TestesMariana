@@ -38,8 +38,9 @@
             this.btnInserir = new System.Windows.Forms.ToolStripButton();
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
             this.btnExcluir = new System.Windows.Forms.ToolStripButton();
-            this.btnGerarPdf = new System.Windows.Forms.ToolStripButton();
             this.btnDuplicar = new System.Windows.Forms.ToolStripButton();
+            this.btnGerarPdf = new System.Windows.Forms.ToolStripButton();
+            this.btnGerarPDFGabarito = new System.Windows.Forms.ToolStripButton();
             this.labelTipoCadastro = new System.Windows.Forms.ToolStripLabel();
             this.statusStripRodape = new System.Windows.Forms.StatusStrip();
             this.labelRodape = new System.Windows.Forms.ToolStripStatusLabel();
@@ -113,8 +114,9 @@
             this.btnInserir,
             this.btnEditar,
             this.btnExcluir,
-            this.btnGerarPdf,
             this.btnDuplicar,
+            this.btnGerarPdf,
+            this.btnGerarPDFGabarito,
             this.labelTipoCadastro});
             this.toolbox.Location = new System.Drawing.Point(0, 24);
             this.toolbox.Name = "toolbox";
@@ -161,6 +163,20 @@
             this.btnExcluir.Text = "Excluir";
             this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
+            // btnDuplicar
+            // 
+            this.btnDuplicar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnDuplicar.DoubleClickEnabled = true;
+            this.btnDuplicar.Image = global::TestesMariana.WinApp.Properties.Resources.Duplicate;
+            this.btnDuplicar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnDuplicar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDuplicar.Name = "btnDuplicar";
+            this.btnDuplicar.Padding = new System.Windows.Forms.Padding(5);
+            this.btnDuplicar.Size = new System.Drawing.Size(38, 38);
+            this.btnDuplicar.Text = "Duplicar teste";
+            this.btnDuplicar.Visible = false;
+            this.btnDuplicar.Click += new System.EventHandler(this.btnDuplicar_Click);
+            // 
             // btnGerarPdf
             // 
             this.btnGerarPdf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -175,19 +191,18 @@
             this.btnGerarPdf.Visible = false;
             this.btnGerarPdf.Click += new System.EventHandler(this.btnGerarPdf_Click);
             // 
-            // btnDuplicar
+            // btnGerarPDFGabarito
             // 
-            this.btnDuplicar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnDuplicar.DoubleClickEnabled = true;
-            this.btnDuplicar.Image = global::TestesMariana.WinApp.Properties.Resources.Duplicate;
-            this.btnDuplicar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnDuplicar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnDuplicar.Name = "btnDuplicar";
-            this.btnDuplicar.Padding = new System.Windows.Forms.Padding(5);
-            this.btnDuplicar.Size = new System.Drawing.Size(38, 38);
-            this.btnDuplicar.Text = "Duplicar teste";
-            this.btnDuplicar.Visible = false;
-            this.btnDuplicar.Click += new System.EventHandler(this.btnDuplicar_Click);
+            this.btnGerarPDFGabarito.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnGerarPDFGabarito.Image = global::TestesMariana.WinApp.Properties.Resources.Gabarito;
+            this.btnGerarPDFGabarito.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnGerarPDFGabarito.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnGerarPDFGabarito.Name = "btnGerarPDFGabarito";
+            this.btnGerarPDFGabarito.Padding = new System.Windows.Forms.Padding(5);
+            this.btnGerarPDFGabarito.Size = new System.Drawing.Size(38, 38);
+            this.btnGerarPDFGabarito.Text = "Gerar PDF com gabarito";
+            this.btnGerarPDFGabarito.Visible = false;
+            this.btnGerarPDFGabarito.Click += new System.EventHandler(this.btnGerarPDFGabarito_Click);
             // 
             // labelTipoCadastro
             // 
@@ -266,5 +281,6 @@
         private System.Windows.Forms.ToolStripLabel labelTipoCadastro;
         private System.Windows.Forms.ToolStripButton btnGerarPdf;
         private System.Windows.Forms.ToolStripButton btnDuplicar;
+        private System.Windows.Forms.ToolStripButton btnGerarPDFGabarito;
     }
 }

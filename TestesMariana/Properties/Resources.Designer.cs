@@ -93,6 +93,16 @@ namespace TestesMariana.WinApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Gabarito {
+            get {
+                object obj = ResourceManager.GetObject("Gabarito", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Insert {
             get {
                 object obj = ResourceManager.GetObject("Insert", resourceCulture);

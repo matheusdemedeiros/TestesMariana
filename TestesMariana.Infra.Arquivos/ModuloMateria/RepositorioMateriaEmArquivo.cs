@@ -116,6 +116,8 @@ namespace TestesMariana.Infra.Arquivos.ModuloMateria
 
                 else if (ObterMateriaPeloTitulo(registro.Titulo).Numero != registro.Numero)
                     validacaoDeTitulo.Errors.Add(new ValidationFailure("", "Não foi possível editar, pois já existe uma matéria com este título cadastrada no sistema!"));
+                
+
             }
             return validacaoDeTitulo;
         }

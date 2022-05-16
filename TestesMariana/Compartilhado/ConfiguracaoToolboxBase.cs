@@ -15,8 +15,9 @@ namespace TestesMariana.WinApp.Compartilhado
         public virtual string TooltipGerarPDF { get; }
         
         public virtual string TooltipDuplicar { get; }
-        
-        
+
+        public virtual string TooltipGabarito { get; }
+
         public virtual bool InserirHabilitado { get { return true; } }
 
         public virtual bool EditarHabilitado { get { return true; } }
@@ -26,5 +27,7 @@ namespace TestesMariana.WinApp.Compartilhado
         public virtual bool GerarPDFHabilitado { get { return false; } }
         
         public virtual bool DuplicarHabilitado { get { return false; } }
+
+        public virtual bool PDFGabaritoHabilitado { get { return false; } }
     }
 }

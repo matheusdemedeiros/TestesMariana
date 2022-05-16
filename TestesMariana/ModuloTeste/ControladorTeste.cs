@@ -101,7 +101,7 @@ namespace TestesMariana.WinApp.ModuloTeste
             }
         }
 
-        public void GerarPDF()
+        public void GerarPDF(bool gabarito)
         {
             Teste testeSelecionado = ObtemTesteSelecionado();
 
@@ -119,7 +119,7 @@ namespace TestesMariana.WinApp.ModuloTeste
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
                     geradorPDF = new GeradorPDF(testeSelecionado, sfd.FileName);
-                    geradorPDF.GerarPDF();
+                    geradorPDF.GerarPDF(gabarito);
                 }
             }
             catch (Exception ex)
