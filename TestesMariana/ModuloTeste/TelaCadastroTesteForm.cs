@@ -18,8 +18,8 @@ namespace TestesMariana.WinApp.ModuloTeste
         private List<Questao> questoesFiltradas;
         private Teste teste;
 
-
-        public TelaCadastroTesteForm(List<Disciplina> disciplinas, List<Materia> materias, List<Questao> questoes)
+        public TelaCadastroTesteForm(List<Disciplina> disciplinas, List<Materia> materias,
+            List<Questao> questoes)
         {
             InitializeComponent();
             this.disciplinas = disciplinas;
@@ -41,48 +41,28 @@ namespace TestesMariana.WinApp.ModuloTeste
             set
             {
                 teste = value;
-                if (teste.Numero != 0 && string.IsNullOrEmpty(txtTituloTeste.Text))
-                {
-                    txtNumero.Text = teste.Numero.ToString();
-                    txtQtdQuestoes.Text = teste.QtdQuestoes.ToString();
-                    txtTituloTeste.Text = teste.Titulo;
-                    comboBoxDisciplinas.SelectedItem = teste.Disciplina;
-                    
-                    if(teste.Materia != null)
-                        comboBoxMaterias.SelectedItem = teste.Materia;
-                    else
-                        comboBoxMaterias.SelectedIndex = -1;
+                txtNumero.Text = teste.Numero.ToString();
+                numericUpDownQtdQuestoes.Value = teste.QtdQuestoes;
+                txtTituloTeste.Text = teste.Titulo;
+                comboBoxDisciplinas.SelectedItem = teste.Disciplina;
 
-                    comboBoxSerie.SelectedItem = teste.Serie;
-                    questoesFiltradas = teste.Questoes;
-                }
+                if (teste.Materia != null)
+                    comboBoxMaterias.SelectedItem = teste.Materia;
+                else
+                    comboBoxMaterias.SelectedIndex = -1;
+
+                comboBoxSerie.SelectedItem = teste.Serie;
+                questoesFiltradas = teste.Questoes;
             }
         }
 
         public Func<Teste, ValidationResult> GravarRegistro { get; set; }
 
 
-        private void btnGravar_Click(object sender, EventArgs e)
+        private void btnGerarTeste_Click(object sender, EventArgs e)
         {
-            teste.Titulo = txtTituloTeste.Text;
-            teste.QtdQuestoes = int.Parse(txtQtdQuestoes.Text);
-            teste.Disciplina = (Disciplina)comboBoxDisciplinas.SelectedItem;
-            teste.Materia = (Materia)comboBoxMaterias.SelectedItem;
-            teste.Serie = comboBoxSerie.SelectedItem.ToString();
-            
             GerarTeste();
-
-            var resultadoValidacao = GravarRegistro(teste);
-
-            if (resultadoValidacao.IsValid == false)
-            {
-                string erro = resultadoValidacao.Errors[0].ErrorMessage;
-
-                TelaPrincipalForm.Instancia.AtualizarRodape(erro, Color.Red);
-
-                DialogResult = DialogResult.None;
-            }
-
+            MessageBox.Show("Teste geraddo com sucesso!!", "Informativo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnLimpar_Click(object sender, EventArgs e)
@@ -111,9 +91,7 @@ namespace TestesMariana.WinApp.ModuloTeste
                 MessageBox.Show("A quantidade desejada deve ser menor que o total encontrado!", "Informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
-    
-
-    private void comboBoxDisciplinas_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBoxDisciplinas_SelectedIndexChanged(object sender, EventArgs e)
         {
             ManipularComboboxMaterias();
         }
@@ -198,7 +176,7 @@ namespace TestesMariana.WinApp.ModuloTeste
 
         private void LiparCampos()
         {
-            txtQtdQuestoes.Text = "";
+            numericUpDownQtdQuestoes.Text = "";
             txtTituloTeste.Text = "";
             labelMaxQuestoesEncontradas.Text = "0";
             comboBoxDisciplinas.SelectedIndex = -1;
@@ -223,7 +201,7 @@ namespace TestesMariana.WinApp.ModuloTeste
             {
                 int valor;
 
-                int qtdInformadaUsuario = int.Parse(txtQtdQuestoes.Text);
+                int qtdInformadaUsuario = (int)numericUpDownQtdQuestoes.Value;
 
                 Random randNum = new Random();
 
@@ -240,11 +218,33 @@ namespace TestesMariana.WinApp.ModuloTeste
 
         private bool VerificarCampoDeQtd()
         {
-            if (int.Parse(txtQtdQuestoes.Text) <= questoesFiltradas.Count)
+            if (int.Parse(numericUpDownQtdQuestoes.Text) <= questoesFiltradas.Count)
                 return true;
 
             return false;
         }
 
+        private void btnGravar_Click(object sender, EventArgs e)
+        {
+            Teste novoTeste = new Teste();
+
+            novoTeste.Titulo = txtTituloTeste.Text;
+            novoTeste.QtdQuestoes = (int)numericUpDownQtdQuestoes.Value;
+            novoTeste.Disciplina = (Disciplina)comboBoxDisciplinas.SelectedItem;
+            novoTeste.Materia = (Materia)comboBoxMaterias.SelectedItem;
+            novoTeste.Serie = comboBoxSerie.SelectedItem.ToString();
+            novoTeste.Questoes = questoesFiltradas;
+
+            var resultadoValidacao = GravarRegistro(novoTeste);
+
+            if (resultadoValidacao.IsValid == false)
+            {
+                string erro = resultadoValidacao.Errors[0].ErrorMessage;
+
+                TelaPrincipalForm.Instancia.AtualizarRodape(erro, Color.Red);
+
+                DialogResult = DialogResult.None;
+            }
+        }
     }
 }

@@ -33,10 +33,14 @@ namespace TestesMariana.Dominio.ModuloTeste
 
                 doc.Add(titulo);
 
-
                 Paragraph disciplina = new Paragraph();
                 disciplina.Alignment = Element.ALIGN_JUSTIFIED;
                 disciplina.Add($"Disciplina: {teste.Disciplina.Nome}\n");
+                
+                Paragraph serie = new Paragraph();
+                disciplina.Alignment = Element.ALIGN_JUSTIFIED;
+                disciplina.Add($"Série: {teste.Serie}\n");
+
 
                 doc.Add(disciplina);
 

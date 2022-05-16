@@ -8,7 +8,7 @@ using TestesMariana.Dominio.ModuloQuestao;
 
 namespace TestesMariana.Dominio.ModuloTeste
 {
-    public class Teste : EntidadeBase<Teste>
+    public class Teste : EntidadeBase<Teste>, ICloneable
     {
 
         private DateTime? dataCriacao;
@@ -79,10 +79,10 @@ namespace TestesMariana.Dominio.ModuloTeste
             return Questoes.Exists(x => x.Enunciado.SaoIguais(questao.Enunciado));
         }
 
-        public Teste Clone()
-        {
-            return MemberwiseClone() as Teste;
-        }
+        //public Teste Clone()
+        //{
+        //    return MemberwiseClone() as Teste;
+        //}
 
         public override void Atualizar(Teste registro)
         {
@@ -98,6 +98,23 @@ namespace TestesMariana.Dominio.ModuloTeste
         public override string ToString()
         {
             return Titulo;
+        }
+
+        private Teste(Teste registro)
+        {
+            this.Titulo = registro.Titulo;
+            this.DataCriacao = registro.DataCriacao;
+            this.QtdQuestoes = registro.QtdQuestoes;
+            this.Questoes = registro.Questoes;
+            this.Materia = registro.Materia;
+            this.Disciplina = registro.Disciplina;
+            this.Serie = registro.Serie;
+            this.DataCriacao = DateTime.Now;
+        }
+
+        public object Clone()
+        {
+            return new Teste(this);
         }
     }
 }

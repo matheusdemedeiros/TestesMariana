@@ -162,6 +162,10 @@ namespace TestesMariana.WinApp.ModuloTeste
         public void Duplicar()
         {
             Teste testeSelecionado = ObtemTesteSelecionado();
+            //Teste testeDuplicado = (Teste)testeSelecionado.Clone();
+
+           
+
 
             if (testeSelecionado == null)
             {

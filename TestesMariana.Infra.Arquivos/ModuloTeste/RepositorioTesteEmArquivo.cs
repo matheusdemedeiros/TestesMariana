@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using FluentValidation.Results;
 using System.Collections.Generic;
 using System.Linq;
 using TestesMariana.Dominio.ModuloTeste;
@@ -10,8 +11,8 @@ namespace TestesMariana.Infra.Arquivos.ModuloTeste
     {
         public RepositorioTesteEmArquivo(DataContext dataContext) : base(dataContext)
         {
-            if (dataContext.Questoes.Count > 0)
-                contador = dataContext.Questoes.Max(x => x.Numero);
+            if (dataContext.Testes.Count > 0)
+                contador = dataContext.Testes.Max(x => x.Numero);
         }
 
         public override List<Teste> ObterRegistros()
