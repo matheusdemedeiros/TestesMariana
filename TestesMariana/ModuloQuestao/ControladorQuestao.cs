@@ -111,13 +111,11 @@ namespace TestesMariana.WinApp.ModuloQuestao
             }
         }
 
-
         public override ConfiguracaoToolboxBase ObtemConfiguracaoToolbox()
         {
             return new ConfiguracaoToolboxQuestao();
         }
-
-
+        
         public override UserControl ObtemListagem()
         {
             if (listagemQuestoes == null)
@@ -134,7 +132,8 @@ namespace TestesMariana.WinApp.ModuloQuestao
 
             listagemQuestoes.AtualizarRegistros(questoes);
 
-            TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {questoes.Count} questão(ões)", Color.DarkBlue);
+            TelaPrincipalForm.Instancia.AtualizarRodape(
+                $"Visualizando {questoes.Count} questão(ões)", TipoMensagemRodape.VISUALIZANDO);
         }
 
         private Questao ObtemQuestaoSelecionada()

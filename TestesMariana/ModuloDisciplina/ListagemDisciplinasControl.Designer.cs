@@ -39,7 +39,7 @@
             this.grid.Location = new System.Drawing.Point(0, 0);
             this.grid.Name = "grid";
             this.grid.RowTemplate.Height = 25;
-            this.grid.Size = new System.Drawing.Size(640, 356);
+            this.grid.Size = new System.Drawing.Size(588, 356);
             this.grid.TabIndex = 0;
             // 
             // ListagemDisciplinasControl
@@ -49,7 +49,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.Controls.Add(this.grid);
             this.Name = "ListagemDisciplinasControl";
-            this.Size = new System.Drawing.Size(640, 356);
+            this.Size = new System.Drawing.Size(588, 356);
             this.Load += new System.EventHandler(this.ListagemDisciplinasControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
             this.ResumeLayout(false);

@@ -7,6 +7,7 @@ using TestesMariana.Dominio.ModuloDisciplina;
 using TestesMariana.Dominio.ModuloMateria;
 using TestesMariana.Dominio.ModuloQuestao;
 using TestesMariana.Dominio.ModuloTeste;
+using TestesMariana.WinApp.Compartilhado;
 
 namespace TestesMariana.WinApp.ModuloTeste
 {
@@ -17,6 +18,7 @@ namespace TestesMariana.WinApp.ModuloTeste
         private List<Questao> questoes;
         private List<Questao> questoesFiltradas;
         private Teste teste;
+        private bool gerouTeste;
 
         public TelaCadastroTesteForm(List<Disciplina> disciplinas, List<Materia> materias,
             List<Questao> questoes)
@@ -58,16 +60,18 @@ namespace TestesMariana.WinApp.ModuloTeste
 
         public Func<Teste, ValidationResult> GravarRegistro { get; set; }
 
-
         private void btnGerarTeste_Click(object sender, EventArgs e)
         {
             GerarTeste();
-            MessageBox.Show("Teste geraddo com sucesso!!", "Informativo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if(gerouTeste)
+                MessageBox.Show("Teste gerado na memória com sucesso!!", "Informativo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnLimpar_Click(object sender, EventArgs e)
         {
-            LiparCampos();
+            LimparCampos();
+
+            TelaPrincipalForm.Instancia.AtualizarRodape("", TipoMensagemRodape.VAZIO);
         }
 
         private void btnFiltrar_Click(object sender, EventArgs e)
@@ -86,6 +90,7 @@ namespace TestesMariana.WinApp.ModuloTeste
                 }
 
                 labelMaxQuestoesEncontradas.Text = questoesFiltradas.Count.ToString();
+                numericUpDownQtdQuestoes.Maximum = questoesFiltradas.Count;
             }
             else
                 MessageBox.Show("A quantidade desejada deve ser menor que o total encontrado!", "Informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -100,18 +105,21 @@ namespace TestesMariana.WinApp.ModuloTeste
         {
             if (comboBoxSerie.Text == "")
             {
-                MessageBox.Show("Escolha uma Série primeiro", "Informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                TelaPrincipalForm.Instancia.AtualizarRodape("Escolha uma Série primeiro!", TipoMensagemRodape.ERRO);
+                //MessageBox.Show("Escolha uma Série primeiro", "Informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             if (comboBoxDisciplinas.Text == "")
             {
+                TelaPrincipalForm.Instancia.AtualizarRodape("Escolha uma Disciplina primeiro!", TipoMensagemRodape.ERRO);
                 MessageBox.Show("Escolha uma Disciplina primeiro", "Informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
 
             if (checkBoxTesteDisciplinaInteira.Checked == false && comboBoxMaterias.Text == "")
             {
-                MessageBox.Show("Escolha uma Matéria primeiro", "Informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                TelaPrincipalForm.Instancia.AtualizarRodape("Escolha uma Matéria primeiro!", TipoMensagemRodape.ERRO);
+                //MessageBox.Show("Escolha uma Matéria primeiro", "Informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
 
@@ -174,7 +182,7 @@ namespace TestesMariana.WinApp.ModuloTeste
             return disciplinaSelecionada;
         }
 
-        private void LiparCampos()
+        private void LimparCampos()
         {
             numericUpDownQtdQuestoes.Text = "";
             txtTituloTeste.Text = "";
@@ -182,6 +190,8 @@ namespace TestesMariana.WinApp.ModuloTeste
             comboBoxDisciplinas.SelectedIndex = -1;
             comboBoxMaterias.SelectedIndex = -1;
             comboBoxSerie.SelectedIndex = -1;
+            
+            gerouTeste = false;
         }
 
         private void checkBoxTesteDisciplinaInteira_CheckedChanged(object sender, EventArgs e)
@@ -213,6 +223,10 @@ namespace TestesMariana.WinApp.ModuloTeste
 
                     teste.AdicionarQuestao(questoesFiltradas[valor]);
                 }
+                if (teste.Questoes.Count > 0)
+                    gerouTeste = true;
+                else
+                    gerouTeste = false;
             }
         }
 
@@ -232,8 +246,8 @@ namespace TestesMariana.WinApp.ModuloTeste
             novoTeste.QtdQuestoes = (int)numericUpDownQtdQuestoes.Value;
             novoTeste.Disciplina = (Disciplina)comboBoxDisciplinas.SelectedItem;
             novoTeste.Materia = (Materia)comboBoxMaterias.SelectedItem;
-            novoTeste.Serie = comboBoxSerie.SelectedItem.ToString();
-            novoTeste.Questoes = questoesFiltradas;
+            novoTeste.Serie = comboBoxSerie.Text;
+            novoTeste.Questoes.AddRange(teste.Questoes);
 
             var resultadoValidacao = GravarRegistro(novoTeste);
 
@@ -241,10 +255,14 @@ namespace TestesMariana.WinApp.ModuloTeste
             {
                 string erro = resultadoValidacao.Errors[0].ErrorMessage;
 
-                TelaPrincipalForm.Instancia.AtualizarRodape(erro, Color.Red);
+                TelaPrincipalForm.Instancia.AtualizarRodape(erro, TipoMensagemRodape.ERRO);
 
                 DialogResult = DialogResult.None;
+
             }
+            else
+                MessageBox.Show("Teste gravdo com sucesso!!", "Informativo",MessageBoxButtons.OK,MessageBoxIcon.Information);
+
         }
     }
 }

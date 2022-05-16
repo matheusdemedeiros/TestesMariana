@@ -156,14 +156,14 @@
             this.comboBoxMaterias.Location = new System.Drawing.Point(121, 161);
             this.comboBoxMaterias.Name = "comboBoxMaterias";
             this.comboBoxMaterias.Size = new System.Drawing.Size(247, 23);
-            this.comboBoxMaterias.TabIndex = 3;
+            this.comboBoxMaterias.TabIndex = 4;
             // 
             // btnGerarTeste
             // 
             this.btnGerarTeste.Location = new System.Drawing.Point(35, 221);
             this.btnGerarTeste.Name = "btnGerarTeste";
             this.btnGerarTeste.Size = new System.Drawing.Size(75, 23);
-            this.btnGerarTeste.TabIndex = 5;
+            this.btnGerarTeste.TabIndex = 7;
             this.btnGerarTeste.Text = "Gerar teste";
             this.btnGerarTeste.UseVisualStyleBackColor = true;
             this.btnGerarTeste.Click += new System.EventHandler(this.btnGerarTeste_Click);
@@ -173,7 +173,7 @@
             this.btnLimpar.Location = new System.Drawing.Point(121, 256);
             this.btnLimpar.Name = "btnLimpar";
             this.btnLimpar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpar.TabIndex = 6;
+            this.btnLimpar.TabIndex = 9;
             this.btnLimpar.Text = "Limpar";
             this.btnLimpar.UseVisualStyleBackColor = true;
             this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
@@ -184,7 +184,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(209, 256);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 7;
+            this.btnCancelar.TabIndex = 10;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             // 
@@ -230,7 +230,7 @@
             this.btnFiltrar.Location = new System.Drawing.Point(35, 189);
             this.btnFiltrar.Name = "btnFiltrar";
             this.btnFiltrar.Size = new System.Drawing.Size(75, 23);
-            this.btnFiltrar.TabIndex = 12;
+            this.btnFiltrar.TabIndex = 5;
             this.btnFiltrar.Text = "Filtrar";
             this.btnFiltrar.UseVisualStyleBackColor = true;
             this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
@@ -241,7 +241,7 @@
             this.checkBoxTesteDisciplinaInteira.Location = new System.Drawing.Point(127, 137);
             this.checkBoxTesteDisciplinaInteira.Name = "checkBoxTesteDisciplinaInteira";
             this.checkBoxTesteDisciplinaInteira.Size = new System.Drawing.Size(157, 19);
-            this.checkBoxTesteDisciplinaInteira.TabIndex = 13;
+            this.checkBoxTesteDisciplinaInteira.TabIndex = 3;
             this.checkBoxTesteDisciplinaInteira.Text = "Teste da disciplina inteira";
             this.checkBoxTesteDisciplinaInteira.UseVisualStyleBackColor = true;
             this.checkBoxTesteDisciplinaInteira.CheckedChanged += new System.EventHandler(this.checkBoxTesteDisciplinaInteira_CheckedChanged);
@@ -251,8 +251,13 @@
             this.numericUpDownQtdQuestoes.Location = new System.Drawing.Point(306, 219);
             this.numericUpDownQtdQuestoes.Name = "numericUpDownQtdQuestoes";
             this.numericUpDownQtdQuestoes.Size = new System.Drawing.Size(62, 23);
-            this.numericUpDownQtdQuestoes.TabIndex = 14;
+            this.numericUpDownQtdQuestoes.TabIndex = 6;
             this.numericUpDownQtdQuestoes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDownQtdQuestoes.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // btnGravar
             // 
@@ -260,7 +265,7 @@
             this.btnGravar.Location = new System.Drawing.Point(35, 256);
             this.btnGravar.Name = "btnGravar";
             this.btnGravar.Size = new System.Drawing.Size(75, 23);
-            this.btnGravar.TabIndex = 15;
+            this.btnGravar.TabIndex = 8;
             this.btnGravar.Text = "Gravar";
             this.btnGravar.UseVisualStyleBackColor = true;
             this.btnGravar.Click += new System.EventHandler(this.btnGravar_Click);

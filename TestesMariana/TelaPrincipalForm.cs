@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Threading;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using TestesMariana.Dominio.ModuloTeste;
 using TestesMariana.Infra.Arquivos.Compartilhado;
 using TestesMariana.Infra.Arquivos.ModuloDisciplina;
 using TestesMariana.Infra.Arquivos.ModuloMateria;
@@ -28,7 +28,7 @@ namespace TestesMariana
 
             Instancia = this;
 
-            AtualizarRodape(string.Empty, Color.DarkBlue);
+            AtualizarRodape(string.Empty, TipoMensagemRodape.VAZIO);
 
             labelTipoCadastro.Text = string.Empty;
 
@@ -63,14 +63,36 @@ namespace TestesMariana
             ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
         }
 
-        public void AtualizarRodape(string mensagem, Color cor)
+        public void AtualizarRodape(string mensagem, TipoMensagemRodape tipoMSG)
         {
-            labelRodape.Text = mensagem;
+            var corBack = Color.DarkBlue;
             
-            statusStripRodape.BackColor = cor;
+            labelRodape.ForeColor = Color.White;
+
+            if (tipoMSG == TipoMensagemRodape.SUCESSO)
+            {
+                labelRodape.Text = mensagem;
+                
+                statusStripRodape.BackColor = Color.Green;
+            }
             
-            if (cor.IsEmpty == false)
-                labelRodape.ForeColor = Color.White;
+            if (tipoMSG == TipoMensagemRodape.ERRO)
+            {
+                labelRodape.Text = mensagem;
+
+                statusStripRodape.BackColor = Color.Red;
+
+            }
+
+            if (tipoMSG == TipoMensagemRodape.VISUALIZANDO)
+            {
+                labelRodape.Text = mensagem;
+
+                statusStripRodape.BackColor = corBack;
+            }
+            if(tipoMSG == TipoMensagemRodape.VAZIO)
+                statusStripRodape.BackColor = corBack;
+            
         }
            
         private void ConfigurarBotoes(ConfiguracaoToolboxBase configuracao)
@@ -122,7 +144,7 @@ namespace TestesMariana
 
         private void ConfigurarListagem()
         {
-            AtualizarRodape("", Color.DarkBlue);
+            AtualizarRodape("", TipoMensagemRodape.VAZIO);
 
             var listagemControl = controlador.ObtemListagem();
 
@@ -176,6 +198,12 @@ namespace TestesMariana
             controladorTeste.GerarPDF(true);
         }
 
+        private void btnDuplicar_Click(object sender, EventArgs e)
+        {
+            var controladorTeste = (ControladorTeste)controlador;
+            controladorTeste.Duplicar();
+        }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (toolbox.Enabled == true)
@@ -190,12 +218,5 @@ namespace TestesMariana
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
-
-        private void btnDuplicar_Click(object sender, EventArgs e)
-        {
-            var controladorTeste = (ControladorTeste)controlador;
-            controladorTeste.Duplicar();
-        }
-
     }
 }

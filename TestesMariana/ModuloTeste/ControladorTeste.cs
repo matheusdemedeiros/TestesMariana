@@ -149,7 +149,8 @@ namespace TestesMariana.WinApp.ModuloTeste
 
             listagemTestes.AtualizarRegistros(testes);
 
-            TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {testes.Count} Teste(s)", Color.DarkBlue);
+            TelaPrincipalForm.Instancia.AtualizarRodape(
+                $"Visualizando {testes.Count} Teste(s)", TipoMensagemRodape.VISUALIZANDO);
         }
 
         public Teste ObtemTesteSelecionado()
@@ -162,10 +163,6 @@ namespace TestesMariana.WinApp.ModuloTeste
         public void Duplicar()
         {
             Teste testeSelecionado = ObtemTesteSelecionado();
-            //Teste testeDuplicado = (Teste)testeSelecionado.Clone();
-
-           
-
 
             if (testeSelecionado == null)
             {

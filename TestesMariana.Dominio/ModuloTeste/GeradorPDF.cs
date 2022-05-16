@@ -8,7 +8,6 @@ namespace TestesMariana.Dominio.ModuloTeste
 {
     public class GeradorPDF
     {
-        private const int BOLD = Font.BOLD;
         private Teste teste;
         private string arquivo;
 

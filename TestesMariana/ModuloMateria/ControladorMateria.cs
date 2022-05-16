@@ -119,7 +119,8 @@ namespace TestesMariana.WinApp.ModuloMateria
 
             listagemMaterias.AtualizarRegistros(materias);
 
-            TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {materias.Count} materia(s)", Color.DarkBlue);
+            TelaPrincipalForm.Instancia.AtualizarRodape(
+                $"Visualizando {materias.Count} materia(s)", TipoMensagemRodape.VISUALIZANDO);
         }
 
         private Materia ObtemMateriaSelecionada()

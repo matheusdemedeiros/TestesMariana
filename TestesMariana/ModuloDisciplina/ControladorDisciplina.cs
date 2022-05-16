@@ -111,7 +111,7 @@ namespace TestesMariana.WinApp.ModuloDisciplina
 
             listagemDisciplinas.AtualizarRegistros(disciplinas);
 
-            TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {disciplinas.Count} disciplina(s)", Color.DarkBlue);
+            TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {disciplinas.Count} disciplina(s)", TipoMensagemRodape.VISUALIZANDO);
         }
 
         private Disciplina ObtemDisciplinaSelecionada()

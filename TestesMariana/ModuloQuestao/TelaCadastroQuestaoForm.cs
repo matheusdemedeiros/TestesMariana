@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using TestesMariana.Dominio.ModuloDisciplina;
 using TestesMariana.Dominio.ModuloMateria;
 using TestesMariana.Dominio.ModuloQuestao;
+using TestesMariana.WinApp.Compartilhado;
 
 namespace TestesMariana.WinApp.ModuloQuestao
 {
@@ -88,7 +89,7 @@ namespace TestesMariana.WinApp.ModuloQuestao
             {
                 string erro = resultadoValidacao.Errors[0].ErrorMessage;
 
-                TelaPrincipalForm.Instancia.AtualizarRodape(erro, Color.Red);
+                TelaPrincipalForm.Instancia.AtualizarRodape(erro, TipoMensagemRodape.ERRO);
 
                 DialogResult = DialogResult.None;
             }
@@ -170,7 +171,7 @@ namespace TestesMariana.WinApp.ModuloQuestao
             var resultado = questao.AdicionarAlternativa(alternativa);
 
             if (resultado.IsValid == false)
-                TelaPrincipalForm.Instancia.AtualizarRodape(resultado.Errors[0].ErrorMessage, Color.Red);
+                TelaPrincipalForm.Instancia.AtualizarRodape(resultado.Errors[0].ErrorMessage, TipoMensagemRodape.ERRO);
 
             txtAlternativaDescricao.Text = "";
         }
@@ -194,9 +195,7 @@ namespace TestesMariana.WinApp.ModuloQuestao
                    MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
-                TelaPrincipalForm.Instancia.AtualizarRodape(resultado.Errors[0].ErrorMessage, Color.Red);
-
-
+                TelaPrincipalForm.Instancia.AtualizarRodape(resultado.Errors[0].ErrorMessage, TipoMensagemRodape.ERRO);
         }
 
         public void MarcarCorreta(Alternativa alternativa)

@@ -3,6 +3,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using TestesMariana.Dominio.ModuloDisciplina;
+using TestesMariana.WinApp.Compartilhado;
 
 namespace TestesMariana.WinApp.ModuloDisciplina
 {
@@ -35,7 +36,7 @@ namespace TestesMariana.WinApp.ModuloDisciplina
         {
             LimparCampos();
 
-            TelaPrincipalForm.Instancia.AtualizarRodape("", Color.DarkBlue);
+            TelaPrincipalForm.Instancia.AtualizarRodape("", TipoMensagemRodape.VAZIO);
         }
 
         private void btnGravar_Click(object sender, EventArgs e)
@@ -48,7 +49,7 @@ namespace TestesMariana.WinApp.ModuloDisciplina
             {
                 string erro = resultadoValidacao.Errors[0].ErrorMessage;
 
-                TelaPrincipalForm.Instancia.AtualizarRodape(erro, Color.Red);
+                TelaPrincipalForm.Instancia.AtualizarRodape(erro, TipoMensagemRodape.ERRO);
 
                 DialogResult = DialogResult.None;
             }
@@ -56,12 +57,12 @@ namespace TestesMariana.WinApp.ModuloDisciplina
 
         private void TelaCadastroDisciplinasForm_Load(object sender, EventArgs e)
         {
-            TelaPrincipalForm.Instancia.AtualizarRodape("", Color.DarkBlue);
+            TelaPrincipalForm.Instancia.AtualizarRodape("", TipoMensagemRodape.VAZIO);
         }
 
         private void TelaCadastroDisciplinasForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            TelaPrincipalForm.Instancia.AtualizarRodape("", Color.DarkBlue);
+            TelaPrincipalForm.Instancia.AtualizarRodape("", TipoMensagemRodape.VAZIO);
         }
 
         private void LimparCampos()
