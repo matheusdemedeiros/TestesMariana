@@ -18,6 +18,8 @@ namespace TestesMariana.WinApp.ModuloTeste
         
         public override string TooltipGabarito => "Gerar PDF do Gabarito";
 
+        public override string TooltipVisualizarDetalhadamente => "Visualizar teste detalhadamente";
+
 
         public override bool EditarHabilitado { get { return false; } }
         
@@ -26,6 +28,8 @@ namespace TestesMariana.WinApp.ModuloTeste
         public override bool GerarPDFHabilitado { get { return true; } }
 
         public override bool DuplicarHabilitado { get { return true; } }
+
+        public override bool VisualizarDetalhadamenteHabilitado { get { return true; } }
 
 
     }

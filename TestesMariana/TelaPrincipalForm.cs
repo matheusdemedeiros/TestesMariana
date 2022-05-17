@@ -103,6 +103,7 @@ namespace TestesMariana
             btnGerarPdf.Visible = configuracao.GerarPDFHabilitado;
             btnDuplicar.Visible= configuracao.DuplicarHabilitado;
             btnGerarPDFGabarito.Visible = configuracao.PDFGabaritoHabilitado;
+            btnVisualizarDetalhadamente.Visible = configuracao.VisualizarDetalhadamenteHabilitado;
         }
 
         private void ConfigurarTooltips(ConfiguracaoToolboxBase configuracao)
@@ -113,6 +114,7 @@ namespace TestesMariana
             btnGerarPdf.ToolTipText = configuracao.TooltipGerarPDF;
             btnDuplicar.ToolTipText = configuracao.TooltipDuplicar;
             btnGerarPDFGabarito.ToolTipText = configuracao.TooltipGabarito;
+            btnVisualizarDetalhadamente.ToolTipText = configuracao.TooltipVisualizarDetalhadamente;
         }
 
         private void ConfigurarTelaPrincipal(ToolStripMenuItem opcaoSelecionada)
@@ -204,6 +206,13 @@ namespace TestesMariana
             controladorTeste.Duplicar();
         }
 
+        private void btnVisualizarDetalhadamente_Click(object sender, EventArgs e)
+        {
+            var controladorTeste = (ControladorTeste)controlador;
+            controladorTeste.VisualizacaoDetalhadaTeste();
+        }
+
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (toolbox.Enabled == true)
@@ -218,5 +227,6 @@ namespace TestesMariana
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
+
     }
 }

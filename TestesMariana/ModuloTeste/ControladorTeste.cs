@@ -101,6 +101,22 @@ namespace TestesMariana.WinApp.ModuloTeste
             }
         }
 
+        public void VisualizacaoDetalhadaTeste()
+        {
+            Teste testeSelecionado = ObtemTesteSelecionado();
+
+            if (testeSelecionado == null)
+                return;
+            else
+            {
+                TelaVisualizacaoDetalhadaTesteForm tela = new TelaVisualizacaoDetalhadaTesteForm(testeSelecionado);
+
+                tela.ShowDialog();
+            }
+
+        }
+
+
         public void GerarPDF(bool gabarito)
         {
             Teste testeSelecionado = ObtemTesteSelecionado();

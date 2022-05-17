@@ -45,6 +45,7 @@
             this.statusStripRodape = new System.Windows.Forms.StatusStrip();
             this.labelRodape = new System.Windows.Forms.ToolStripStatusLabel();
             this.panelRegistros = new System.Windows.Forms.Panel();
+            this.btnVisualizarDetalhadamente = new System.Windows.Forms.ToolStripButton();
             this.menu.SuspendLayout();
             this.toolbox.SuspendLayout();
             this.statusStripRodape.SuspendLayout();
@@ -114,6 +115,7 @@
             this.btnInserir,
             this.btnEditar,
             this.btnExcluir,
+            this.btnVisualizarDetalhadamente,
             this.btnDuplicar,
             this.btnGerarPdf,
             this.btnGerarPDFGabarito,
@@ -237,6 +239,19 @@
             this.panelRegistros.Size = new System.Drawing.Size(800, 363);
             this.panelRegistros.TabIndex = 3;
             // 
+            // btnVisualizarDetalhadamente
+            // 
+            this.btnVisualizarDetalhadamente.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnVisualizarDetalhadamente.Image = global::TestesMariana.WinApp.Properties.Resources.Visualizar_detalhadamente;
+            this.btnVisualizarDetalhadamente.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnVisualizarDetalhadamente.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnVisualizarDetalhadamente.Name = "btnVisualizarDetalhadamente";
+            this.btnVisualizarDetalhadamente.Padding = new System.Windows.Forms.Padding(5);
+            this.btnVisualizarDetalhadamente.Size = new System.Drawing.Size(38, 38);
+            this.btnVisualizarDetalhadamente.Text = "toolStripButton1";
+            this.btnVisualizarDetalhadamente.Visible = false;
+            this.btnVisualizarDetalhadamente.Click += new System.EventHandler(this.btnVisualizarDetalhadamente_Click);
+            // 
             // TelaPrincipalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -282,5 +297,6 @@
         private System.Windows.Forms.ToolStripButton btnGerarPdf;
         private System.Windows.Forms.ToolStripButton btnDuplicar;
         private System.Windows.Forms.ToolStripButton btnGerarPDFGabarito;
+        private System.Windows.Forms.ToolStripButton btnVisualizarDetalhadamente;
     }
 }
