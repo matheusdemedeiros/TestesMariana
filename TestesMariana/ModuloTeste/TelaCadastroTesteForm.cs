@@ -1,7 +1,6 @@
 ﻿using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 using TestesMariana.Dominio.ModuloDisciplina;
 using TestesMariana.Dominio.ModuloMateria;
