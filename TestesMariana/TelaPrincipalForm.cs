@@ -22,7 +22,7 @@ namespace TestesMariana
         private Dictionary<string, ControladorBase> controladores;
         private DataContext contextoDados;
 
-        public TelaPrincipalForm(DataContext contextoDados) 
+        public TelaPrincipalForm(DataContext contextoDados)
         {
             InitializeComponent();
 
@@ -66,16 +66,16 @@ namespace TestesMariana
         public void AtualizarRodape(string mensagem, TipoMensagemRodape tipoMSG)
         {
             var corBack = Color.DarkBlue;
-            
+
             labelRodape.ForeColor = Color.White;
 
             if (tipoMSG == TipoMensagemRodape.SUCESSO)
             {
                 labelRodape.Text = mensagem;
-                
+
                 statusStripRodape.BackColor = Color.Green;
             }
-            
+
             if (tipoMSG == TipoMensagemRodape.ERRO)
             {
                 labelRodape.Text = mensagem;
@@ -90,18 +90,18 @@ namespace TestesMariana
 
                 statusStripRodape.BackColor = corBack;
             }
-            if(tipoMSG == TipoMensagemRodape.VAZIO)
+            if (tipoMSG == TipoMensagemRodape.VAZIO)
                 statusStripRodape.BackColor = corBack;
-            
+
         }
-           
+
         private void ConfigurarBotoes(ConfiguracaoToolboxBase configuracao)
         {
             btnInserir.Enabled = configuracao.InserirHabilitado;
             btnEditar.Visible = configuracao.EditarHabilitado;
             btnExcluir.Enabled = configuracao.ExcluirHabilitado;
             btnGerarPdf.Visible = configuracao.GerarPDFHabilitado;
-            btnDuplicar.Visible= configuracao.DuplicarHabilitado;
+            btnDuplicar.Visible = configuracao.DuplicarHabilitado;
             btnGerarPDFGabarito.Visible = configuracao.PDFGabaritoHabilitado;
             btnVisualizarDetalhadamente.Visible = configuracao.VisualizarDetalhadamenteHabilitado;
         }
@@ -211,7 +211,6 @@ namespace TestesMariana
             var controladorTeste = (ControladorTeste)controlador;
             controladorTeste.VisualizacaoDetalhadaTeste();
         }
-
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
