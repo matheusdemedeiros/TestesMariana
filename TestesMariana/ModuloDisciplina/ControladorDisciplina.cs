@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 using TestesMariana.Dominio.ModuloDisciplina;
 using TestesMariana.WinApp.Compartilhado;
@@ -9,7 +8,6 @@ namespace TestesMariana.WinApp.ModuloDisciplina
     public class ControladorDisciplina : ControladorBase
     {
         private readonly IRepositorioDisciplina repositorioDisciplina;
-
         private ListagemDisciplinasControl listagemDisciplinas;
 
         public ControladorDisciplina(IRepositorioDisciplina repositorioDisciplina)
@@ -29,7 +27,6 @@ namespace TestesMariana.WinApp.ModuloDisciplina
 
             if (resultado == DialogResult.OK)
                 CarregarDisciplinas();
-
         }
 
         public override void Editar()
@@ -52,9 +49,7 @@ namespace TestesMariana.WinApp.ModuloDisciplina
             DialogResult resultado = tela.ShowDialog();
 
             if (resultado == DialogResult.OK)
-            {
                 CarregarDisciplinas();
-            }
         }
 
         public override void Excluir()
@@ -96,7 +91,6 @@ namespace TestesMariana.WinApp.ModuloDisciplina
 
         public override UserControl ObtemListagem()
         {
-
             if (listagemDisciplinas == null)
                 listagemDisciplinas = new ListagemDisciplinasControl();
 
@@ -105,6 +99,13 @@ namespace TestesMariana.WinApp.ModuloDisciplina
             return listagemDisciplinas;
         }
 
+        private Disciplina ObtemDisciplinaSelecionada()
+        {
+            var numero = listagemDisciplinas.ObtemNumeroDisciplinaSelecionado();
+
+            return repositorioDisciplina.SelecionarPorNumero(numero);
+        }
+        
         private void CarregarDisciplinas()
         {
             List<Disciplina> disciplinas = repositorioDisciplina.SelecionarTodos();
@@ -112,13 +113,6 @@ namespace TestesMariana.WinApp.ModuloDisciplina
             listagemDisciplinas.AtualizarRegistros(disciplinas);
 
             TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {disciplinas.Count} disciplina(s)", TipoMensagemRodape.VISUALIZANDO);
-        }
-
-        private Disciplina ObtemDisciplinaSelecionada()
-        {
-            var numero = listagemDisciplinas.ObtemNumeroDisciplinaSelecionado();
-
-            return repositorioDisciplina.SelecionarPorNumero(numero);
         }
     }
 }

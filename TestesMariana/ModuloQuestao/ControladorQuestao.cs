@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 using TestesMariana.Dominio.ModuloDisciplina;
 using TestesMariana.Dominio.ModuloMateria;
@@ -24,22 +22,9 @@ namespace TestesMariana.WinApp.ModuloQuestao
             this.repositorioMateria = reposirioMateria;
         }
 
+        public List<Disciplina> Disiciplinas => repositorioDisciplina.SelecionarTodos();
 
-        public List<Disciplina> Disiciplinas
-        {
-            get
-            {
-                return repositorioDisciplina.SelecionarTodos();
-            }
-        }
-
-        public List<Materia> Materias
-        {
-            get
-            {
-                return repositorioMateria.SelecionarTodos();
-            }
-        }
+        public List<Materia> Materias => repositorioMateria.SelecionarTodos();
 
         public override void Inserir()
         {
@@ -53,9 +38,7 @@ namespace TestesMariana.WinApp.ModuloQuestao
 
             if (resultado == DialogResult.OK)
                 CarregarQuestoes();
-
         }
-        
 
         public override void Editar()
         {
@@ -105,7 +88,7 @@ namespace TestesMariana.WinApp.ModuloQuestao
                     MessageBox.Show(erro, "Exclusão de Questões - Informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
                 else
-                    MessageBox.Show("Questão excluída com sucesso!", "Exclusão de Matérias - Informativo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Questão excluída com sucesso!", "Exclusão de Questões - Informativo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 CarregarQuestoes();
             }
@@ -115,7 +98,7 @@ namespace TestesMariana.WinApp.ModuloQuestao
         {
             return new ConfiguracaoToolboxQuestao();
         }
-        
+
         public override UserControl ObtemListagem()
         {
             if (listagemQuestoes == null)

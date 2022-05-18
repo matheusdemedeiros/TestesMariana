@@ -11,7 +11,6 @@ namespace TestesMariana.WinApp.ModuloQuestao
         public ListagemQuestoesControl()
         {
             InitializeComponent();
-
             grid.ConfigurarGridZebrado();
             grid.ConfigurarGridSomenteLeitura();
             grid.Columns.AddRange(ObterColunas());
@@ -52,5 +51,7 @@ namespace TestesMariana.WinApp.ModuloQuestao
                     questao.Materia.Disciplina, questao.Materia, questao.Serie, questao.Alternativas.Count);
             }
         }
+
+
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 using TestesMariana.Dominio.ModuloDisciplina;
 using TestesMariana.Dominio.ModuloMateria;
@@ -10,11 +9,9 @@ namespace TestesMariana.WinApp.ModuloMateria
     public class ControladorMateria : ControladorBase
     {
         private readonly IRepositorioMateria repositorioMateria;
-
         private readonly IRepositorioDisciplina repositorioDisciplina;
-
         private ListagemMateriasControl listagemMaterias;
-
+        
         public ControladorMateria(IRepositorioMateria repositorioMateria,
             IRepositorioDisciplina repositorioDisciplina)
         {
@@ -22,13 +19,7 @@ namespace TestesMariana.WinApp.ModuloMateria
             this.repositorioDisciplina = repositorioDisciplina;
         }
 
-        public List<Disciplina> Disiciplinas
-        {
-            get
-            {
-                return repositorioDisciplina.SelecionarTodos();
-            }
-        }
+        public List<Disciplina> Disiciplinas => repositorioDisciplina.SelecionarTodos();
 
         public override void Inserir()
         {
@@ -113,6 +104,13 @@ namespace TestesMariana.WinApp.ModuloMateria
             return listagemMaterias;
         }
 
+        private Materia ObtemMateriaSelecionada()
+        {
+            var numero = listagemMaterias.ObtemNumeroMateriaSelecionado();
+
+            return repositorioMateria.SelecionarPorNumero(numero);
+        }
+        
         private void CarregarMaterias()
         {
             List<Materia> materias = repositorioMateria.SelecionarTodos();
@@ -121,13 +119,6 @@ namespace TestesMariana.WinApp.ModuloMateria
 
             TelaPrincipalForm.Instancia.AtualizarRodape(
                 $"Visualizando {materias.Count} materia(s)", TipoMensagemRodape.VISUALIZANDO);
-        }
-
-        private Materia ObtemMateriaSelecionada()
-        {
-            var numero = listagemMaterias.ObtemNumeroMateriaSelecionado();
-
-            return repositorioMateria.SelecionarPorNumero(numero);
         }
     }
 }

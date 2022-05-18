@@ -1,6 +1,7 @@
 ﻿using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows.Forms;
 using TestesMariana.Dominio.ModuloDisciplina;
 using TestesMariana.Dominio.ModuloMateria;
@@ -34,26 +35,34 @@ namespace TestesMariana.WinApp.ModuloTeste
 
         public Teste Teste
         {
-            get
-            {
-                return teste;
-            }
-
+            get => teste;
             set
             {
                 teste = value;
-                txtNumero.Text = teste.Numero.ToString();
-                numericUpDownQtdQuestoes.Value = teste.QtdQuestoes;
                 txtTituloTeste.Text = teste.Titulo;
-                comboBoxDisciplinas.SelectedItem = teste.Disciplina;
 
-                if (teste.Materia != null)
-                    comboBoxMaterias.SelectedItem = teste.Materia;
+                txtNumero.Text = teste.Numero.ToString();
+
+                if (teste.Numero != 0)
+                {
+                    comboBoxDisciplinas.SelectedItem = teste.Disciplina;
+
+                    if (teste.Materia == null)
+                    {
+                        checkBoxTesteDisciplinaInteira.Checked = false;
+                        comboBoxMaterias.Enabled = false;
+                        comboBoxMaterias.SelectedIndex = -1;
+                    }
+                    else
+                        comboBoxMaterias.SelectedItem = teste.Materia;
+
+                    numericUpDownQtdQuestoes.Value = teste.QtdQuestoes;
+                    comboBoxSerie.SelectedItem = teste.Serie;
+
+                    AplicarFiltro();
+                }
                 else
-                    comboBoxMaterias.SelectedIndex = -1;
-
-                comboBoxSerie.SelectedItem = teste.Serie;
-                questoesFiltradas = teste.Questoes;
+                    numericUpDownQtdQuestoes.Value = 0;
             }
         }
 
@@ -61,38 +70,58 @@ namespace TestesMariana.WinApp.ModuloTeste
 
         private void btnGerarTeste_Click(object sender, EventArgs e)
         {
-            GerarTeste();
-            if(gerouTeste)
-                MessageBox.Show("Teste gerado na memória com sucesso!!", "Informativo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void btnLimpar_Click(object sender, EventArgs e)
-        {
-            LimparCampos();
-
-            TelaPrincipalForm.Instancia.AtualizarRodape("", TipoMensagemRodape.VAZIO);
-        }
-
-        private void btnFiltrar_Click(object sender, EventArgs e)
-        {
             if (VerificaCampos())
             {
-                if (checkBoxTesteDisciplinaInteira.Checked)
+                AplicarFiltro();
+
+                var qtdInformadaQuestoes = (int)numericUpDownQtdQuestoes.Value;
+
+                Teste testeAhSerPassado;
+
+                Teste novoTeste = new Teste();
+
+                if (teste.Numero == 0)
+                    testeAhSerPassado = teste;
+                else
+                    testeAhSerPassado = novoTeste;
+
+
+                if (qtdInformadaQuestoes > questoesFiltradas.Count)
+                    GerarTeste(questoesFiltradas.Count, testeAhSerPassado);
+                else
+                    GerarTeste(qtdInformadaQuestoes, testeAhSerPassado);
+
+                novoTeste.Titulo = txtTituloTeste.Text;
+                novoTeste.QtdQuestoes = teste.Questoes.Count;
+                novoTeste.Disciplina = (Disciplina)comboBoxDisciplinas.SelectedItem;
+                novoTeste.Materia = (Materia)comboBoxMaterias.SelectedItem;
+                novoTeste.Serie = comboBoxSerie.Text;
+
+                var resultadoValidacao = GravarRegistro(novoTeste);
+
+                if (resultadoValidacao.IsValid == false)
                 {
-                    questoesFiltradas = Filtrar(x => x.Materia.Serie == comboBoxSerie.Text
-                    && x.Disciplina == comboBoxDisciplinas.SelectedItem);
+                    string erro = resultadoValidacao.Errors[0].ErrorMessage;
+
+                    TelaPrincipalForm.Instancia.AtualizarRodape(erro, TipoMensagemRodape.ERRO);
+
+                    DialogResult = DialogResult.None;
                 }
                 else
                 {
-                    questoesFiltradas = Filtrar(x => x.Materia.Serie == comboBoxSerie.Text
-                    && x.Disciplina == comboBoxDisciplinas.SelectedItem && x.Materia == comboBoxMaterias.SelectedItem);
+                    if (gerouTeste && qtdInformadaQuestoes > questoesFiltradas.Count)
+                    {
+                        MessageBox.Show($"Teste gerado somente com {questoesFiltradas.Count} questões," +
+                            $" pois a quantidade informada é maior que os resultados encontrados!!", "Informativo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Teste gerado com {qtdInformadaQuestoes} questões com sucesso!!", "Informativo",
+                                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
-
-                labelMaxQuestoesEncontradas.Text = questoesFiltradas.Count.ToString();
-                numericUpDownQtdQuestoes.Maximum = questoesFiltradas.Count;
             }
-            else
-                MessageBox.Show("A quantidade desejada deve ser menor que o total encontrado!", "Informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private void comboBoxDisciplinas_SelectedIndexChanged(object sender, EventArgs e)
@@ -100,42 +129,54 @@ namespace TestesMariana.WinApp.ModuloTeste
             ManipularComboboxMaterias();
         }
 
-        private bool VerificaCampos()
+        private void checkBoxTesteDisciplinaInteira_CheckedChanged(object sender, EventArgs e)
         {
-            if (comboBoxSerie.Text == "")
+            if (checkBoxTesteDisciplinaInteira.Checked)
             {
-                TelaPrincipalForm.Instancia.AtualizarRodape("Escolha uma Série primeiro!", TipoMensagemRodape.ERRO);
-                //MessageBox.Show("Escolha uma Série primeiro", "Informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return false;
+                comboBoxMaterias.Enabled = false;
+                comboBoxMaterias.SelectedIndex = -1;
             }
-            if (comboBoxDisciplinas.Text == "")
-            {
-                TelaPrincipalForm.Instancia.AtualizarRodape("Escolha uma Disciplina primeiro!", TipoMensagemRodape.ERRO);
-                MessageBox.Show("Escolha uma Disciplina primeiro", "Informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return false;
-            }
-
-            if (checkBoxTesteDisciplinaInteira.Checked == false && comboBoxMaterias.Text == "")
-            {
-                TelaPrincipalForm.Instancia.AtualizarRodape("Escolha uma Matéria primeiro!", TipoMensagemRodape.ERRO);
-                //MessageBox.Show("Escolha uma Matéria primeiro", "Informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return false;
-            }
-
-            return true;
+            else
+                comboBoxMaterias.Enabled = true;
         }
 
-        private List<Questao> Filtrar(Predicate<Questao> condicao)
+        private void AplicarFiltro()
         {
-            List<Questao> listaFiltrada = new List<Questao>();
-
-            foreach (var questao in questoes)
+            if (checkBoxTesteDisciplinaInteira.Checked)
             {
-                if (condicao(questao))
-                    listaFiltrada.Add(questao);
+                questoesFiltradas = Filtrar(x => x.Materia.Serie == comboBoxSerie.Text
+                && x.Disciplina == comboBoxDisciplinas.SelectedItem);
+            }
+            else
+            {
+                questoesFiltradas = Filtrar(x => x.Materia.Serie == comboBoxSerie.Text
+                && x.Disciplina == comboBoxDisciplinas.SelectedItem && x.Materia == comboBoxMaterias.SelectedItem);
+            }
+        }
+
+        private bool VerificaCampos()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            bool retorno = true;
+
+            if (comboBoxSerie.Text == "")
+                sb.Append("* Selecione uma Série primeiro!");
+
+
+            if (comboBoxDisciplinas.Text == "")
+                sb.Append("\n\n* Selecione uma Disciplina primeiro!");
+
+            if (checkBoxTesteDisciplinaInteira.Checked == false && comboBoxMaterias.Text == "")
+                sb.Append("\n\n* Selecione uma Matéria primeiro!");
+
+            if (sb.Length > 0)
+            {
+                MessageBox.Show(sb.ToString(), "Informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                retorno = false;
             }
 
-            return listaFiltrada;
+            return retorno;
         }
 
         private void ManipularComboboxDisciplinas()
@@ -181,87 +222,39 @@ namespace TestesMariana.WinApp.ModuloTeste
             return disciplinaSelecionada;
         }
 
-        private void LimparCampos()
+        private List<Questao> Filtrar(Predicate<Questao> condicao)
         {
-            numericUpDownQtdQuestoes.Text = "";
-            txtTituloTeste.Text = "";
-            labelMaxQuestoesEncontradas.Text = "0";
-            comboBoxDisciplinas.SelectedIndex = -1;
-            comboBoxMaterias.SelectedIndex = -1;
-            comboBoxSerie.SelectedIndex = -1;
-            
-            gerouTeste = false;
+            List<Questao> listaFiltrada = new List<Questao>();
+
+            foreach (var questao in questoes)
+            {
+                if (condicao(questao))
+                    listaFiltrada.Add(questao);
+            }
+
+            return listaFiltrada;
         }
 
-        private void checkBoxTesteDisciplinaInteira_CheckedChanged(object sender, EventArgs e)
+        private void GerarTeste(int qtdInformada, Teste teste)
         {
-            if (checkBoxTesteDisciplinaInteira.Checked)
+            int valor;
+
+            int qtdInformadaUsuario = qtdInformada;
+
+            Random randNum = new Random();
+
+            teste.Questoes.Clear();
+
+            while (qtdInformadaUsuario > teste.Questoes.Count)
             {
-                comboBoxMaterias.Enabled = false;
-                comboBoxMaterias.SelectedIndex = -1;
+                valor = randNum.Next(0, questoesFiltradas.Count);
+
+                teste.AdicionarQuestao(questoesFiltradas[valor]);
             }
+            if (teste.Questoes.Count > 0)
+                gerouTeste = true;
             else
-                comboBoxMaterias.Enabled = true;
-        }
-
-        private void GerarTeste()
-        {
-            if (VerificarCampoDeQtd())
-            {
-                int valor;
-
-                int qtdInformadaUsuario = (int)numericUpDownQtdQuestoes.Value;
-
-                Random randNum = new Random();
-
-                teste.Questoes.Clear();
-
-                while (qtdInformadaUsuario > teste.Questoes.Count)
-                {
-                    valor = randNum.Next(0, questoesFiltradas.Count);
-
-                    teste.AdicionarQuestao(questoesFiltradas[valor]);
-                }
-                if (teste.Questoes.Count > 0)
-                    gerouTeste = true;
-                else
-                    gerouTeste = false;
-            }
-        }
-
-        private bool VerificarCampoDeQtd()
-        {
-            if (int.Parse(numericUpDownQtdQuestoes.Text) <= questoesFiltradas.Count)
-                return true;
-
-            return false;
-        }
-
-        private void btnGravar_Click(object sender, EventArgs e)
-        {
-            Teste novoTeste = new Teste();
-
-            novoTeste.Titulo = txtTituloTeste.Text;
-            novoTeste.QtdQuestoes = (int)numericUpDownQtdQuestoes.Value;
-            novoTeste.Disciplina = (Disciplina)comboBoxDisciplinas.SelectedItem;
-            novoTeste.Materia = (Materia)comboBoxMaterias.SelectedItem;
-            novoTeste.Serie = comboBoxSerie.Text;
-            novoTeste.Questoes.AddRange(teste.Questoes);
-
-            var resultadoValidacao = GravarRegistro(novoTeste);
-
-            if (resultadoValidacao.IsValid == false)
-            {
-                string erro = resultadoValidacao.Errors[0].ErrorMessage;
-
-                TelaPrincipalForm.Instancia.AtualizarRodape(erro, TipoMensagemRodape.ERRO);
-
-                DialogResult = DialogResult.None;
-
-            }
-            else
-                MessageBox.Show("Teste gravdo com sucesso!!", "Informativo",MessageBoxButtons.OK,MessageBoxIcon.Information);
-
+                gerouTeste = false;
         }
     }
 }

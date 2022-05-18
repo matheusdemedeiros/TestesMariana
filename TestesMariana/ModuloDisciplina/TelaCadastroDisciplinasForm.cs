@@ -1,6 +1,5 @@
 ﻿using FluentValidation.Results;
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 using TestesMariana.Dominio.ModuloDisciplina;
 using TestesMariana.WinApp.Compartilhado;
@@ -69,6 +68,5 @@ namespace TestesMariana.WinApp.ModuloDisciplina
         {
             this.txtNomeDisciplina.Clear();
         }
-
     }
 }

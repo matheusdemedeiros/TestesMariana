@@ -1,7 +1,6 @@
 ﻿using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 using TestesMariana.Dominio.ModuloDisciplina;
 using TestesMariana.Dominio.ModuloMateria;
@@ -11,9 +10,7 @@ namespace TestesMariana.WinApp.ModuloMateria
 {
     public partial class TelaCadastroMateriasForm : Form
     {
-
         private Materia materia;
-
         private List<Disciplina> disciplinas;
 
         public TelaCadastroMateriasForm(List<Disciplina> disciplinas)
@@ -27,10 +24,7 @@ namespace TestesMariana.WinApp.ModuloMateria
 
         public Materia Materia
         {
-            get
-            {
-                return materia;
-            }
+            get => materia;
             set
             {
                 materia = value;

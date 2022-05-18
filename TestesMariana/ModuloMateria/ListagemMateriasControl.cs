@@ -14,7 +14,7 @@ namespace TestesMariana.WinApp.ModuloMateria
             grid.ConfigurarGridSomenteLeitura();
             grid.Columns.AddRange(ObterColunas());
         }
-
+        
         public DataGridViewColumn[] ObterColunas()
         {
             var colunas = new DataGridViewColumn[]
@@ -31,7 +31,6 @@ namespace TestesMariana.WinApp.ModuloMateria
             return colunas;
         }
 
-
         public int ObtemNumeroMateriaSelecionado()
         {
             return grid.SelecionarNumero<int>();
@@ -42,10 +41,7 @@ namespace TestesMariana.WinApp.ModuloMateria
             grid.Rows.Clear();
 
             foreach (Materia materia in materias)
-            {
                 grid.Rows.Add(materia.Numero, materia.Titulo, materia.Disciplina.Nome, materia.Serie);
-            }
         }
-
     }
 }

@@ -38,6 +38,7 @@
             this.btnInserir = new System.Windows.Forms.ToolStripButton();
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
             this.btnExcluir = new System.Windows.Forms.ToolStripButton();
+            this.btnVisualizarDetalhadamente = new System.Windows.Forms.ToolStripButton();
             this.btnDuplicar = new System.Windows.Forms.ToolStripButton();
             this.btnGerarPdf = new System.Windows.Forms.ToolStripButton();
             this.btnGerarPDFGabarito = new System.Windows.Forms.ToolStripButton();
@@ -45,7 +46,6 @@
             this.statusStripRodape = new System.Windows.Forms.StatusStrip();
             this.labelRodape = new System.Windows.Forms.ToolStripStatusLabel();
             this.panelRegistros = new System.Windows.Forms.Panel();
-            this.btnVisualizarDetalhadamente = new System.Windows.Forms.ToolStripButton();
             this.menu.SuspendLayout();
             this.toolbox.SuspendLayout();
             this.statusStripRodape.SuspendLayout();
@@ -165,6 +165,19 @@
             this.btnExcluir.Text = "Excluir";
             this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
+            // btnVisualizarDetalhadamente
+            // 
+            this.btnVisualizarDetalhadamente.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnVisualizarDetalhadamente.Image = global::TestesMariana.WinApp.Properties.Resources.Visualizar_detalhadamente;
+            this.btnVisualizarDetalhadamente.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnVisualizarDetalhadamente.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnVisualizarDetalhadamente.Name = "btnVisualizarDetalhadamente";
+            this.btnVisualizarDetalhadamente.Padding = new System.Windows.Forms.Padding(5);
+            this.btnVisualizarDetalhadamente.Size = new System.Drawing.Size(38, 38);
+            this.btnVisualizarDetalhadamente.Text = "toolStripButton1";
+            this.btnVisualizarDetalhadamente.Visible = false;
+            this.btnVisualizarDetalhadamente.Click += new System.EventHandler(this.btnVisualizarDetalhadamente_Click);
+            // 
             // btnDuplicar
             // 
             this.btnDuplicar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -238,19 +251,7 @@
             this.panelRegistros.Name = "panelRegistros";
             this.panelRegistros.Size = new System.Drawing.Size(800, 363);
             this.panelRegistros.TabIndex = 3;
-            // 
-            // btnVisualizarDetalhadamente
-            // 
-            this.btnVisualizarDetalhadamente.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnVisualizarDetalhadamente.Image = global::TestesMariana.WinApp.Properties.Resources.Visualizar_detalhadamente;
-            this.btnVisualizarDetalhadamente.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnVisualizarDetalhadamente.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnVisualizarDetalhadamente.Name = "btnVisualizarDetalhadamente";
-            this.btnVisualizarDetalhadamente.Padding = new System.Windows.Forms.Padding(5);
-            this.btnVisualizarDetalhadamente.Size = new System.Drawing.Size(38, 38);
-            this.btnVisualizarDetalhadamente.Text = "toolStripButton1";
-            this.btnVisualizarDetalhadamente.Visible = false;
-            this.btnVisualizarDetalhadamente.Click += new System.EventHandler(this.btnVisualizarDetalhadamente_Click);
+            this.panelRegistros.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.panelRegistros_ControlAdded);
             // 
             // TelaPrincipalForm
             // 

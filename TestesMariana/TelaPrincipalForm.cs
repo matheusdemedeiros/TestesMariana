@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -63,36 +62,48 @@ namespace TestesMariana
             ConfigurarTelaPrincipal((ToolStripMenuItem)sender);
         }
 
-        public void AtualizarRodape(string mensagem, TipoMensagemRodape tipoMSG)
+        private void btnInserir_Click(object sender, EventArgs e)
         {
-            var corBack = Color.DarkBlue;
+            controlador.Inserir();
+        }
 
-            labelRodape.ForeColor = Color.White;
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            controlador.Editar();
+        }
 
-            if (tipoMSG == TipoMensagemRodape.SUCESSO)
-            {
-                labelRodape.Text = mensagem;
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            controlador.Excluir();
+        }
 
-                statusStripRodape.BackColor = Color.Green;
-            }
+        private void btnGerarPdf_Click(object sender, EventArgs e)
+        {
+            var controladorTeste = (ControladorTeste)controlador;
+            controladorTeste.GerarPDF(false);
+        }
 
-            if (tipoMSG == TipoMensagemRodape.ERRO)
-            {
-                labelRodape.Text = mensagem;
+        private void btnGerarPDFGabarito_Click(object sender, EventArgs e)
+        {
+            var controladorTeste = (ControladorTeste)controlador;
+            controladorTeste.GerarPDF(true);
+        }
 
-                statusStripRodape.BackColor = Color.Red;
+        private void btnDuplicar_Click(object sender, EventArgs e)
+        {
+            var controladorTeste = (ControladorTeste)controlador;
+            controladorTeste.Duplicar();
+        }
 
-            }
-
-            if (tipoMSG == TipoMensagemRodape.VISUALIZANDO)
-            {
-                labelRodape.Text = mensagem;
-
-                statusStripRodape.BackColor = corBack;
-            }
-            if (tipoMSG == TipoMensagemRodape.VAZIO)
-                statusStripRodape.BackColor = corBack;
-
+        private void btnVisualizarDetalhadamente_Click(object sender, EventArgs e)
+        {
+            var controladorTeste = (ControladorTeste)controlador;
+            controladorTeste.VisualizacaoDetalhadaTeste();
+        }
+        
+        private void panelRegistros_ControlAdded(object sender, ControlEventArgs e)
+        {
+            panelRegistros.Focus();
         }
 
         private void ConfigurarBotoes(ConfiguracaoToolboxBase configuracao)
@@ -126,6 +137,38 @@ namespace TestesMariana
             ConfigurarToolbox();
 
             ConfigurarListagem();
+        }
+
+        public void AtualizarRodape(string mensagem, TipoMensagemRodape tipoMSG)
+        {
+            var corBack = Color.DarkBlue;
+
+            labelRodape.ForeColor = Color.White;
+
+            if (tipoMSG == TipoMensagemRodape.SUCESSO)
+            {
+                labelRodape.Text = mensagem;
+
+                statusStripRodape.BackColor = Color.Green;
+            }
+
+            if (tipoMSG == TipoMensagemRodape.ERRO)
+            {
+                labelRodape.Text = mensagem;
+
+                statusStripRodape.BackColor = Color.Red;
+
+            }
+
+            if (tipoMSG == TipoMensagemRodape.VISUALIZANDO)
+            {
+                labelRodape.Text = mensagem;
+
+                statusStripRodape.BackColor = corBack;
+            }
+            if (tipoMSG == TipoMensagemRodape.VAZIO)
+                statusStripRodape.BackColor = corBack;
+
         }
 
         private void ConfigurarToolbox()
@@ -173,45 +216,6 @@ namespace TestesMariana
                repositorioMateria, repositorioTeste));
         }
 
-        private void btnInserir_Click(object sender, EventArgs e)
-        {
-            controlador.Inserir();
-        }
-
-        private void btnEditar_Click(object sender, EventArgs e)
-        {
-            controlador.Editar();
-        }
-
-        private void btnExcluir_Click(object sender, EventArgs e)
-        {
-            controlador.Excluir();
-        }
-
-        private void btnGerarPdf_Click(object sender, EventArgs e)
-        {
-            var controladorTeste = (ControladorTeste)controlador;
-            controladorTeste.GerarPDF(false);
-        }
-
-        private void btnGerarPDFGabarito_Click(object sender, EventArgs e)
-        {
-            var controladorTeste = (ControladorTeste)controlador;
-            controladorTeste.GerarPDF(true);
-        }
-
-        private void btnDuplicar_Click(object sender, EventArgs e)
-        {
-            var controladorTeste = (ControladorTeste)controlador;
-            controladorTeste.Duplicar();
-        }
-
-        private void btnVisualizarDetalhadamente_Click(object sender, EventArgs e)
-        {
-            var controladorTeste = (ControladorTeste)controlador;
-            controladorTeste.VisualizacaoDetalhadaTeste();
-        }
-
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (toolbox.Enabled == true)
@@ -226,6 +230,5 @@ namespace TestesMariana
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
-
     }
 }

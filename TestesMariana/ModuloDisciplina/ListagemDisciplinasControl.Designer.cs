@@ -50,7 +50,6 @@
             this.Controls.Add(this.grid);
             this.Name = "ListagemDisciplinasControl";
             this.Size = new System.Drawing.Size(588, 356);
-            this.Load += new System.EventHandler(this.ListagemDisciplinasControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
             this.ResumeLayout(false);
 

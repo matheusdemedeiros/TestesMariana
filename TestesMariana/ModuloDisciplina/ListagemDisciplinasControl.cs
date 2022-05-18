@@ -14,7 +14,7 @@ namespace TestesMariana.WinApp.ModuloDisciplina
             grid.ConfigurarGridSomenteLeitura();
             grid.Columns.AddRange(ObterColunas());
         }
-
+        
         public DataGridViewColumn[] ObterColunas()
         {
             var colunas = new DataGridViewColumn[]
@@ -22,12 +22,10 @@ namespace TestesMariana.WinApp.ModuloDisciplina
                 new DataGridViewTextBoxColumn { DataPropertyName = "Numero", HeaderText = "Número"},
 
                 new DataGridViewTextBoxColumn { DataPropertyName = "Nome", HeaderText = "Nome da disciplina"},
-
             };
 
             return colunas;
         }
-
 
         public int ObtemNumeroDisciplinaSelecionado()
         {
@@ -39,14 +37,7 @@ namespace TestesMariana.WinApp.ModuloDisciplina
             grid.Rows.Clear();
 
             foreach (Disciplina disciplina in disciplinas)
-            {
                 grid.Rows.Add(disciplina.Numero, disciplina.Nome);
-            }
-        }
-
-        private void ListagemDisciplinasControl_Load(object sender, System.EventArgs e)
-        {
-            grid.Focus();
         }
     }
 }
