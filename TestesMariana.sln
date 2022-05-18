@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestesMariana.WinApp", "TestesMariana\TestesMariana.WinApp.csproj", "{10101F89-70DE-4972-AFC8-5E94F044DB75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestesMariana.WinApp", "TestesMariana\TestesMariana.WinApp.csproj", "{10101F89-70DE-4972-AFC8-5E94F044DB75}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Apresentação", "1 - Apresentação", "{6D06324E-56ED-4E5B-9416-84C878DD0E7F}"
 EndProject
@@ -11,11 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Dominio", "2 - Dominio"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Infra", "3 - Infra", "{DF746775-F413-4681-90A1-68726ADC478D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestesMariana.Dominio", "TestesMariana.Dominio\TestesMariana.Dominio.csproj", "{5C8FFF27-3AF3-448F-8962-439BD97BF031}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestesMariana.Dominio", "TestesMariana.Dominio\TestesMariana.Dominio.csproj", "{5C8FFF27-3AF3-448F-8962-439BD97BF031}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Arquivos", "Arquivos", "{8A2019BC-CC65-418D-A180-B234F7061CF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestesMariana.Infra.Arquivos", "TestesMariana.Infra.Arquivos\TestesMariana.Infra.Arquivos.csproj", "{7655F882-CD76-4C54-B606-2CA231CACC53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestesMariana.Infra.Arquivos", "TestesMariana.Infra.Arquivos\TestesMariana.Infra.Arquivos.csproj", "{7655F882-CD76-4C54-B606-2CA231CACC53}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Banco de Dados", "Banco de Dados", "{60CFCA8A-3833-47D6-9D8D-8CCA395949C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesteMariana.infra.DataBase", "TesteMariana.infra.DataBase\TesteMariana.infra.DataBase.csproj", "{92DA72CD-F359-49B6-8F3E-9648FC93DA1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +39,10 @@ Global
 		{7655F882-CD76-4C54-B606-2CA231CACC53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7655F882-CD76-4C54-B606-2CA231CACC53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7655F882-CD76-4C54-B606-2CA231CACC53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92DA72CD-F359-49B6-8F3E-9648FC93DA1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92DA72CD-F359-49B6-8F3E-9648FC93DA1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92DA72CD-F359-49B6-8F3E-9648FC93DA1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92DA72CD-F359-49B6-8F3E-9648FC93DA1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +52,8 @@ Global
 		{5C8FFF27-3AF3-448F-8962-439BD97BF031} = {8AB683FD-A1D9-4822-A94F-D2D72A9708E1}
 		{8A2019BC-CC65-418D-A180-B234F7061CF9} = {DF746775-F413-4681-90A1-68726ADC478D}
 		{7655F882-CD76-4C54-B606-2CA231CACC53} = {8A2019BC-CC65-418D-A180-B234F7061CF9}
+		{60CFCA8A-3833-47D6-9D8D-8CCA395949C3} = {DF746775-F413-4681-90A1-68726ADC478D}
+		{92DA72CD-F359-49B6-8F3E-9648FC93DA1B} = {60CFCA8A-3833-47D6-9D8D-8CCA395949C3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EB1D9C42-66C1-4B43-B446-8C614B87F45D}

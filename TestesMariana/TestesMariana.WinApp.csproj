@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TesteMariana.infra.DataBase\TesteMariana.infra.DataBase.csproj" />
     <ProjectReference Include="..\TestesMariana.Dominio\TestesMariana.Dominio.csproj" />
     <ProjectReference Include="..\TestesMariana.Infra.Arquivos\TestesMariana.Infra.Arquivos.csproj" />
   </ItemGroup>
