@@ -100,7 +100,7 @@ namespace TestesMariana
             var controladorTeste = (ControladorTeste)controlador;
             controladorTeste.VisualizacaoDetalhadaTeste();
         }
-        
+
         private void panelRegistros_ControlAdded(object sender, ControlEventArgs e)
         {
             panelRegistros.Focus();
@@ -160,15 +160,12 @@ namespace TestesMariana
 
             }
 
-            if (tipoMSG == TipoMensagemRodape.VISUALIZANDO)
+            if (tipoMSG == TipoMensagemRodape.VISUALIZANDO  || tipoMSG == TipoMensagemRodape.VAZIO)
             {
                 labelRodape.Text = mensagem;
-
+                
                 statusStripRodape.BackColor = corBack;
             }
-            if (tipoMSG == TipoMensagemRodape.VAZIO)
-                statusStripRodape.BackColor = corBack;
-
         }
 
         private void ConfigurarToolbox()

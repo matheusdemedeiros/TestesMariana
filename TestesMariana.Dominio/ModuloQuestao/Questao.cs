@@ -10,7 +10,7 @@ namespace TestesMariana.Dominio.ModuloQuestao
     public class Questao : EntidadeBase<Questao>
     {
 
-        private int contadorASCII = (int)'a';
+        private int contadorASCII = 'a';
 
         public string Enunciado { get; set; }
 

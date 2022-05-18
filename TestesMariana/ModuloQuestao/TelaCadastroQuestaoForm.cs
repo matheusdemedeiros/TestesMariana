@@ -30,10 +30,8 @@ namespace TestesMariana.WinApp.ModuloQuestao
 
         public Questao Questao
         {
-            get
-            {
-                return questao;
-            }
+            get => questao;
+           
             set
             {
                 questao = value;
@@ -252,7 +250,9 @@ namespace TestesMariana.WinApp.ModuloQuestao
             txtAlternativaDescricao.Enabled = true;
             txtAlternativaDescricao.Enabled = true;
             listAlternativasCadastradas.Enabled = true;
-            checkBoxAlternativaCorreta.Enabled = true;
+            
+            if(questao.Numero == 0)
+                checkBoxAlternativaCorreta.Enabled = true;
 
             btnAdicionarAlternativa.Enabled = true;
             btnGravar.Enabled = true;
@@ -260,6 +260,5 @@ namespace TestesMariana.WinApp.ModuloQuestao
             btnRemoverAlternativa.Enabled = true;
 
         }
-
     }
 }

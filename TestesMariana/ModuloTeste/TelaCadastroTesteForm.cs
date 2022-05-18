@@ -92,10 +92,11 @@ namespace TestesMariana.WinApp.ModuloTeste
                     GerarTeste(qtdInformadaQuestoes, testeAhSerPassado);
 
                 novoTeste.Titulo = txtTituloTeste.Text;
-                novoTeste.QtdQuestoes = teste.Questoes.Count;
+                novoTeste.QtdQuestoes = testeAhSerPassado.Questoes.Count;
                 novoTeste.Disciplina = (Disciplina)comboBoxDisciplinas.SelectedItem;
                 novoTeste.Materia = (Materia)comboBoxMaterias.SelectedItem;
                 novoTeste.Serie = comboBoxSerie.Text;
+                novoTeste.Questoes = testeAhSerPassado.Questoes;
 
                 var resultadoValidacao = GravarRegistro(novoTeste);
 
@@ -122,6 +123,8 @@ namespace TestesMariana.WinApp.ModuloTeste
                     }
                 }
             }
+            else
+                DialogResult = DialogResult.None;
         }
 
         private void comboBoxDisciplinas_SelectedIndexChanged(object sender, EventArgs e)
@@ -243,10 +246,8 @@ namespace TestesMariana.WinApp.ModuloTeste
 
             Random randNum = new Random();
 
-            teste.Questoes.Clear();
-
             while (qtdInformadaUsuario > teste.Questoes.Count)
-            {
+                   {
                 valor = randNum.Next(0, questoesFiltradas.Count);
 
                 teste.AdicionarQuestao(questoesFiltradas[valor]);
