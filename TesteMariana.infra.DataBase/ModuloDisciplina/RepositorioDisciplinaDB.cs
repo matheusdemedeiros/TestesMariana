@@ -26,6 +26,26 @@ namespace TesteMariana.infra.DataBase.ModuloDisciplina
                     @NOME
                 );SELECT SCOPE_IDENTITY();";
 
+        private const string sqlInserirsSemDuplicatas =
+            @"IF NOT EXISTS
+                (
+                    SELECT * FROM [TBDISCIPLINA]
+                    WHERE
+                        [NOME] = @NOME
+                )
+            BEGIN
+                INSERT INTO [TBDISCIPLINA]
+                (
+                   [NOME]
+                )
+            VALUES
+                (
+                    @NOME
+                )
+            END
+            SELECT SCOPE_IDENTITY();";
+
+
         private const string sqlEditar =
             @"UPDATE[TBDISCIPLINA]
 		        SET
@@ -66,13 +86,16 @@ namespace TesteMariana.infra.DataBase.ModuloDisciplina
 
             SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
 
-            SqlCommand comandoInsercao = new SqlCommand(sqlInserir, conexaoComBanco);
+            SqlCommand comandoInsercao = new SqlCommand(sqlInserirsSemDuplicatas, conexaoComBanco);
 
             ConfigurarParametrosDisciplina(novoRegistro, comandoInsercao);
 
             conexaoComBanco.Open();
             var id = comandoInsercao.ExecuteScalar();
-            novoRegistro.Numero = Convert.ToInt32(id);
+            if (id != DBNull.Value)
+                novoRegistro.Numero = Convert.ToInt32(id);
+            else
+                resultadoValidacao.Errors.Add(new ValidationFailure("", "Não foi possível inserir, pois já existe uma disciplina com este nome cadastrada no DataBase!"));
 
             conexaoComBanco.Close();
 

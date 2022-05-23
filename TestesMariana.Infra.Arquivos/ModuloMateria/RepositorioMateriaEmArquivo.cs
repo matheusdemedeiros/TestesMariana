@@ -151,6 +151,5 @@ namespace TestesMariana.Infra.Arquivos.ModuloMateria
                 materiaAntiga.Disciplina.DecrementarQtdMateriasRelacionadas();
             }
         }
-
     }
 }

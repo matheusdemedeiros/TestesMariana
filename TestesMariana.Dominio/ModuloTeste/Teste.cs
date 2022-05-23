@@ -10,7 +10,6 @@ namespace TestesMariana.Dominio.ModuloTeste
 {
     public class Teste : EntidadeBase<Teste>, ICloneable
     {
-
         private DateTime? dataCriacao;
 
         public int QtdQuestoes { get; set; }
@@ -78,11 +77,6 @@ namespace TestesMariana.Dominio.ModuloTeste
         {
             return Questoes.Exists(x => x.Enunciado.SaoIguais(questao.Enunciado));
         }
-
-        //public Teste Clone()
-        //{
-        //    return MemberwiseClone() as Teste;
-        //}
 
         public override void Atualizar(Teste registro)
         {

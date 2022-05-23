@@ -4,7 +4,6 @@ using TestesMariana.Dominio.Compartilhado;
 namespace TestesMariana.Dominio.ModuloDisciplina
 {
 
-    [Serializable]
     public class Disciplina : EntidadeBase<Disciplina>
     {
         public Disciplina()
@@ -19,10 +18,12 @@ namespace TestesMariana.Dominio.ModuloDisciplina
 
         public string Nome { get; set; }
 
-        public bool PodeExcluir => QtdMateriasRelacionadas == 0 ? true : false;
+        public bool PodeExcluir => QtdMateriasRelacionadas == 0 && QtdQuestoesRelacionadas == 0 ? true : false;
 
         public int QtdMateriasRelacionadas = 0;
-        
+
+        public int QtdQuestoesRelacionadas = 0;
+
         public void IncrementarQtdMateriasRelacionadas()
         {
             QtdMateriasRelacionadas++;
@@ -31,6 +32,16 @@ namespace TestesMariana.Dominio.ModuloDisciplina
         public void DecrementarQtdMateriasRelacionadas()
         {
             QtdMateriasRelacionadas--;
+        }
+
+        public void IncrementarQtdQuestoesRelacionadas()
+        {
+            QtdQuestoesRelacionadas++;
+        }
+
+        public void DecrementarQtdQuestoesRelacionadas()
+        {
+            QtdQuestoesRelacionadas--;
         }
 
         public override void Atualizar(Disciplina registro)

@@ -27,6 +27,8 @@ namespace TestesMariana.Infra.Arquivos.ModuloQuestao
 
                 novoRegistro.Materia.IncrementarQtdQuestoesRelacionadas();
 
+                novoRegistro.Disciplina.IncrementarQtdQuestoesRelacionadas();
+
                 var registros = ObterRegistros();
 
                 registros.Add(novoRegistro);
@@ -49,6 +51,8 @@ namespace TestesMariana.Infra.Arquivos.ModuloQuestao
                     {
                         AtualizarMateriasRelacionadas(registro, questao);
 
+                        AtualizarDisciplinasRelacionadas(registro, questao);
+
                         questao.Atualizar(registro);
 
                         break;
@@ -66,6 +70,8 @@ namespace TestesMariana.Infra.Arquivos.ModuloQuestao
             var registros = ObterRegistros();
 
             registro.Materia.DecrementarQtdQuestoesRelacionadas();
+            
+            registro.Disciplina.DecrementarQtdQuestoesRelacionadas();
 
             if (registros.Remove(registro) == false)
                 resultadoValidacao.Errors.Add(new ValidationFailure("", "Não foi possível remover a questão!"));
@@ -147,12 +153,29 @@ namespace TestesMariana.Infra.Arquivos.ModuloQuestao
             return false;
         }
 
+        private bool VerificaSeAsDisciplinasSaoIguais(Questao questao1, Questao questao2)
+        {
+            if (questao1.Disciplina == questao2.Disciplina)
+                return true;
+
+            return false;
+        }
+
         private void AtualizarMateriasRelacionadas(Questao questaoNova, Questao questaoAntiga)
         {
             if (VerificaSeAsMateriasSaoIguais(questaoAntiga, questaoNova) == false)
             {
                 questaoNova.Materia.IncrementarQtdQuestoesRelacionadas();
                 questaoAntiga.Materia.DecrementarQtdQuestoesRelacionadas();
+            }
+        }
+        
+        private void AtualizarDisciplinasRelacionadas(Questao questaoNova, Questao questaoAntiga)
+        {
+            if (VerificaSeAsDisciplinasSaoIguais(questaoAntiga, questaoNova) == false)
+            {
+                questaoNova.Disciplina.IncrementarQtdQuestoesRelacionadas();
+                questaoAntiga.Disciplina.DecrementarQtdQuestoesRelacionadas();
             }
         }
     }

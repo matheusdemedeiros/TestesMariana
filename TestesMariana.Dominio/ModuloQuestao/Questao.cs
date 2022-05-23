@@ -22,12 +22,20 @@ namespace TestesMariana.Dominio.ModuloQuestao
 
         public string Serie => Materia.Serie;
 
-        public bool TemAlternativaCorretaCadastrada
+        public bool TemAlternativaCorretaCadastrada => Alternativas.Exists(x => x.Correta == true);
+
+        public bool PòdeExcluir => QtdTestesRelacionados == 0 ? true : false;
+
+        public int QtdTestesRelacionados = 0;
+
+        public void IncrementarQtdTestesRelacionados()
         {
-            get
-            {
-                return Alternativas.Exists(x => x.Correta == true);
-            }
+            QtdTestesRelacionados++;
+        }
+
+        public void DecrementarQtdTestesRelacionados()
+        {
+            QtdTestesRelacionados--;
         }
 
         public Questao()
@@ -123,7 +131,7 @@ namespace TestesMariana.Dominio.ModuloQuestao
         {
             return new ValidadorAlternativa();
         }
-        
+
         public override void Atualizar(Questao registro)
         {
             this.Enunciado = registro.Enunciado;
@@ -135,6 +143,7 @@ namespace TestesMariana.Dominio.ModuloQuestao
         {
             return Enunciado;
         }
+
 
         public Questao Clone()
         {

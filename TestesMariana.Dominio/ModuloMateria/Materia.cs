@@ -4,8 +4,6 @@ using TestesMariana.Dominio.ModuloDisciplina;
 
 namespace TestesMariana.Dominio.ModuloMateria
 {
-
-    [Serializable]
     public class Materia : EntidadeBase<Materia>
     {
         public string Titulo { get; set; }
@@ -15,7 +13,7 @@ namespace TestesMariana.Dominio.ModuloMateria
         public string Serie { get; set; }
 
         public string NomeDisciplina => Disciplina.Nome;
-
+        
         public bool PodeExcluir => QtdQuestoesRelacionadas == 0 ? true : false;
 
         public int QtdQuestoesRelacionadas = 0;
