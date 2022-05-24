@@ -26,7 +26,7 @@ namespace TesteMariana.infra.DataBase.ModuloDisciplina
                     @NOME
                 );SELECT SCOPE_IDENTITY();";
 
-        private const string sqlInserirsSemDuplicatas =
+        private const string sqlInserirSemDuplicatas =
             @"IF NOT EXISTS
                 (
                     SELECT * FROM [TBDISCIPLINA]
@@ -86,12 +86,14 @@ namespace TesteMariana.infra.DataBase.ModuloDisciplina
 
             SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
 
-            SqlCommand comandoInsercao = new SqlCommand(sqlInserirsSemDuplicatas, conexaoComBanco);
+            SqlCommand comandoInsercao = new SqlCommand(sqlInserirSemDuplicatas, conexaoComBanco);
 
             ConfigurarParametrosDisciplina(novoRegistro, comandoInsercao);
 
             conexaoComBanco.Open();
+            
             var id = comandoInsercao.ExecuteScalar();
+            
             if (id != DBNull.Value)
                 novoRegistro.Numero = Convert.ToInt32(id);
             else

@@ -56,7 +56,7 @@ namespace TestesMariana.WinApp.ModuloTeste
                     else
                         comboBoxMaterias.SelectedItem = teste.Materia;
 
-                    numericUpDownQtdQuestoes.Value = teste.QtdQuestoes;
+                    numericUpDownQtdQuestoes.Value = teste.QtdQuestoesDesejadas;
                     comboBoxSerie.SelectedItem = teste.Serie;
 
                     AplicarFiltro();
@@ -92,7 +92,7 @@ namespace TestesMariana.WinApp.ModuloTeste
                     GerarTeste(qtdInformadaQuestoes, testeAhSerPassado);
 
                 novoTeste.Titulo = txtTituloTeste.Text;
-                novoTeste.QtdQuestoes = testeAhSerPassado.Questoes.Count;
+                novoTeste.QtdQuestoesDesejadas = testeAhSerPassado.Questoes.Count;
                 novoTeste.Disciplina = (Disciplina)comboBoxDisciplinas.SelectedItem;
                 novoTeste.Materia = (Materia)comboBoxMaterias.SelectedItem;
                 novoTeste.Serie = comboBoxSerie.Text;

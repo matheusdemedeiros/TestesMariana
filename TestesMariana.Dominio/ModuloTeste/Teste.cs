@@ -12,7 +12,7 @@ namespace TestesMariana.Dominio.ModuloTeste
     {
         private DateTime? dataCriacao;
 
-        public int QtdQuestoes { get; set; }
+        public int QtdQuestoesDesejadas { get; set; }
 
         public string Titulo { get; set; }
 
@@ -82,7 +82,7 @@ namespace TestesMariana.Dominio.ModuloTeste
         {
             this.Titulo = registro.Titulo;
             this.DataCriacao = registro.DataCriacao;
-            this.QtdQuestoes = registro.QtdQuestoes;
+            this.QtdQuestoesDesejadas = registro.QtdQuestoesDesejadas;
             this.Questoes = registro.Questoes;
             this.Materia = registro.Materia;
             this.Disciplina = registro.Disciplina;
@@ -98,7 +98,7 @@ namespace TestesMariana.Dominio.ModuloTeste
         {
             this.Titulo = registro.Titulo;
             this.DataCriacao = registro.DataCriacao;
-            this.QtdQuestoes = registro.QtdQuestoes;
+            this.QtdQuestoesDesejadas = registro.QtdQuestoesDesejadas;
             this.Questoes = registro.Questoes;
             this.Materia = registro.Materia;
             this.Disciplina = registro.Disciplina;

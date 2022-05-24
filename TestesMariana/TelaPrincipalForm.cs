@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using TesteMariana.infra.DataBase.ModuloDisciplina;
+using TesteMariana.infra.DataBase.ModuloMateria;
 using TestesMariana.Infra.Arquivos.Compartilhado;
 using TestesMariana.Infra.Arquivos.ModuloDisciplina;
 using TestesMariana.Infra.Arquivos.ModuloMateria;
@@ -161,10 +162,10 @@ namespace TestesMariana
 
             }
 
-            if (tipoMSG == TipoMensagemRodape.VISUALIZANDO  || tipoMSG == TipoMensagemRodape.VAZIO)
+            if (tipoMSG == TipoMensagemRodape.VISUALIZANDO || tipoMSG == TipoMensagemRodape.VAZIO)
             {
                 labelRodape.Text = mensagem;
-                
+
                 statusStripRodape.BackColor = corBack;
             }
         }
@@ -200,10 +201,12 @@ namespace TestesMariana
 
         private void InicializarControladores()
         {
-            var repositorioDisciplina = new RepositorioDisciplinaDB();
-            
+            var repositorioDisciplina = new RepositorioDisciplinaDBFilha();
+            var repositorioMateria = new RepositorioMateriaDB();
+
             //var repositorioDisciplina = new RepositorioDisciplinaEmArquivo(contextoDados);
-            var repositorioMateria = new RepositorioMateriaEmArquivo(contextoDados);
+            //var repositorioMateria = new RepositorioMateriaEmArquivo(contextoDados);
+            
             var repositorioQuestao = new RepositorioQuestaoEmArquivo(contextoDados);
             var repositorioTeste = new RepositorioTesteEmArquivo(contextoDados);
 

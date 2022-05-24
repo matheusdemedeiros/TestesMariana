@@ -22,10 +22,13 @@ namespace TestesMariana.Dominio.ModuloQuestao
 
         public string Serie => Materia.Serie;
 
+        [SkipProperty]
         public bool TemAlternativaCorretaCadastrada => Alternativas.Exists(x => x.Correta == true);
-
+        
+        [SkipProperty]
         public bool PòdeExcluir => QtdTestesRelacionados == 0 ? true : false;
 
+        [SkipProperty]
         public int QtdTestesRelacionados = 0;
 
         public void IncrementarQtdTestesRelacionados()

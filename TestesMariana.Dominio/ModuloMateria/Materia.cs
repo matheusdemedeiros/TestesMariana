@@ -1,5 +1,4 @@
-﻿using System;
-using TestesMariana.Dominio.Compartilhado;
+﻿using TestesMariana.Dominio.Compartilhado;
 using TestesMariana.Dominio.ModuloDisciplina;
 
 namespace TestesMariana.Dominio.ModuloMateria
@@ -13,9 +12,11 @@ namespace TestesMariana.Dominio.ModuloMateria
         public string Serie { get; set; }
 
         public string NomeDisciplina => Disciplina.Nome;
-        
+
+        [SkipProperty]
         public bool PodeExcluir => QtdQuestoesRelacionadas == 0 ? true : false;
 
+        [SkipProperty]
         public int QtdQuestoesRelacionadas = 0;
 
         public void IncrementarQtdQuestoesRelacionadas()
