@@ -17,7 +17,7 @@ namespace TesteMariana.infra.DataBase.ModuloQuestao
              "Integrated Security=True;" +
              "Pooling=False";
 
-        #region Sql Queries
+        #region SQL QUERIES
 
         private const string sqlInserirQuestao =
             @"INSERT INTO [TBQUESTAO]
@@ -36,10 +36,11 @@ namespace TesteMariana.infra.DataBase.ModuloQuestao
                 );SELECT SCOPE_IDENTITY();";
 
         private const string sqlEditar =
-            @"UPDATE[TBMATERIA]
+            @"UPDATE[TBQUESTAO]
 		        SET
-			        [TITULO] = @TITULO,
+			        [ENUNCIADO] = @ENUNCIADO,
                     [SERIE] = @SERIE,
+                    [MATERIA_NUMERO] = @MATERIA_NUMERO,
                     [DISCIPLINA_NUMERO] = @DISCIPLINA_NUMERO
 		        WHERE
 			        [NUMERO] = @NUMERO";
@@ -50,7 +51,7 @@ namespace TesteMariana.infra.DataBase.ModuloQuestao
 			        [NUMERO] = @NUMERO";
 
         private const string sqlSelecionarTodasAsQuestoes =
-             @"SELECT
+            @"SELECT
                 QT.NUMERO,
                 QT.ENUNCIADO,
                 QT.SERIE,
@@ -61,14 +62,14 @@ namespace TesteMariana.infra.DataBase.ModuloQuestao
                 M.NUMERO AS MATERIA_NUMERO,
                 M.TITULO AS MATERIA_TITULO,
                 M.SERIE AS MATERIA_SERIE
-            FROM
+              FROM
                 TBQUESTAO AS QT INNER JOIN TBDISCIPLINA AS D ON
                 QT.DISCIPLINA_NUMERO = D.NUMERO
                 INNER JOIN TBMATERIA AS M ON
                 QT.MATERIA_NUMERO = M.NUMERO";
 
         private const string sqlSelecionarPorNumero =
-             @"SELECT
+            @"SELECT
                 QT.NUMERO,
                 QT.ENUNCIADO,
                 QT.SERIE,
@@ -103,7 +104,6 @@ namespace TesteMariana.infra.DataBase.ModuloQuestao
                     @QUESTAO_NUMERO
                 ); SELECT SCOPE_IDENTITY();";
 
-
         private const string sqlSelecionarAlternativasDaQuestao =
             @"SELECT 
                 [NUMERO],
@@ -117,7 +117,14 @@ namespace TesteMariana.infra.DataBase.ModuloQuestao
             WHERE 
                 [QUESTAO_NUMERO] = @QUESTAO_NUMERO";
 
+        private const string sqlExcluirAlternativas =
+            @"DELETE FROM [TBALTERNATIVA]
+		        WHERE
+			        [QUESTAO_NUMERO] = @QUESTAO_NUMERO";
+
         #endregion
+
+        #region MÉTODOS PÚBLICOS
 
         public ValidationResult Inserir(Questao novoRegistro)
         {
@@ -149,22 +156,77 @@ namespace TesteMariana.infra.DataBase.ModuloQuestao
 
         public ValidationResult Editar(Questao registro)
         {
-            throw new NotImplementedException();
+            var validador = new ValidadorQuestao();
+
+            var resultadoValidacao = validador.Validate(registro);
+
+            if (resultadoValidacao.IsValid == false)
+                return resultadoValidacao;
+
+            SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
+
+            SqlCommand comandoEdicao = new SqlCommand(sqlEditar, conexaoComBanco);
+
+            ConfigurarParametrosQuestao(registro, comandoEdicao);
+
+            conexaoComBanco.Open();
+
+            comandoEdicao.ExecuteNonQuery();
+
+            conexaoComBanco.Close();
+
+            ExcluirAlternativas(registro);
+
+            AdicionarAlternativas(registro);
+
+            return resultadoValidacao;
         }
 
         public ValidationResult Excluir(Questao registro)
         {
-            throw new NotImplementedException();
-        }
+            ExcluirAlternativas(registro);
 
-        public List<Questao> Filtrar(Predicate<Questao> condicao)
-        {
-            throw new NotImplementedException();
+            SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
+
+            SqlCommand comandoExclusao = new SqlCommand(sqlExcluirQuestao, conexaoComBanco);
+
+            comandoExclusao.Parameters.AddWithValue("NUMERO", registro.Numero);
+
+            conexaoComBanco.Open();
+
+            int numeroRegistrosExcluidos = comandoExclusao.ExecuteNonQuery();
+
+            var resultadoValidacao = new ValidationResult();
+
+            if (numeroRegistrosExcluidos == 0)
+                resultadoValidacao.Errors.Add(new ValidationFailure("", "Não foi possível excluir a questão!"));
+
+            conexaoComBanco.Close();
+
+            return resultadoValidacao;
         }
 
         public Questao SelecionarPorNumero(int numero)
         {
-            throw new NotImplementedException();
+            SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
+
+            SqlCommand comandoSelecao = new SqlCommand(sqlSelecionarPorNumero, conexaoComBanco);
+
+            comandoSelecao.Parameters.AddWithValue("NUMERO", numero);
+
+            conexaoComBanco.Open();
+            SqlDataReader leitorQuestao = comandoSelecao.ExecuteReader();
+
+            Questao questao = null;
+
+            if (leitorQuestao.Read())
+                questao = ConverterParaQuestao(leitorQuestao);
+
+            conexaoComBanco.Close();
+
+            CarregarAlternativas(questao);
+
+            return questao;
         }
 
         public List<Questao> SelecionarTodos()
@@ -191,30 +253,7 @@ namespace TesteMariana.infra.DataBase.ModuloQuestao
 
             return questoes;
         }
-
-        private void CarregarAlternativas(Questao questao)
-        {
-            SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
-
-            SqlCommand comandoSelecao = new SqlCommand(sqlSelecionarAlternativasDaQuestao, conexaoComBanco);
-
-            comandoSelecao.Parameters.AddWithValue("QUESTAO_NUMERO", questao.Numero);
-
-            conexaoComBanco.Open();
-            SqlDataReader leitorAlternativa = comandoSelecao.ExecuteReader();
-
-
-            while (leitorAlternativa.Read())
-            {
-                Alternativa alternativa = ConverterParaAlternativa(leitorAlternativa);
-
-                questao.AdicionarAlternativa(alternativa);
-            }
-
-            conexaoComBanco.Close();
-        }
-
-
+        
         public void AdicionarAlternativas(Questao questaoSelecionada)
         {
             SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
@@ -237,8 +276,47 @@ namespace TesteMariana.infra.DataBase.ModuloQuestao
             }
 
             conexaoComBanco.Close();
+        }
+        
+        public void ExcluirAlternativas(Questao questao)
+        {
+            SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
 
-            //Editar(questaoSelecionada);
+            SqlCommand comandoExclusao = new SqlCommand(sqlExcluirAlternativas, conexaoComBanco);
+
+            comandoExclusao.Parameters.AddWithValue("QUESTAO_NUMERO", questao.Numero);
+
+            conexaoComBanco.Open();
+
+            comandoExclusao.ExecuteNonQuery();
+
+            conexaoComBanco.Close();
+        }
+        
+        #endregion
+
+        #region MÉTODOS PRIVADOS
+
+        private void CarregarAlternativas(Questao questao)
+        {
+            SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
+
+            SqlCommand comandoSelecao = new SqlCommand(sqlSelecionarAlternativasDaQuestao, conexaoComBanco);
+
+            comandoSelecao.Parameters.AddWithValue("QUESTAO_NUMERO", questao.Numero);
+
+            conexaoComBanco.Open();
+            SqlDataReader leitorAlternativa = comandoSelecao.ExecuteReader();
+
+
+            while (leitorAlternativa.Read())
+            {
+                Alternativa alternativa = ConverterParaAlternativa(leitorAlternativa);
+
+                questao.AdicionarAlternativa(alternativa);
+            }
+
+            conexaoComBanco.Close();
         }
 
         private Questao ConverterParaQuestao(SqlDataReader leitorQuestao)
@@ -308,5 +386,7 @@ namespace TesteMariana.infra.DataBase.ModuloQuestao
             comando.Parameters.AddWithValue("CORRETA", novoRegistro.Correta);
             comando.Parameters.AddWithValue("LETRA", novoRegistro.Letra);
         }
+        
+        #endregion
     }
 }
