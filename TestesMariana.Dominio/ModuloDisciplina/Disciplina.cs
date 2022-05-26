@@ -1,4 +1,5 @@
-﻿using TestesMariana.Dominio.Compartilhado;
+﻿using System;
+using TestesMariana.Dominio.Compartilhado;
 
 namespace TestesMariana.Dominio.ModuloDisciplina
 {
@@ -58,6 +59,18 @@ namespace TestesMariana.Dominio.ModuloDisciplina
         public Disciplina Clone()
         {
             return MemberwiseClone() as Disciplina;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Disciplina disciplina &&
+                   Numero == disciplina.Numero &&
+                   Nome == disciplina.Nome;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Numero, Nome);
         }
     }
 }

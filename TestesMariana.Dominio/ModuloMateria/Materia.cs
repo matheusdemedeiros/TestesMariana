@@ -1,4 +1,6 @@
-﻿using TestesMariana.Dominio.Compartilhado;
+﻿using System;
+using System.Collections.Generic;
+using TestesMariana.Dominio.Compartilhado;
 using TestesMariana.Dominio.ModuloDisciplina;
 
 namespace TestesMariana.Dominio.ModuloMateria
@@ -58,5 +60,20 @@ namespace TestesMariana.Dominio.ModuloMateria
             return MemberwiseClone() as Materia;
         }
 
+        public override bool Equals(object obj)
+        {
+            return obj is Materia materia &&
+                   Numero == materia.Numero &&
+                   Titulo == materia.Titulo &&
+                   EqualityComparer<Disciplina>.Default.Equals(Disciplina, materia.Disciplina) &&
+                   Serie == materia.Serie &&
+                   NomeDisciplina == materia.NomeDisciplina &&
+                   PodeExcluir == materia.PodeExcluir;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Numero, Titulo, Disciplina, Serie, NomeDisciplina, PodeExcluir);
+        }
     }
 }

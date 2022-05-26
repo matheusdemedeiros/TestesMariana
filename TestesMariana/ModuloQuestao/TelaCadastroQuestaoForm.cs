@@ -1,7 +1,6 @@
 ﻿using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 using TestesMariana.Dominio.ModuloDisciplina;
 using TestesMariana.Dominio.ModuloMateria;
@@ -124,7 +123,7 @@ namespace TestesMariana.WinApp.ModuloQuestao
 
             if (disciplinaSelecionada != null)
             {
-                materiasFiltradasPorDisciplina = FiltrarMateriasPorDisciplina(x => x.Disciplina == disciplinaSelecionada);
+                materiasFiltradasPorDisciplina = FiltrarMateriasPorDisciplina(x => x.Disciplina.Numero == disciplinaSelecionada.Numero);
                 PopularComboboxMaterias(materiasFiltradasPorDisciplina);
             }
         }

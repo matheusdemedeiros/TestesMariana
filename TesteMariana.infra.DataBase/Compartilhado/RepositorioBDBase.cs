@@ -143,7 +143,7 @@ namespace TesteMariana.infra.DataBase.Compartilhado
             return entidades;
         }
 
-        protected void ConfigurarParametrosEntidade(T registro, SqlCommand comandoAhSerExecutado)
+        protected virtual void ConfigurarParametrosEntidade(T registro, SqlCommand comandoAhSerExecutado)
         {
             PropertyInfo[] props = registro.GetType().GetFilteredProperties();
 

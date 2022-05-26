@@ -33,36 +33,12 @@ namespace TesteMariana.infra.DataBase.ModuloMateria
 
                 );SELECT SCOPE_IDENTITY();";
 
-        private const string sqlInserirSemDuplicatas =
-            @"IF NOT EXISTS
-                (
-                    SELECT * FROM [TBMATERIA]
-                    WHERE
-                        [TITULO] = @TITULO
-                )
-            BEGIN
-                INSERT INTO  [TBMATERIA]
-                (
-                   
-                    [TITULO],
-                    [SERIE],
-                    [DISCIPLINA_NUMERO]
-                )
-            VALUES
-                (
-                    @TITULO,
-                    @SERIE,
-                    @DISCIPLINA_NUMERO
-                )
-            END
-            SELECT SCOPE_IDENTITY();";
-
         private const string sqlEditar =
-            @"UPDATE[TBMATERIA]
+                @"UPDATE[TBMATERIA]
 		        SET
-			        [TITULO],
-                    [SERIE],
-                    [DISCIPLINA.NUMERO]
+			        [TITULO] = @TITULO,
+                    [SERIE] = @SERIE,
+                    [DISCIPLINA_NUMERO] = @DISCIPLINA_NUMERO
 		        WHERE
 			        [NUMERO] = @NUMERO";
 
@@ -163,6 +139,7 @@ namespace TesteMariana.infra.DataBase.ModuloMateria
             comandoExclusao.Parameters.AddWithValue("NUMERO", registro.Numero);
 
             conexaoComBanco.Open();
+
             int numeroRegistrosExcluidos = comandoExclusao.ExecuteNonQuery();
 
             var resultadoValidacao = new ValidationResult();
@@ -223,7 +200,7 @@ namespace TesteMariana.infra.DataBase.ModuloMateria
             int numero = Convert.ToInt32(leitorMateria["NUMERO"]);
             string titulo = Convert.ToString(leitorMateria["TITULO"]);
             string serie = Convert.ToString(leitorMateria["SERIE"]);
-            
+
             int numeroDisciplina = Convert.ToInt32(leitorMateria["DISCIPLINA_NUMERO"]);
             string nomeDisciplina = Convert.ToString(leitorMateria["DISCIPLINA_NOME"]);
 
