@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 
-
 namespace TestesMariana.Dominio.ModuloQuestao
 {
     public  class ValidadorQuestao : AbstractValidator<Questao>
@@ -20,7 +19,6 @@ namespace TestesMariana.Dominio.ModuloQuestao
 
             RuleFor(x => x.Materia).NotNull()
                 .WithMessage("A questão deve ter uma matéria cadastrada!");
-
         }
     }
 }

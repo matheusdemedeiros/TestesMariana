@@ -25,7 +25,5 @@ namespace TestesMariana.Dominio.Compartilhado
 
             return options;
         }
-
     }
-
 }

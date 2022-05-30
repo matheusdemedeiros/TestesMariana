@@ -12,7 +12,7 @@ namespace TestesMariana.Dominio.ModuloTeste
     {
         private DateTime? dataCriacao;
 
-        public int QtdQuestoesDesejadas { get; set; }
+        #region PROPS
 
         public string Titulo { get; set; }
 
@@ -23,17 +23,10 @@ namespace TestesMariana.Dominio.ModuloTeste
         public Materia? Materia { get; set; }
 
         public string Serie { get; set; }
+        
+        public DateTime? DataCriacao { get => dataCriacao; set => dataCriacao = value; }
 
-        public DateTime? DataCriacao
-        {
-            get
-            {
-                return dataCriacao;
-            }
-
-            set { dataCriacao = value; }
-
-        }
+        #endregion
 
         public Teste()
         {
@@ -42,6 +35,8 @@ namespace TestesMariana.Dominio.ModuloTeste
 
             Questoes = new List<Questao>();
         }
+
+        #region MÉTODOS PÚBLICOS
 
         public ValidationResult AdicionarQuestao(Questao questao)
         {
@@ -63,26 +58,15 @@ namespace TestesMariana.Dominio.ModuloTeste
             return resultadoValidacao;
         }
 
-        private ValidationResult ValidarQuestao(Questao questao)
+        public object Clone()
         {
-            var resultadoValidacao = new ValidationResult();
-
-            if(VerificarSeAhQuestaoJaEstaPresenteNoTeste(questao))
-                resultadoValidacao.Errors.Add(new ValidationFailure("", "A questão já está no teste!"));
-
-            return resultadoValidacao;
+            return new Teste(this);
         }
-
-        private bool VerificarSeAhQuestaoJaEstaPresenteNoTeste(Questao questao)
-        {
-            return Questoes.Exists(x => x.Enunciado.SaoIguais(questao.Enunciado));
-        }
-
+        
         public override void Atualizar(Teste registro)
         {
             this.Titulo = registro.Titulo;
             this.DataCriacao = registro.DataCriacao;
-            this.QtdQuestoesDesejadas = registro.QtdQuestoesDesejadas;
             this.Questoes = registro.Questoes;
             this.Materia = registro.Materia;
             this.Disciplina = registro.Disciplina;
@@ -94,21 +78,36 @@ namespace TestesMariana.Dominio.ModuloTeste
             return Titulo;
         }
 
+        #endregion
+
+        #region MÉTODOS PRIVADOS
+
         private Teste(Teste registro)
         {
             this.Titulo = registro.Titulo;
             this.DataCriacao = registro.DataCriacao;
-            this.QtdQuestoesDesejadas = registro.QtdQuestoesDesejadas;
             this.Questoes = registro.Questoes;
             this.Materia = registro.Materia;
             this.Disciplina = registro.Disciplina;
             this.Serie = registro.Serie;
             this.DataCriacao = DateTime.Now;
         }
-
-        public object Clone()
+        
+        private ValidationResult ValidarQuestao(Questao questao)
         {
-            return new Teste(this);
+            var resultadoValidacao = new ValidationResult();
+
+            if (VerificarSeAhQuestaoJaEstaPresenteNoTeste(questao))
+                resultadoValidacao.Errors.Add(new ValidationFailure("", "A questão já está no teste!"));
+
+            return resultadoValidacao;
         }
+
+        private bool VerificarSeAhQuestaoJaEstaPresenteNoTeste(Questao questao)
+        {
+            return Questoes.Exists(x => x.Enunciado.SaoIguais(questao.Enunciado));
+        }
+        
+        #endregion
     }
 }

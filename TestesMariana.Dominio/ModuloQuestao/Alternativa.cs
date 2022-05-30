@@ -1,7 +1,11 @@
-﻿namespace TestesMariana.Dominio.ModuloQuestao
+﻿using System;
+
+namespace TestesMariana.Dominio.ModuloQuestao
 {
     public class Alternativa
     {
+        #region PROGPS
+
         public int Numero { get; set; }
 
         public string Descricao { get; set; }
@@ -10,16 +14,14 @@
         
         public char Letra { get; set; }
 
+        #endregion
+
         public Alternativa()
         {
             this.Correta = false;
         }
 
-        public Alternativa(string descricao, bool correta) : this()
-        {
-            Descricao = descricao;
-            Correta = correta;
-        }
+        #region MÉTODOS PÚBLICOS
 
         public override string ToString()
         {
@@ -28,5 +30,21 @@
 
             return $"{Letra}) {Descricao};";
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Alternativa alternativa &&
+                   Numero == alternativa.Numero &&
+                   Descricao == alternativa.Descricao &&
+                   Correta == alternativa.Correta &&
+                   Letra == alternativa.Letra;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Numero, Descricao, Correta, Letra);
+        }
+        
+        #endregion
     }
 }

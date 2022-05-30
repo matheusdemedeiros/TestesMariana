@@ -17,7 +17,6 @@ namespace TestesMariana.Dominio.ModuloMateria
             RuleFor(x => x.Disciplina)
                 .NotNull()
                 .WithMessage("O campo 'Disciplina' é obrigatório.");
-
         }
     }
 }

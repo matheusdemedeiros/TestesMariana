@@ -25,16 +25,16 @@ namespace TestesMariana.Dominio.ModuloTeste
                 PdfWriter.GetInstance(doc, new FileStream(arquivo, FileMode.Create));
                 doc.Open();
 
-                doc.Add(GerarTitulo(gabarito));
+                doc.Add(AdicionarTitulo(gabarito));
 
-                doc.Add(GerarDisciplina());
+                doc.Add(AdicionarDisciplina());
 
-                doc.Add(GerarSerie());
+                doc.Add(AdicionarSerie());
 
                 if (teste.Materia != null)
                     doc.Add(AdicionarMateria());
 
-                foreach (var q in GerarQuestoes(gabarito))
+                foreach (var q in AdicionarQuestoes(gabarito))
                     doc.Add(q);
 
             }
@@ -48,7 +48,9 @@ namespace TestesMariana.Dominio.ModuloTeste
             }
         }
 
-        private List<Paragraph> GerarQuestoes(bool gabarito)
+        #region MÉTODOS PRIVADOS
+
+        private List<Paragraph> AdicionarQuestoes(bool gabarito)
         {
             List<Paragraph> questoes = new List<Paragraph>();
             Font fontBOLD = FontFactory.GetFont(FontFactory.TIMES_BOLD);
@@ -87,7 +89,7 @@ namespace TestesMariana.Dominio.ModuloTeste
             return materia;
         }
 
-        private Paragraph GerarSerie()
+        private Paragraph AdicionarSerie()
         {
             Paragraph serie = new Paragraph();
             serie.Alignment = Element.ALIGN_JUSTIFIED;
@@ -95,7 +97,7 @@ namespace TestesMariana.Dominio.ModuloTeste
             return serie;
         }
 
-        private Paragraph GerarDisciplina()
+        private Paragraph AdicionarDisciplina()
         {
             Paragraph disciplina = new Paragraph();
             disciplina.Alignment = Element.ALIGN_JUSTIFIED;
@@ -103,7 +105,7 @@ namespace TestesMariana.Dominio.ModuloTeste
             return disciplina;
         }
 
-        private Paragraph GerarTitulo(bool gabarito)
+        private Paragraph AdicionarTitulo(bool gabarito)
         {
             Paragraph titulo = new Paragraph();
             titulo.Font.Size = 18;
@@ -123,6 +125,7 @@ namespace TestesMariana.Dominio.ModuloTeste
             doc.SetMargins(50, 50, 50, 50);
             return doc;
         }
-
+        
+        #endregion
     }
 }

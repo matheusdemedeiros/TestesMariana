@@ -7,6 +7,8 @@ namespace TestesMariana.Dominio.ModuloMateria
 {
     public class Materia : EntidadeBase<Materia>
     {
+        #region PROPS
+
         public string Titulo { get; set; }
         
         public Disciplina Disciplina { get; set; }
@@ -20,6 +22,15 @@ namespace TestesMariana.Dominio.ModuloMateria
 
         [SkipProperty]
         public int QtdQuestoesRelacionadas = 0;
+        
+        #endregion
+
+        public Materia()
+        {
+
+        }
+
+        #region MÉTODOS PÚBLICOS
 
         public void IncrementarQtdQuestoesRelacionadas()
         {
@@ -31,18 +42,6 @@ namespace TestesMariana.Dominio.ModuloMateria
             QtdQuestoesRelacionadas--;
         }
 
-        public Materia()
-        {
-
-        }
-
-        public Materia(string titulo, Disciplina disciplina, string serie)
-        {
-            Titulo = titulo;
-            Disciplina = disciplina;
-            Serie = serie;
-        }
-        
         public override void Atualizar(Materia registro)
         {
             this.Titulo = registro.Titulo;
@@ -75,5 +74,7 @@ namespace TestesMariana.Dominio.ModuloMateria
         {
             return HashCode.Combine(Numero, Titulo, Disciplina, Serie, NomeDisciplina, PodeExcluir);
         }
+        
+        #endregion
     }
 }

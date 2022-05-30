@@ -10,11 +10,8 @@ namespace TestesMariana.Dominio.ModuloDisciplina
 
         }
 
-        public Disciplina(string nome)
-        {
-            Nome = nome;
-        }
-
+        #region PROPS
+        
         public string Nome { get; set; }
 
         [SkipProperty]
@@ -25,6 +22,10 @@ namespace TestesMariana.Dominio.ModuloDisciplina
 
         [SkipProperty]
         public int QtdQuestoesRelacionadas = 0;
+
+        #endregion
+
+        #region MÉTODOS PÚBLICOS
 
         public void IncrementarQtdMateriasRelacionadas()
         {
@@ -72,5 +73,7 @@ namespace TestesMariana.Dominio.ModuloDisciplina
         {
             return HashCode.Combine(Numero, Nome);
         }
+
+        #endregion
     }
 }

@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
+using System;
 using System.Collections.Generic;
 using TestesMariana.Dominio.Compartilhado;
 using TestesMariana.Dominio.ModuloDisciplina;
@@ -9,8 +10,9 @@ namespace TestesMariana.Dominio.ModuloQuestao
 {
     public class Questao : EntidadeBase<Questao>
     {
-
         private int contadorASCII = 'a';
+
+        #region PROPS
 
         public string Enunciado { get; set; }
 
@@ -30,6 +32,15 @@ namespace TestesMariana.Dominio.ModuloQuestao
 
         [SkipProperty]
         public int QtdTestesRelacionados = 0;
+        
+        #endregion
+        
+        public Questao()
+        {
+            Alternativas = new List<Alternativa>();
+        }
+
+        #region MÉTODOS PÚBLICOS
 
         public void IncrementarQtdTestesRelacionados()
         {
@@ -39,18 +50,6 @@ namespace TestesMariana.Dominio.ModuloQuestao
         public void DecrementarQtdTestesRelacionados()
         {
             QtdTestesRelacionados--;
-        }
-
-        public Questao()
-        {
-            Alternativas = new List<Alternativa>();
-        }
-
-        public Questao(string enunciado, List<Alternativa> alternativas, Materia materia)
-        {
-            Enunciado = enunciado;
-            Alternativas = alternativas;
-            Materia = materia;
         }
 
         public ValidationResult AdicionarAlternativa(Alternativa alternativa)
@@ -147,7 +146,6 @@ namespace TestesMariana.Dominio.ModuloQuestao
             return Enunciado;
         }
 
-
         public Questao Clone()
         {
             return MemberwiseClone() as Questao;
@@ -164,5 +162,39 @@ namespace TestesMariana.Dominio.ModuloQuestao
             }
 
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Questao questao &&
+                   Numero == questao.Numero &&
+                   contadorASCII == questao.contadorASCII &&
+                   Enunciado == questao.Enunciado &&
+                   EqualityComparer<List<Alternativa>>.Default.Equals(Alternativas, questao.Alternativas) &&
+                   EqualityComparer<Materia>.Default.Equals(Materia, questao.Materia) &&
+                   EqualityComparer<Disciplina>.Default.Equals(Disciplina, questao.Disciplina) &&
+                   Serie == questao.Serie &&
+                   TemAlternativaCorretaCadastrada == questao.TemAlternativaCorretaCadastrada &&
+                   PòdeExcluir == questao.PòdeExcluir &&
+                   QtdTestesRelacionados == questao.QtdTestesRelacionados;
+        }
+
+        public override int GetHashCode()
+        {
+            HashCode hash = new HashCode();
+            hash.Add(Numero);
+            hash.Add(contadorASCII);
+            hash.Add(Enunciado);
+            hash.Add(Alternativas);
+            hash.Add(Materia);
+            hash.Add(Disciplina);
+            hash.Add(Serie);
+            hash.Add(TemAlternativaCorretaCadastrada);
+            hash.Add(PòdeExcluir);
+            hash.Add(QtdTestesRelacionados);
+            return hash.ToHashCode();
+        }
+
+
+        #endregion
     }
 }

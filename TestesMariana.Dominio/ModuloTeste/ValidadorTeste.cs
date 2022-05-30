@@ -20,10 +20,6 @@ namespace TestesMariana.Dominio.ModuloTeste
 
             RuleFor(x => x.Questoes.Count).GreaterThan(0)
                     .WithMessage("O teste deve ter no mínimo uma questão!");
-            
-            RuleFor(x => x.QtdQuestoesDesejadas).GreaterThan(0)
-                    .WithMessage("Defina uma quantidade de questões para o teste!");
-
         }
     }
 }

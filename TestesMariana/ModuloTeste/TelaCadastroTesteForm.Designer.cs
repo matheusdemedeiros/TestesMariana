@@ -133,6 +133,7 @@
             this.comboBoxSerie.Name = "comboBoxSerie";
             this.comboBoxSerie.Size = new System.Drawing.Size(247, 23);
             this.comboBoxSerie.TabIndex = 1;
+            this.comboBoxSerie.SelectedIndexChanged += new System.EventHandler(this.comboBoxSerie_SelectedIndexChanged);
             // 
             // comboBoxDisciplinas
             // 

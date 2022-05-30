@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestesMariana.Infra.Arquivo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Banco de Dados", "Banco de Dados", "{60CFCA8A-3833-47D6-9D8D-8CCA395949C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesteMariana.infra.DataBase", "TesteMariana.infra.DataBase\TesteMariana.infra.DataBase.csproj", "{92DA72CD-F359-49B6-8F3E-9648FC93DA1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TesteMariana.infra.DataBase", "TesteMariana.infra.DataBase\TesteMariana.infra.DataBase.csproj", "{92DA72CD-F359-49B6-8F3E-9648FC93DA1B}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TestesMariana.Projeto.BancoDados", "TestesMariana.Projeto.BancoDados\TestesMariana.Projeto.BancoDados.sqlproj", "{961D986B-25CB-4C7C-A279-D8BFBAA77C3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,12 @@ Global
 		{92DA72CD-F359-49B6-8F3E-9648FC93DA1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92DA72CD-F359-49B6-8F3E-9648FC93DA1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92DA72CD-F359-49B6-8F3E-9648FC93DA1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{961D986B-25CB-4C7C-A279-D8BFBAA77C3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{961D986B-25CB-4C7C-A279-D8BFBAA77C3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{961D986B-25CB-4C7C-A279-D8BFBAA77C3F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{961D986B-25CB-4C7C-A279-D8BFBAA77C3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{961D986B-25CB-4C7C-A279-D8BFBAA77C3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{961D986B-25CB-4C7C-A279-D8BFBAA77C3F}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +62,7 @@ Global
 		{7655F882-CD76-4C54-B606-2CA231CACC53} = {8A2019BC-CC65-418D-A180-B234F7061CF9}
 		{60CFCA8A-3833-47D6-9D8D-8CCA395949C3} = {DF746775-F413-4681-90A1-68726ADC478D}
 		{92DA72CD-F359-49B6-8F3E-9648FC93DA1B} = {60CFCA8A-3833-47D6-9D8D-8CCA395949C3}
+		{961D986B-25CB-4C7C-A279-D8BFBAA77C3F} = {60CFCA8A-3833-47D6-9D8D-8CCA395949C3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EB1D9C42-66C1-4B43-B446-8C614B87F45D}

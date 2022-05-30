@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 using TestesMariana.Dominio.ModuloDisciplina;
 using TestesMariana.Dominio.ModuloMateria;
@@ -18,7 +17,7 @@ namespace TestesMariana.WinApp.ModuloTeste
         private IRepositorioTeste repositorioTeste;
         private ListagemTesteControl listagemTestes;
         private GeradorPDF geradorPDF;
-        
+
         public ControladorTeste(IRepositorioQuestao repositorioQuestao,
             IRepositorioDisciplina repositorioDisciplina,
             IRepositorioMateria repositorioMateria, IRepositorioTeste repositorioTeste)
@@ -29,28 +28,16 @@ namespace TestesMariana.WinApp.ModuloTeste
             this.repositorioTeste = repositorioTeste;
         }
 
-        public List<Disciplina> Disiciplinas
-        {
-            get
-            {
-                return repositorioDisciplina.SelecionarTodos();
-            }
-        }
-        public List<Materia> Materias
-        {
-            get
-            {
-                return repositorioMateria.SelecionarTodos();
-            }
-        }
-        public List<Questao> Questoes
-        {
-            get
-            {
-                return repositorioQuestao.SelecionarTodos();
-            }
-        }
+        #region PROPS
 
+        public List<Disciplina> Disiciplinas => repositorioDisciplina.SelecionarTodos();
+        
+        public List<Materia> Materias => repositorioMateria.SelecionarTodos();
+        
+        public List<Questao> Questoes => repositorioQuestao.SelecionarTodos();
+
+        #endregion 
+        
         public override void Inserir()
         {
             TelaCadastroTesteForm tela = new TelaCadastroTesteForm(Disiciplinas, Materias, Questoes);
@@ -113,9 +100,7 @@ namespace TestesMariana.WinApp.ModuloTeste
 
                 tela.ShowDialog();
             }
-
         }
-
 
         public void GerarPDF(bool gabarito)
         {
@@ -136,6 +121,7 @@ namespace TestesMariana.WinApp.ModuloTeste
                 {
                     geradorPDF = new GeradorPDF(testeSelecionado, sfd.FileName);
                     geradorPDF.GerarPDF(gabarito);
+                    MessageBox.Show("PDF gerado com sucesso!", "Informativo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)

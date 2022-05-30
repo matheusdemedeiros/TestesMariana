@@ -10,7 +10,6 @@ namespace TesteMariana.infra.DataBase.ModuloQuestao
 {
     public class RepositorioQuestaoDB : IRepositorioQuestao
     {
-
         private const string enderecoBanco =
              "Data Source=(LocalDB)\\MSSqlLocalDB;" +
              "Initial Catalog=TestesMariana;" +
@@ -306,8 +305,8 @@ namespace TesteMariana.infra.DataBase.ModuloQuestao
             comandoSelecao.Parameters.AddWithValue("QUESTAO_NUMERO", questao.Numero);
 
             conexaoComBanco.Open();
+            
             SqlDataReader leitorAlternativa = comandoSelecao.ExecuteReader();
-
 
             while (leitorAlternativa.Read())
             {

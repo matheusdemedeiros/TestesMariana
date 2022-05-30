@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using TesteMariana.infra.DataBase.ModuloDisciplina;
 using TesteMariana.infra.DataBase.ModuloMateria;
 using TesteMariana.infra.DataBase.ModuloQuestao;
+using TesteMariana.infra.DataBase.ModuloTeste;
 using TestesMariana.Infra.Arquivos.Compartilhado;
 using TestesMariana.Infra.Arquivos.ModuloDisciplina;
 using TestesMariana.Infra.Arquivos.ModuloMateria;
@@ -205,12 +206,12 @@ namespace TestesMariana
             var repositorioDisciplina = new RepositorioDisciplinaDBFilha();
             var repositorioMateria = new RepositorioMateriaDB();
             var repositorioQuestao = new RepositorioQuestaoDB();
+            var repositorioTeste = new RepositorioTesteDB();
 
             //var repositorioDisciplina = new RepositorioDisciplinaEmArquivo(contextoDados);
             //var repositorioMateria = new RepositorioMateriaEmArquivo(contextoDados);
             //var repositorioQuestao = new RepositorioQuestaoEmArquivo(contextoDados);
-            
-            var repositorioTeste = new RepositorioTesteEmArquivo(contextoDados);
+            //var repositorioTeste = new RepositorioTesteEmArquivo(contextoDados);
 
             controladores = new Dictionary<string, ControladorBase>();
 
