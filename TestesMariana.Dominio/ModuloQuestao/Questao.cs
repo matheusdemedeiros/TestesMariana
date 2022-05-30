@@ -11,6 +11,7 @@ namespace TestesMariana.Dominio.ModuloQuestao
     public class Questao : EntidadeBase<Questao>
     {
         private int contadorASCII = 'a';
+        private int maxQtdAlternativas = 4;
 
         #region PROPS
 
@@ -58,9 +59,14 @@ namespace TestesMariana.Dominio.ModuloQuestao
 
             if (resultadoValidacao.IsValid)
             {
-                Alternativas.Add(alternativa);
+                if (Alternativas.Count < maxQtdAlternativas)
+                {
+                    Alternativas.Add(alternativa);
 
-                AtualizarLetraAlternativas();
+                    AtualizarLetraAlternativas();
+                }
+                else
+                    resultadoValidacao.Errors.Add(new ValidationFailure("", $"É possível adicionar somente {maxQtdAlternativas} alternativas por questão!"));
             }
 
             return resultadoValidacao;

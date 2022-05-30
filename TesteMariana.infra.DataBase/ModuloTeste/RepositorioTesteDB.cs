@@ -72,7 +72,7 @@ namespace TesteMariana.infra.DataBase.ModuloTeste
                 LEFT JOIN TBMATERIA AS MT
             ON
                 T.MATERIA_NUMERO = MT.NUMERO";
-            
+
         private const string sqlSelecionarPorNumero =
             @"SELECT
                 T.[NUMERO],
@@ -95,7 +95,7 @@ namespace TesteMariana.infra.DataBase.ModuloTeste
                 T.MATERIA_NUMERO = MT.NUMERO
             WHERE
                 T.NUMERO = @NUMERO";
-        
+
         private const string sqlRemoverQuestaoDoTeste =
             @" DELETE FROM
                 TBTESTE_TBQUESTAO
@@ -155,7 +155,6 @@ namespace TesteMariana.infra.DataBase.ModuloTeste
 
         #endregion
 
-
         public ValidationResult Inserir(Teste novoRegistro)
         {
             var validador = new ValidadorTeste();
@@ -192,8 +191,7 @@ namespace TesteMariana.infra.DataBase.ModuloTeste
 
         public ValidationResult Excluir(Teste registro)
         {
-            foreach (var questao in registro.Questoes)
-                RemoverQuestao(questao);
+            RemoverQuestao(registro);
 
             SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
 
@@ -290,7 +288,7 @@ namespace TesteMariana.infra.DataBase.ModuloTeste
             Disciplina disciplina = new Disciplina();
             disciplina.Numero = numeroDisciplina;
             disciplina.Nome = nomeDisciplina;
-            
+
             var teste = new Teste
             {
                 Numero = numeroTeste,
@@ -354,13 +352,13 @@ namespace TesteMariana.infra.DataBase.ModuloTeste
             conexaoComBanco.Close();
         }
 
-        private void RemoverQuestao(Questao questao)
+        private void RemoverQuestao(Teste teste)
         {
             SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
 
             SqlCommand comandoExclusao = new SqlCommand(sqlRemoverQuestaoDoTeste, conexaoComBanco);
 
-            comandoExclusao.Parameters.AddWithValue("QUESTAO_NUMERO", questao.Numero);
+            comandoExclusao.Parameters.AddWithValue("TESTE_NUMERO", teste.Numero);
 
             conexaoComBanco.Open();
             comandoExclusao.ExecuteNonQuery();

@@ -9,7 +9,7 @@ namespace TestesMariana.Dominio.ModuloQuestao
         {
             RuleFor(x => x.Descricao.RemoverEspacosEmBranco())
                 .NotNull().NotEmpty()
-                .WithMessage("O campo 'Descrição da alternativa' é obrigatório.");
+                .WithMessage("O campo 'Descrição da alternativa' é obrigatório!");
         }
     }
 }

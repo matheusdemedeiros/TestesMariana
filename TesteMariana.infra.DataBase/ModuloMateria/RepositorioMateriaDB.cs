@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using TestesMariana.Dominio.Compartilhado;
 using TestesMariana.Dominio.ModuloDisciplina;
 using TestesMariana.Dominio.ModuloMateria;
 
@@ -34,7 +35,7 @@ namespace TesteMariana.infra.DataBase.ModuloMateria
                 );SELECT SCOPE_IDENTITY();";
 
         private const string sqlEditar =
-                @"UPDATE[TBMATERIA]
+            @"UPDATE[TBMATERIA]
 		        SET
 			        [TITULO] = @TITULO,
                     [SERIE] = @SERIE,
@@ -75,13 +76,37 @@ namespace TesteMariana.infra.DataBase.ModuloMateria
                 WHERE
                     MT.[NUMERO] = @NUMERO";
 
+        private const string sqlObterTitulosCadastrados =
+            @"SELECT [TITULO] FROM TBMATERIA;";
+
+        private const string sqlSelecionarPeloTitulo =
+            @"SELECT 
+                    MT.[NUMERO],		            
+                    MT.[TITULO],
+                    MT.[SERIE],
+                    
+	                D.NUMERO AS DISCIPLINA_NUMERO,
+	                D.NOME AS DISCIPLINA_NOME
+
+                FROM
+	                TBMATERIA AS MT INNER JOIN TBDISCIPLINA AS D ON
+	                MT.DISCIPLINA_NUMERO = D.NUMERO
+                WHERE
+                    MT.[TITULO] = @TITULO";
+
+        private const string sqlVerificaRelacaoComQuestao =
+           @"SELECT COUNT (*) FROM TBQUESTAO WHERE MATERIA_NUMERO = @NUMERO";
+
+        private const string sqlVerificaRelacaoComTeste =
+           @"SELECT COUNT (*) FROM TBTESTE WHERE MATERIA_NUMERO = @NUMERO";
+
         #endregion
+
+        #region MÉTODOS PÚBLICOS
 
         public ValidationResult Inserir(Materia novoRegistro)
         {
-            var validador = new ValidadorMateria();
-
-            var resultadoValidacao = validador.Validate(novoRegistro);
+            var resultadoValidacao = Validar(novoRegistro);
 
             if (resultadoValidacao.IsValid == false)
                 return resultadoValidacao;
@@ -110,9 +135,7 @@ namespace TesteMariana.infra.DataBase.ModuloMateria
 
         public ValidationResult Editar(Materia registro)
         {
-            var validador = new ValidadorMateria();
-
-            var resultadoValidacao = validador.Validate(registro);
+            var resultadoValidacao = Validar(registro);
 
             if (resultadoValidacao.IsValid == false)
                 return resultadoValidacao;
@@ -138,17 +161,19 @@ namespace TesteMariana.infra.DataBase.ModuloMateria
 
             comandoExclusao.Parameters.AddWithValue("NUMERO", registro.Numero);
 
-            conexaoComBanco.Open();
+            ValidationResult resultadoValidacao = VerificaRelacoesParaExclusao(registro);
 
-            int numeroRegistrosExcluidos = comandoExclusao.ExecuteNonQuery();
+            if (resultadoValidacao.IsValid)
+            {
+                conexaoComBanco.Open();
 
-            var resultadoValidacao = new ValidationResult();
+                int numeroRegistrosExcluidos = comandoExclusao.ExecuteNonQuery();
 
-            if (numeroRegistrosExcluidos == 0)
-                resultadoValidacao.Errors.Add(new ValidationFailure("", "Não foi possível remover a matéria!"));
+                if (numeroRegistrosExcluidos == 0)
+                    resultadoValidacao.Errors.Add(new ValidationFailure("", "Não foi possível remover a matéria!"));
 
-            conexaoComBanco.Close();
-
+                conexaoComBanco.Close();
+            }
             return resultadoValidacao;
         }
 
@@ -195,6 +220,10 @@ namespace TesteMariana.infra.DataBase.ModuloMateria
             return disiciplinas;
         }
 
+        #endregion
+
+        #region MÉTODOS PRIVADOS
+
         private static Materia ConverterParaMateria(SqlDataReader leitorMateria)
         {
             int numero = Convert.ToInt32(leitorMateria["NUMERO"]);
@@ -227,5 +256,126 @@ namespace TesteMariana.infra.DataBase.ModuloMateria
             comando.Parameters.AddWithValue("DISCIPLINA_NUMERO", novaMateria.Disciplina.Numero);
 
         }
+
+        private ValidationResult Validar(Materia registro)
+        {
+            var validator = new ValidadorMateria();
+
+            var resultadoValidacao = validator.Validate(registro);
+
+            if (resultadoValidacao.IsValid == false)
+                return resultadoValidacao;
+
+            resultadoValidacao = ValidarTitulo(registro);
+
+            return resultadoValidacao;
+        }
+
+        private ValidationResult ValidarTitulo(Materia registro)
+        {
+            bool tituloRegistrado = VerificarSeOhTituloJaEstaRegistrado(registro);
+
+            ValidationResult validacaoDeTitulo = new ValidationResult();
+
+            if (tituloRegistrado)
+            {
+                if (registro.Numero == 0)
+                    validacaoDeTitulo.Errors.Add(new ValidationFailure("", "Não foi possível inserir, pois já existe uma matéria com este título cadastrada no sistema!"));
+
+                else if (SelecionarPorTitulo(registro.Titulo).Numero != registro.Numero)
+                    validacaoDeTitulo.Errors.Add(new ValidationFailure("", "Não foi possível editar, pois já existe uma matéria com este título cadastrada no sistema!"));
+            }
+            return validacaoDeTitulo;
+        }
+
+        private Materia SelecionarPorTitulo(string titulo)
+        {
+            SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
+
+            SqlCommand comandoSelecao = new SqlCommand(sqlSelecionarPeloTitulo, conexaoComBanco);
+
+            comandoSelecao.Parameters.AddWithValue("TITULO", titulo);
+
+            conexaoComBanco.Open();
+            SqlDataReader leitorMateria = comandoSelecao.ExecuteReader();
+
+            Materia materia = null;
+            if (leitorMateria.Read())
+                materia = ConverterParaMateria(leitorMateria);
+
+            conexaoComBanco.Close();
+
+            return materia;
+        }
+
+        private List<string> ObterTitulosCadastrados()
+        {
+            SqlConnection conexao = new SqlConnection(enderecoBanco);
+
+            SqlCommand comando = new SqlCommand(sqlObterTitulosCadastrados, conexao);
+
+            conexao.Open();
+
+            SqlDataReader leitorNomes = comando.ExecuteReader();
+
+            List<string> nomesCadastrados = new List<string>();
+
+            while (leitorNomes.Read())
+            {
+                var nome = Convert.ToString(leitorNomes["TITULO"]);
+
+                nomesCadastrados.Add(nome);
+            }
+            conexao.Close();
+
+            return nomesCadastrados;
+        }
+
+        private bool VerificarSeOhTituloJaEstaRegistrado(Materia registro)
+        {
+            return ObterTitulosCadastrados().Exists(x => x.SaoIguais(registro.Titulo));
+        }
+
+        private ValidationResult VerificaRelacoesParaExclusao(Materia registro)
+        {
+            var resultadoValidacao = new ValidationResult();
+
+            resultadoValidacao = VerificaSQLDeExclusao(sqlVerificaRelacaoComTeste, registro,
+                "Não é possível excluir, pois a matéria está associada à algum Teste!");
+
+            if (resultadoValidacao.IsValid == false)
+                return resultadoValidacao;
+
+            resultadoValidacao = VerificaSQLDeExclusao(sqlVerificaRelacaoComQuestao, registro,
+                "Não é possível excluir, pois a matéria está associada à alguma Questão!");
+
+            return resultadoValidacao;
+        }
+
+        private ValidationResult VerificaSQLDeExclusao(string sql, Materia registro, string mensagem)
+        {
+            var resultadoValidacao = new ValidationResult();
+
+            SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
+
+            SqlCommand comando = new SqlCommand(sql, conexaoComBanco);
+
+            comando.Parameters.AddWithValue("NUMERO", registro.Numero);
+
+            conexaoComBanco.Open();
+
+            var result = comando.ExecuteScalar();
+
+            conexaoComBanco.Close();
+
+            var qtd = Convert.ToInt32(result);
+
+            if (qtd > 0)
+                resultadoValidacao.Errors.Add(new ValidationFailure("", mensagem));
+
+            return resultadoValidacao;
+        }
+
+        #endregion
     }
 }

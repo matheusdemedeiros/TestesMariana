@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using TestesMariana.Dominio.Compartilhado;
 using TestesMariana.Dominio.ModuloDisciplina;
 
 namespace TesteMariana.infra.DataBase.ModuloDisciplina
@@ -15,7 +16,8 @@ namespace TesteMariana.infra.DataBase.ModuloDisciplina
                "Integrated Security=True;" +
                "Pooling=False";
 
-        #region Sql Queries
+        #region SQL QUERIES
+
         private const string sqlInserir =
             @"INSERT INTO [TBDISCIPLINA] 
                 (
@@ -45,7 +47,6 @@ namespace TesteMariana.infra.DataBase.ModuloDisciplina
             END
             SELECT SCOPE_IDENTITY();";
 
-
         private const string sqlEditar =
             @"UPDATE[TBDISCIPLINA]
 		        SET
@@ -73,31 +74,44 @@ namespace TesteMariana.infra.DataBase.ModuloDisciplina
 		            [TBDISCIPLINA]
 		        WHERE
                     [NUMERO] = @NUMERO";
+
+        private const string sqlObterNomesCadastrados =
+            @"SELECT [NOME] FROM TBDISCIPLINA;";
+
+        private const string sqlSelecionarPeloNome =
+            @"SELECT [NUMERO], [NOME] FROM TBDISCIPLINA WHERE NOME = @NOME;";
+
+        private const string sqlVerificaRelacaoComMateria =
+            @"SELECT COUNT (*) FROM TBMATERIA WHERE DISCIPLINA_NUMERO = @NUMERO";
+
+        private const string sqlVerificaRelacaoComQuestao =
+           @"SELECT COUNT (*) FROM TBQUESTAO WHERE DISCIPLINA_NUMERO = @NUMERO";
+
+        private const string sqlVerificaRelacaoComTeste =
+           @"SELECT COUNT (*) FROM TBTESTE WHERE DISCIPLINA_NUMERO = @NUMERO";
+
         #endregion
+
+        #region MÉTODOS PÚBLICOS
 
         public ValidationResult Inserir(Disciplina novoRegistro)
         {
-            var validador = new ValidadorDisciplina();
-
-            var resultadoValidacao = validador.Validate(novoRegistro);
+            var resultadoValidacao = Validar(novoRegistro);
 
             if (resultadoValidacao.IsValid == false)
                 return resultadoValidacao;
 
             SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
 
-            SqlCommand comandoInsercao = new SqlCommand(sqlInserirSemDuplicatas, conexaoComBanco);
+            SqlCommand comandoInsercao = new SqlCommand(sqlInserir, conexaoComBanco);
 
             ConfigurarParametrosDisciplina(novoRegistro, comandoInsercao);
 
             conexaoComBanco.Open();
-            
+
             var id = comandoInsercao.ExecuteScalar();
-            
-            if (id != DBNull.Value)
-                novoRegistro.Numero = Convert.ToInt32(id);
-            else
-                resultadoValidacao.Errors.Add(new ValidationFailure("", "Não foi possível inserir, pois já existe uma disciplina com este nome cadastrada no DataBase!"));
+
+            novoRegistro.Numero = Convert.ToInt32(id);
 
             conexaoComBanco.Close();
 
@@ -106,9 +120,7 @@ namespace TesteMariana.infra.DataBase.ModuloDisciplina
 
         public ValidationResult Editar(Disciplina registro)
         {
-            var validador = new ValidadorDisciplina();
-
-            var resultadoValidacao = validador.Validate(registro);
+            var resultadoValidacao = Validar(registro);
 
             if (resultadoValidacao.IsValid == false)
                 return resultadoValidacao;
@@ -134,16 +146,19 @@ namespace TesteMariana.infra.DataBase.ModuloDisciplina
 
             comandoExclusao.Parameters.AddWithValue("NUMERO", registro.Numero);
 
-            conexaoComBanco.Open();
-            int numeroRegistrosExcluidos = comandoExclusao.ExecuteNonQuery();
+            ValidationResult resultadoValidacao = VerificaRelacoesParaExclusao(registro);
+            
+            if (resultadoValidacao.IsValid)
+            {
+                conexaoComBanco.Open();
 
-            var resultadoValidacao = new ValidationResult();
+                int numeroRegistrosExcluidos = comandoExclusao.ExecuteNonQuery();
 
-            if (numeroRegistrosExcluidos == 0)
-                resultadoValidacao.Errors.Add(new ValidationFailure("", "Não foi possível remover a disiciplina!"));
+                if (numeroRegistrosExcluidos == 0)
+                    resultadoValidacao.Errors.Add(new ValidationFailure("", "Não foi possível remover a disiciplina!"));
 
-            conexaoComBanco.Close();
-
+                conexaoComBanco.Close();
+            }
             return resultadoValidacao;
         }
 
@@ -154,6 +169,26 @@ namespace TesteMariana.infra.DataBase.ModuloDisciplina
             SqlCommand comandoSelecao = new SqlCommand(sqlSelecionarPorNumero, conexaoComBanco);
 
             comandoSelecao.Parameters.AddWithValue("NUMERO", numero);
+
+            conexaoComBanco.Open();
+            SqlDataReader leitorDisciplina = comandoSelecao.ExecuteReader();
+
+            Disciplina discilina = null;
+            if (leitorDisciplina.Read())
+                discilina = ConverterParaDisciplina(leitorDisciplina);
+
+            conexaoComBanco.Close();
+
+            return discilina;
+        }
+
+        public Disciplina SelecionarPorNome(string nome)
+        {
+            SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
+
+            SqlCommand comandoSelecao = new SqlCommand(sqlSelecionarPeloNome, conexaoComBanco);
+
+            comandoSelecao.Parameters.AddWithValue("NOME", nome);
 
             conexaoComBanco.Open();
             SqlDataReader leitorDisciplina = comandoSelecao.ExecuteReader();
@@ -190,6 +225,10 @@ namespace TesteMariana.infra.DataBase.ModuloDisciplina
             return disiciplinas;
         }
 
+        #endregion
+
+        #region MÉTODOS PRIVADOS
+
         private static Disciplina ConverterParaDisciplina(SqlDataReader leitorDisciplina)
         {
             int numero = Convert.ToInt32(leitorDisciplina["NUMERO"]);
@@ -210,5 +249,111 @@ namespace TesteMariana.infra.DataBase.ModuloDisciplina
             comando.Parameters.AddWithValue("NOME", novaDisciplina.Nome);
         }
 
+        private ValidationResult Validar(Disciplina registro)
+        {
+            var validator = new ValidadorDisciplina();
+
+            var resultadoValidacao = validator.Validate(registro);
+
+            if (resultadoValidacao.IsValid == false)
+                return resultadoValidacao;
+
+            resultadoValidacao = ValidarNome(registro);
+
+            return resultadoValidacao;
+        }
+
+        private ValidationResult ValidarNome(Disciplina registro)
+        {
+            bool nomeRegistrado = VerificarSeOhNomeJaEstaRegistrado(registro);
+
+            ValidationResult validacaoDeNome = new ValidationResult();
+
+            if (nomeRegistrado)
+            {
+                if (registro.Numero == 0)
+                    validacaoDeNome.Errors.Add(new ValidationFailure("", "Não foi possível inserir, pois já existe uma disciplina com este nome cadastrada no sistema!"));
+
+                else if (SelecionarPorNome(registro.Nome).Numero != registro.Numero)
+                    validacaoDeNome.Errors.Add(new ValidationFailure("", "Não foi possível editar, pois já existe uma disciplina com este nome cadastrada no sistema!"));
+            }
+            return validacaoDeNome;
+        }
+
+        private List<string> ObterNomesCadastrados()
+        {
+            SqlConnection conexao = new SqlConnection(enderecoBanco);
+
+            SqlCommand comando = new SqlCommand(sqlObterNomesCadastrados, conexao);
+
+            conexao.Open();
+
+            SqlDataReader leitorNomes = comando.ExecuteReader();
+
+            List<string> nomesCadastrados = new List<string>();
+
+            while (leitorNomes.Read())
+            {
+                var nome = Convert.ToString(leitorNomes["NOME"]);
+
+                nomesCadastrados.Add(nome);
+            }
+            conexao.Close();
+
+            return nomesCadastrados;
+        }
+
+        private bool VerificarSeOhNomeJaEstaRegistrado(Disciplina registro)
+        {
+            return ObterNomesCadastrados().Exists(x => x.SaoIguais(registro.Nome));
+        }
+
+        private ValidationResult VerificaRelacoesParaExclusao(Disciplina registro)
+        {
+            var resultadoValidacao = new ValidationResult();
+
+            resultadoValidacao = VerificaSQLDeExclusao(sqlVerificaRelacaoComTeste, registro,
+                "Não é possível excluir, pois a disciplina está associada à algum Teste!");
+
+            if (resultadoValidacao.IsValid == false)
+                return resultadoValidacao;
+
+            resultadoValidacao = VerificaSQLDeExclusao(sqlVerificaRelacaoComQuestao, registro,
+                "Não é possível excluir, pois a disciplina está associada à alguma Questão!");
+
+            if (resultadoValidacao.IsValid == false)
+                return resultadoValidacao;
+
+            resultadoValidacao = VerificaSQLDeExclusao(sqlVerificaRelacaoComMateria, registro,
+                            "Não é possível excluir, pois a disciplina está associada à alguma Matéria!");
+
+            return resultadoValidacao;
+        }
+
+        private ValidationResult VerificaSQLDeExclusao(string sql, Disciplina registro, string mensagem)
+        {
+            var resultadoValidacao = new ValidationResult();
+
+            SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
+
+            SqlCommand comando = new SqlCommand(sql, conexaoComBanco);
+
+            comando.Parameters.AddWithValue("NUMERO", registro.Numero);
+
+            conexaoComBanco.Open();
+
+            var result = comando.ExecuteScalar();
+
+            conexaoComBanco.Close();
+
+            var qtd = Convert.ToInt32(result);
+
+            if (qtd > 0)
+                resultadoValidacao.Errors.Add(new ValidationFailure("", mensagem));
+
+            return resultadoValidacao;
+        }
+        
+        #endregion
     }
 }

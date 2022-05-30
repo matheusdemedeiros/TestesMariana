@@ -65,8 +65,6 @@ namespace TestesMariana.WinApp.ModuloTeste
 
                         comboBoxMaterias.SelectedItem = teste.Materia;
                     }
-                    
-                    numericUpDownQtdQuestoes.Value = teste.Questoes.Count;
                 }
                 else
                     numericUpDownQtdQuestoes.Value = 0;
@@ -199,7 +197,7 @@ namespace TestesMariana.WinApp.ModuloTeste
                 sb.Append("* Selecione uma Disciplina primeiro!\n\n");
 
             if (checkBoxTesteDisciplinaInteira.Checked == false && comboBoxMaterias.Text == "")
-                sb.Append("* Selecione uma Matéria primeiro!\n\n!");
+                sb.Append("* Selecione uma Matéria primeiro!\n\n");
 
             if ((int)numericUpDownQtdQuestoes.Value == 0)
                 sb.Append("* Informe a quantidade desejada de questões primeiro!\n\n");

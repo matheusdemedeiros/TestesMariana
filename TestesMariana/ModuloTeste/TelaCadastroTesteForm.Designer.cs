@@ -43,6 +43,7 @@
             this.txtNumero = new System.Windows.Forms.TextBox();
             this.numericUpDownQtdQuestoes = new System.Windows.Forms.NumericUpDown();
             this.checkBoxTesteDisciplinaInteira = new System.Windows.Forms.CheckBox();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQtdQuestoes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -157,7 +158,7 @@
             // btnGerarTeste
             // 
             this.btnGerarTeste.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnGerarTeste.Location = new System.Drawing.Point(106, 235);
+            this.btnGerarTeste.Location = new System.Drawing.Point(106, 263);
             this.btnGerarTeste.Name = "btnGerarTeste";
             this.btnGerarTeste.Size = new System.Drawing.Size(75, 23);
             this.btnGerarTeste.TabIndex = 6;
@@ -168,7 +169,7 @@
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(210, 235);
+            this.btnCancelar.Location = new System.Drawing.Point(210, 263);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 7;
@@ -196,6 +197,11 @@
             // numericUpDownQtdQuestoes
             // 
             this.numericUpDownQtdQuestoes.Location = new System.Drawing.Point(223, 192);
+            this.numericUpDownQtdQuestoes.Maximum = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
             this.numericUpDownQtdQuestoes.Name = "numericUpDownQtdQuestoes";
             this.numericUpDownQtdQuestoes.Size = new System.Drawing.Size(62, 23);
             this.numericUpDownQtdQuestoes.TabIndex = 5;
@@ -212,11 +218,23 @@
             this.checkBoxTesteDisciplinaInteira.UseVisualStyleBackColor = true;
             this.checkBoxTesteDisciplinaInteira.CheckedChanged += new System.EventHandler(this.checkBoxTesteDisciplinaInteira_CheckedChanged);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label7.Location = new System.Drawing.Point(60, 229);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(253, 20);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Máximo de questões por Teste: 15.";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // TelaCadastroTesteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(391, 291);
+            this.ClientSize = new System.Drawing.Size(391, 307);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.numericUpDownQtdQuestoes);
             this.Controls.Add(this.checkBoxTesteDisciplinaInteira);
             this.Controls.Add(this.txtNumero);
@@ -263,5 +281,6 @@
         private System.Windows.Forms.TextBox txtNumero;
         private System.Windows.Forms.NumericUpDown numericUpDownQtdQuestoes;
         private System.Windows.Forms.CheckBox checkBoxTesteDisciplinaInteira;
+        private System.Windows.Forms.Label label7;
     }
 }

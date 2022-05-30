@@ -6,7 +6,7 @@ namespace TestesMariana.WinApp.ModuloTeste
     {
         public override string TipoCadastro => "Cadastro de Testes escolares";
 
-        public override string TooltipInserir => "Inserir um nova Teste";
+        public override string TooltipInserir => "Inserir um novo Teste";
 
         public override string TooltipEditar => "Editar um Teste existente";
 
@@ -18,7 +18,7 @@ namespace TestesMariana.WinApp.ModuloTeste
         
         public override string TooltipGabarito => "Gerar PDF do Gabarito";
 
-        public override string TooltipVisualizarDetalhadamente => "Visualizar teste detalhadamente";
+        public override string TooltipVisualizarDetalhadamente => "Visualizar Teste detalhadamente";
 
 
         public override bool EditarHabilitado { get { return false; } }
@@ -30,7 +30,5 @@ namespace TestesMariana.WinApp.ModuloTeste
         public override bool DuplicarHabilitado { get { return true; } }
 
         public override bool VisualizarDetalhadamenteHabilitado { get { return true; } }
-
-
     }
 }

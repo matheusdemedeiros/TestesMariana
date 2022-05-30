@@ -203,7 +203,7 @@ namespace TestesMariana
 
         private void InicializarControladores()
         {
-            var repositorioDisciplina = new RepositorioDisciplinaDBFilha();
+            var repositorioDisciplina = new RepositorioDisciplinaDB();
             var repositorioMateria = new RepositorioMateriaDB();
             var repositorioQuestao = new RepositorioQuestaoDB();
             var repositorioTeste = new RepositorioTesteDB();

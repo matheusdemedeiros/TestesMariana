@@ -159,19 +159,19 @@
             // checkBoxAlternativaCorreta
             // 
             this.checkBoxAlternativaCorreta.AutoSize = true;
-            this.checkBoxAlternativaCorreta.Location = new System.Drawing.Point(123, 263);
+            this.checkBoxAlternativaCorreta.Location = new System.Drawing.Point(20, 267);
             this.checkBoxAlternativaCorreta.Name = "checkBoxAlternativaCorreta";
             this.checkBoxAlternativaCorreta.Size = new System.Drawing.Size(123, 19);
-            this.checkBoxAlternativaCorreta.TabIndex = 5;
+            this.checkBoxAlternativaCorreta.TabIndex = 4;
             this.checkBoxAlternativaCorreta.Text = "Alternativa correta";
             this.checkBoxAlternativaCorreta.UseVisualStyleBackColor = true;
             // 
             // btnAdicionarAlternativa
             // 
-            this.btnAdicionarAlternativa.Location = new System.Drawing.Point(20, 263);
+            this.btnAdicionarAlternativa.Location = new System.Drawing.Point(160, 263);
             this.btnAdicionarAlternativa.Name = "btnAdicionarAlternativa";
             this.btnAdicionarAlternativa.Size = new System.Drawing.Size(75, 23);
-            this.btnAdicionarAlternativa.TabIndex = 4;
+            this.btnAdicionarAlternativa.TabIndex = 5;
             this.btnAdicionarAlternativa.Text = "Adicionar";
             this.btnAdicionarAlternativa.UseVisualStyleBackColor = true;
             this.btnAdicionarAlternativa.Click += new System.EventHandler(this.btnAdicionarAlternativa_Click);
@@ -255,6 +255,7 @@
             this.MinimizeBox = false;
             this.Name = "TelaCadastroQuestaoForm";
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de Questões";
             this.ResumeLayout(false);
