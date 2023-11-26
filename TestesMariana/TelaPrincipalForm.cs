@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 using TesteMariana.infra.DataBase.ModuloDisciplina;
 using TesteMariana.infra.DataBase.ModuloMateria;
 using TesteMariana.infra.DataBase.ModuloQuestao;
 using TesteMariana.infra.DataBase.ModuloTeste;
 using TestesMariana.Infra.Arquivos.Compartilhado;
-using TestesMariana.Infra.Arquivos.ModuloDisciplina;
-using TestesMariana.Infra.Arquivos.ModuloMateria;
-using TestesMariana.Infra.Arquivos.ModuloQuestao;
-using TestesMariana.Infra.Arquivos.ModuloTeste;
 using TestesMariana.WinApp.Compartilhado;
 using TestesMariana.WinApp.ModuloDisciplina;
 using TestesMariana.WinApp.ModuloMateria;
@@ -149,11 +146,72 @@ namespace TestesMariana
 
             labelRodape.ForeColor = Color.White;
 
+            Thread segundaThread = new Thread
+
+                (() =>
+                    {
+                        if (tipoMSG == TipoMensagemRodape.SUCESSO)
+                        {
+                            labelRodape.Text = mensagem;
+
+                            statusStripRodape.BackColor = Color.Green;
+
+                            //Thread.Sleep(3000);
+
+                            //AtualizarRodape(string.Empty, TipoMensagemRodape.VAZIO);
+                        }
+
+                        if (tipoMSG == TipoMensagemRodape.ERRO)
+                        {
+                            labelRodape.Text = mensagem;
+
+                            statusStripRodape.BackColor = Color.Red;
+
+                            //Thread.Sleep(3000);
+
+                            AtualizarRodape(string.Empty, TipoMensagemRodape.VAZIO);
+                        }
+
+                        if (tipoMSG == TipoMensagemRodape.VISUALIZANDO || tipoMSG == TipoMensagemRodape.VAZIO)
+                        {
+                            Thread.Sleep(1500);
+
+                            labelRodape.Text = mensagem;
+
+                            statusStripRodape.BackColor = corBack;
+                        }
+                    }
+                );
+
+            segundaThread.Start();
+        }
+
+        public void ControlaRodape(string mensagem, TipoMensagemRodape tipoMSG)
+        {
+            var corBack = Color.DarkBlue;
+
+            labelRodape.ForeColor = Color.White;
+
             if (tipoMSG == TipoMensagemRodape.SUCESSO)
             {
-                labelRodape.Text = mensagem;
 
-                statusStripRodape.BackColor = Color.Green;
+                Thread segundaThread = new Thread
+
+                    (() =>
+                    {
+                        labelRodape.Text = mensagem;
+
+                        statusStripRodape.BackColor = Color.Green;
+
+                        Thread.Sleep(3000);
+
+                        AtualizarRodape(string.Empty, TipoMensagemRodape.VAZIO);
+
+                    }
+                    );
+
+                segundaThread.Start();
+
             }
 
             if (tipoMSG == TipoMensagemRodape.ERRO)
@@ -171,6 +229,10 @@ namespace TestesMariana
                 statusStripRodape.BackColor = corBack;
             }
         }
+
+
+
+
 
         private void ConfigurarToolbox()
         {

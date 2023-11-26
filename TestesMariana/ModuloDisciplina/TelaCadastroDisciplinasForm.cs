@@ -52,6 +52,8 @@ namespace TestesMariana.WinApp.ModuloDisciplina
 
                 DialogResult = DialogResult.None;
             }
+            else
+                TelaPrincipalForm.Instancia.AtualizarRodape("Disciplina Cadastrada com sucesso!", TipoMensagemRodape.SUCESSO);
         }
 
         private void TelaCadastroDisciplinasForm_Load(object sender, EventArgs e)
